@@ -1,0 +1,3 @@
+
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Report Aset Lahan</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"></head>
+<body class="p-4"><h1>Laporan Aset Lahan</h1><table class="table table-bordered"><thead><tr><th>ID</th><th>Kode</th><th>Nama</th><th>Pemilik</th><th>Luas (m2)</th></tr></thead><tbody>@foreach($data as $d)<tr><td>{{ $d->id }}</td><td>{{ $d->kode_lahan }}</td><td>{{ $d->nama_lahan }}</td><td>{{ $d->user->name ?? '-' }}</td><td>{{ $d->luas_m2 }}</td></tr>@endforeach</tbody></table></body></html>
