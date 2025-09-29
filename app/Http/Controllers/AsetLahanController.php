@@ -3,20 +3,36 @@ namespace App\Http\Controllers;
 
 use App\Models\AsetLahan;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
-class AsetLahanController extends Controller {
-    public function index() {
-        $asetLahan = AsetLahan::with('user')->get();
+class AsetLahanController extends Controller
+{
+    public function index(Request $request)
+    {
+        // Mulai query builder, jangan langsung ->get()
+        $query = AsetLahan::with('user');
+
+        // Search
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('nama_lahan', 'like', "%$search%");
+        }
+
+        // Order by created_at dan pagination
+        $asetLahan = $query->orderBy('created_at', 'desc')->paginate(3);
+
         return view('aset_lahan.index', compact('asetLahan'));
     }
 
-    public function create() {
+    public function create()
+    {
         $users = User::all();
         return view('aset_lahan.create', compact('users'));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $data = $request->validate([
             'kode_lahan'=>'required|string|max:30|unique:aset_lahans,kode_lahan',
             'user_id'=>'nullable|exists:users,id',
@@ -45,22 +61,27 @@ class AsetLahanController extends Controller {
         ]);
 
         AsetLahan::create($data);
-        return redirect()->route('aset-lahan.index')->with('success','Aset lahan ditambahkan');
+
+        return redirect()->route('aset-lahan.index')->with('success', 'Aset lahan ditambahkan');
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $item = AsetLahan::with('user')->findOrFail($id);
         return view('aset_lahan.show', compact('item'));
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         $item = AsetLahan::findOrFail($id);
         $users = User::all();
-        return view('aset_lahan.edit', compact('item','users'));
+        return view('aset_lahan.edit', compact('item', 'users'));
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $item = AsetLahan::findOrFail($id);
+
         $data = $request->validate([
             'kode_lahan'=>'sometimes|string|max:30|unique:aset_lahans,kode_lahan,'.$id,
             'user_id'=>'nullable|exists:users,id',
@@ -89,17 +110,63 @@ class AsetLahanController extends Controller {
         ]);
 
         $item->update($data);
-        return redirect()->route('aset-lahan.index')->with('success','Aset lahan diupdate');
+
+        return redirect()->route('aset-lahan.index')->with('success', 'Aset lahan diupdate');
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $item = AsetLahan::findOrFail($id);
         $item->delete();
-        return redirect()->route('aset-lahan.index')->with('success','Aset lahan dihapus');
+        return redirect()->route('aset-lahan.index')->with('success', 'Aset lahan dihapus');
     }
 
-    public function report() {
+    public function report()
+    {
         $data = AsetLahan::with('user')->get();
         return view('aset_lahan.report', compact('data'));
+    }
+
+    public function exportPdf()
+    {
+        $data = AsetLahan::with('user')->get();
+        $pdf = Pdf::loadView('aset_lahan.report-pdf', compact('data'))
+                  ->setPaper('a4', 'landscape');
+        return $pdf->download('aset_lahan.pdf');
+    }
+
+    public function exportCsv()
+    {
+        $data = AsetLahan::with('user')->get();
+
+        $filename = "aset_lahan.csv";
+        $handle = fopen($filename, 'w+');
+
+        // Header CSV
+        fputcsv($handle, [
+            'ID','User','Nama Lahan','Alamat','RT/RW','Desa','Kecamatan','Kabupaten','Provinsi','Luas','Satuan','Status','Kepemilikan'
+        ]);
+
+        foreach ($data as $row) {
+            fputcsv($handle, [
+                $row->id,
+                $row->user->name ?? '-',
+                $row->nama_lahan,
+                $row->alamat,
+                $row->rt_rw,
+                $row->desa,
+                $row->kecamatan,
+                $row->kabupaten,
+                $row->provinsi,
+                $row->luas_m2,
+                $row->satuan,
+                $row->status,
+                $row->kepemilikan
+            ]);
+        }
+
+        fclose($handle);
+
+        return response()->download($filename)->deleteFileAfterSend(true);
     }
 }

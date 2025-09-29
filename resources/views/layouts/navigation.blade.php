@@ -6,15 +6,29 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-auto">
                     </a>
+                    <!-- Teks samping logo -->
+                    <div class="ml-3 leading-tight">
+                        <span class="block text-base font-semibold text-gray-800">DESA</span>
+                        <span class="block text-base font-semibold text-gray-800">KALIWUNGU KUDUS</span>
+                    </div>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('menu.utama')" :active="request()->routeIs('menu.*')">
+                        {{ __('Menu Utama') }}
+                    </x-nav-link>
+
+                    {{-- <x-nav-link :href="route('aset-lahan.index')" :active="request()->routeIs('aset-lahan.*')">
+                        {{ __('Aset Lahan & Tanah') }}
+                    </x-nav-link> --}}
+
                 </div>
             </div>
 

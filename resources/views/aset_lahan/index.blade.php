@@ -14,8 +14,40 @@
             @endif
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 flex flex-col gap-4">
+                    <div class="p-6 space-y-6">
+                    <!-- Header: Search + Export -->
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <!-- Search -->
+                        <form action="{{ route('aset-lahan.index') }}" method="GET" class="flex w-full md:w-1/2 gap-2">
+                            <input type="text" name="search" value="{{ request('search') }}"
+                                placeholder="🔍 Cari aset..."
+                                class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                Cari
+                            </button>
+                        </form>
 
+                        <!-- Export Dropdown -->
+                        <div x-data="{ open: false }" class="relative">
+                            <button @click="open = !open"
+                                class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-green-700 transition">
+                                <span>Export</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" @click.away="open = false"
+                                x-transition
+                                class="absolute left-0 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden z-20">
+                                <a href="{{ route('aset-lahan.export.csv') }}" class="block px-4 py-2 hover:bg-gray-100">📄 Export CSV</a>
+                                <a href="{{ route('aset-lahan.export.pdf') }}" class="block px-4 py-2 hover:bg-gray-100">🖨 Export PDF</a>
+                                {{-- <a href="{{ route('reports.export') }}" class="block px-4 py-2 hover:bg-gray-100">📊 Export Excel</a> --}}
+                            </div>
+                        </div>
+                    </div>
                     {{-- Header & tombol --}}
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold">Daftar Aset Lahan & Tanah</h3>
@@ -93,6 +125,10 @@
                             </tbody>
                         </table>
                     </div> {{-- overflow-x-auto --}}
+                    <!-- Pagination -->
+                    <div>
+                        {{ $asetLahan->appends(['search' => request('search')])->links() }}
+                    </div>
                 </div>
             </div>
         </div>
