@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KesejahteraanKeluargaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
@@ -24,7 +25,11 @@ use App\Http\Controllers\SarpraskerjaController;
 use App\Http\Controllers\SuratController;
 
 use App\Models\AsetLahan;
+
+use App\Models\KesejahteraanKeluarga;
+
 use App\Models\Sarpraskerja;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -138,12 +143,26 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('umkm.update');
     Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
 });
+  
+Route::middleware(['auth'])->group(function () {
+    Route::get('/kesejahteraankeluarga', [KesejahteraanKeluargaController::class, 'index'])->name('kesejahteraankeluarga.index');
+    Route::get('/kesejahteraankeluarga/create', [KesejahteraanKeluargaController::class, 'create'])->name('kesejahteraankeluarga.create');
+    Route::post('/kesejahteraankeluarga', [KesejahteraanKeluargaController::class, 'store'])->name('kesejahteraankeluarga.store');
+    Route::get('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'show'])->name('kesejahtraankeluarga.show');
+    Route::get('/kesejahteraankeluarga/{id}/edit', [KesejahteraanKeluargaController::class, 'edit'])->name('kesejahteraankeluarga.edit');
+    Route::put('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'update'])->name('kesejahteraankeluarga.update');
 
+// Untuk hapus data juga sekalian
+    Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
+});
 
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+
+Route::get('/kesejahteraan_keluarga/export/csv', [KesejahteraanKeluarga::class, 'exportCsv'])->name('kesejahteraan_keluarga.export.csv');
+Route::get('/kesejahteraan_keluarga/export/pdf', [KesejahteraanKeluarga::class, 'exportPdf'])->name('kesejahteraan_keluarga.export.pdf');
 
 Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');
 Route::get('/sarpraskerja/export/pdf', [SarpraskerjaController::class, 'exportPdf'])->name('sarpraskerja.export.pdf');
@@ -151,6 +170,7 @@ Route::get('/sarpraskerja/export/pdf', [SarpraskerjaController::class, 'exportPd
 
 Route::get('/umkm/export/csv', [UmkmController::class, 'exportCsv'])->name('umkm.export.csv');
 Route::get('/umkm/export/pdf', [UmkmController::class, 'exportPdf'])->name('umkm.export.pdf');
+
 
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 
@@ -209,6 +229,8 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
+
+
 
 
 
