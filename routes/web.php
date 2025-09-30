@@ -17,8 +17,14 @@ use App\Http\Controllers\JenisSuratController;
 
 // routes/web.php
 use App\Http\Controllers\ReportController;
+
+use App\Http\Controllers\SaprasKerjaController;
+use App\Http\Controllers\SarpraskerjaController;
+
 use App\Http\Controllers\SuratController;
+
 use App\Models\AsetLahan;
+use App\Models\Sarpraskerja;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -108,16 +114,44 @@ Route::delete('/surat-online/{id}', [SuratController::class, 'destroy'])->name('
     //master data jenis surat
 Route::resource('jenis-surat', JenisSuratController::class);
 
-
 });
+  
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sarpraskerja', [SarpraskerjaController::class, 'index'])->name('sarpraskerja.index');
+    Route::get('/sarpraskerja/create', [SarpraskerjaController::class, 'create'])->name('sarpraskerja.create');
+    Route::post('/sarpraskerja', [SarpraskerjaController::class, 'store'])->name('sarpraskerja.store');
+    Route::get('/sarpraskerja/{id}', [SarpraskerjaController::class, 'show'])->name('sarpraskerja.show');
+    Route::get('/sarpraskerja/{id}/edit', [SarpraskerjaController::class, 'edit'])->name('sarpraskerja.edit');
+    Route::put('/sarpraskerja/{id}', [SarpraskerjaController::class, 'update'])->name('sarpraskerja.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/sarpraskerja/{id}', [SarpraskerjaController::class, 'destroy'])->name('sarpraskerja.destroy');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
+    Route::get('/umkm/create', [UmkmController::class, 'create'])->name('umkm.create');
+    Route::post('/umkm', [UmkmController::class, 'store'])->name('umkm.store');
+    Route::get('/umkm/{id}', [UmkmController::class, 'show'])->name('umkm.show');
+    Route::get('/umkm/{id}/edit', [UmkmController::class, 'edit'])->name('umkm.edit');
+    Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('umkm.update');
+    Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
+});
+
 
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
 
+Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');
+Route::get('/sarpraskerja/export/pdf', [SarpraskerjaController::class, 'exportPdf'])->name('sarpraskerja.export.pdf');
+
+
 Route::get('/umkm/export/csv', [UmkmController::class, 'exportCsv'])->name('umkm.export.csv');
 Route::get('/umkm/export/pdf', [UmkmController::class, 'exportPdf'])->name('umkm.export.pdf');
+
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 
 Route::get('/bantuan-sosial/export/csv', [BantuanSosialController::class, 'exportCsv'])->name('bantuan-sosial.export.csv');
@@ -176,15 +210,5 @@ Route::get('/buat-soal', function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
-    Route::get('/umkm/create', [UmkmController::class, 'create'])->name('umkm.create');
-    Route::post('/umkm', [UmkmController::class, 'store'])->name('umkm.store');
-    Route::get('/umkm/{id}', [UmkmController::class, 'show'])->name('umkm.show');
-    Route::get('/umkm/{id}/edit', [UmkmController::class, 'edit'])->name('umkm.edit');
-    Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('umkm.update');
-    Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
-});
 
 
