@@ -45,6 +45,13 @@
                     </a>
 
 
+                    <!-- Bantuan Sosial -->
+                    <a href="{{ route('bantuan-sosial.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Bantuan Sosial</h4>
+                        <p class="text-gray-700">Kelola data Bantuan Sosial</p>
+
+
                     <!-- Anggota Keluarga -->
                     <a href="{{ route('anggota-keluarga.index') }}"
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
