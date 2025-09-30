@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
+use App\Http\Controllers\IbuHamilController;
 
 // routes/web.php
 use App\Http\Controllers\ReportController;
@@ -47,10 +48,25 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
 });
 
+//Ibu Hamil
+Route::middleware(['auth'])->group(function () {
+    Route::get('/ibu-hamil', [IbuHamilController::class, 'index'])->name('ibu-hamil.index');
+    Route::get('/ibu-hamil/create', [IbuHamilController::class, 'create'])->name('ibu-hamil.create');
+    Route::post('/ibu-hamil', [IbuHamilController::class, 'store'])->name('ibu-hamil.store');
+    Route::get('/ibu-hamil/{id}', [IbuHamilController::class, 'show'])->name('ibu-hamil.show');
+    Route::get('/ibu-hamil/{id}/edit', [IbuHamilController::class, 'edit'])->name('ibu-hamil.edit');
+    Route::put('/ibu-hamil/{id}', [IbuHamilController::class, 'update'])->name('ibu-hamil.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/ibu-hamil/{id}', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
+});
+
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+Route::get('/ibu-hamil/export/csv', [IbuHamilController::class, 'exportCsv'])->name('ibu-hamil.export.csv');
+Route::get('/ibu-hamil/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('ibu-hamil.export.pdf');
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 
 
@@ -92,3 +108,4 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
+
