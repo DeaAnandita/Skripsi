@@ -81,7 +81,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Untuk hapus data juga sekalian
     Route::delete('/bantuan-sosial/{id}', [BantuanSosialController::class, 'destroy'])->name('bantuan-sosial.destroy');
-
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/anggota-keluarga', [AnggotaKeluargaController::class, 'index'])->name('anggota-keluarga.index');
@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
 
 // Untuk hapus data juga sekalian
     Route::delete('/anggota-keluarga/{id}', [AnggotaKeluargaController::class, 'destroy'])->name('anggota-keluarga.destroy');
+});
 
 //Ibu Hamil
 Route::middleware(['auth'])->group(function () {
@@ -120,7 +121,7 @@ Route::delete('/surat-online/{id}', [SuratController::class, 'destroy'])->name('
 Route::resource('jenis-surat', JenisSuratController::class);
 
 });
-  
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/sarpraskerja', [SarpraskerjaController::class, 'index'])->name('sarpraskerja.index');
     Route::get('/sarpraskerja/create', [SarpraskerjaController::class, 'create'])->name('sarpraskerja.create');
@@ -143,7 +144,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('umkm.update');
     Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
 });
-  
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/kesejahteraankeluarga', [KesejahteraanKeluargaController::class, 'index'])->name('kesejahteraankeluarga.index');
     Route::get('/kesejahteraankeluarga/create', [KesejahteraanKeluargaController::class, 'create'])->name('kesejahteraankeluarga.create');
@@ -229,8 +230,3 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
-
-
-
-
-
