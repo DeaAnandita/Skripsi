@@ -3,9 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
-
+use App\Http\Controllers\JenisSuratController;
 // routes/web.php
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SuratController;
 use App\Models\AsetLahan;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aset-keluarga/{id}/edit', [AsetKeluargaController::class, 'edit'])->name('aset-keluarga.edit');
     Route::put('/aset-keluarga/{id}', [AsetKeluargaController::class, 'update'])->name('aset-keluarga.update');
 
-// Untuk hapus data juga sekalian
+    // Untuk hapus data juga sekalian
     Route::delete('/aset-keluarga/{id}', [AsetKeluargaController::class, 'destroy'])->name('aset-keluarga.destroy');
 });
 
@@ -43,10 +44,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aset-lahan/{id}/edit', [AsetlahanController::class, 'edit'])->name('aset-lahan.edit');
     Route::put('/aset-lahan/{id}', [AsetlahanController::class, 'update'])->name('aset-lahan.update');
 
-// Untuk hapus data juga sekalian
+    // Untuk hapus data juga sekalian
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
 });
-
+//Layanan Umum
+Route::middleware(['auth'])->group(function () {
+Route::get('/surat-online', [SuratController::class, 'index'])->name('surats.index');
+Route::get('/surat-online/create', [SuratController::class, 'create'])->name('surats.create');
+Route::post('/surat-online', [SuratController::class, 'store'])->name('surats.store');
+Route::get('/surat-online/{id}', [SuratController::class, 'show'])->name('surats.show');
+Route::get('/surat-online/{id}/edit', [SuratController::class, 'edit'])->name('surats.edit');
+Route::put('/surat-online/{id}', [SuratController::class, 'update'])->name('surats.update');
+Route::delete('/surat-online/{id}', [SuratController::class, 'destroy'])->name('surats.destroy');
+    //master data jenis surat
+    Route::resource('jenis-surat', JenisSuratController::class);
+});
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
@@ -76,6 +88,12 @@ Route::get('/data-keluarga', function () {
     return view('data-keluarga');
 })->name('menu.data-keluarga');
 
+//Menu Layanan Umum
+Route::get('/menu-LayananUmum', function () {
+    return view('LayananUmum.menu-LayananUmum');
+})->name('menu-LayananUmum');
+
+
 // Submenu CRUD (butuh controller nanti)
 // Route::get('/data-dasar', [DataDasarController::class, 'index'])->name('data-dasar.index');
 // Route::get('/prasarana', [PrasaranaController::class, 'index'])->name('prasarana.index');
@@ -91,4 +109,4 @@ Route::get('/buat-soal', function () {
     return view('buat-soal');
 })->name('buat-soal');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

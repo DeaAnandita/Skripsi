@@ -16,7 +16,12 @@
                         <h4 class="text-xl font-bold text-white-800 mb-2">Kependudukan</h4>
                         <p class="text-gray-700">Kelola Data</p>
                     </a>
-
+                    <!-- Menu Layanan Umum -->
+                    <a href="{{ route('menu-LayananUmum') }}"
+                    class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Layanan Umum</h4>
+                        <p class="text-gray-700">Kelola Data</p>
+                    </a>
                 </div>
             </div>
         </div>
