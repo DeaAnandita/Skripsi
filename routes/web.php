@@ -6,7 +6,10 @@ use App\Http\Controllers\AsetLahanController;
 
 // routes/web.php
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SaprasKerjaController;
+use App\Http\Controllers\SarpraskerjaController;
 use App\Models\AsetLahan;
+use App\Models\Sarpraskerja;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -51,6 +54,8 @@ Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportC
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');
+Route::get('/sarpraskerja/export/pdf', [SarpraskerjaController::class, 'exportPdf'])->name('sarpraskerja.export.pdf');
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 
 
@@ -92,3 +97,15 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sarpraskerja', [SarpraskerjaController::class, 'index'])->name('sarpraskerja.index');
+    Route::get('/sarpraskerja/create', [SarpraskerjaController::class, 'create'])->name('sarpraskerja.create');
+    Route::post('/sarpraskerja', [SarpraskerjaController::class, 'store'])->name('sarpraskerja.store');
+    Route::get('/sarpraskerja/{id}', [SarpraskerjaController::class, 'show'])->name('sarpraskerja.show');
+    Route::get('/sarpraskerja/{id}/edit', [SarpraskerjaController::class, 'edit'])->name('sarpraskerja.edit');
+    Route::put('/sarpraskerja/{id}', [SarpraskerjaController::class, 'update'])->name('sarpraskerja.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/sarpraskerja/{id}', [SarpraskerjaController::class, 'destroy'])->name('sarpraskerja.destroy');
+});
