@@ -38,10 +38,17 @@
                     </a>
 
                     <!-- Aset Ternak -->
-                    <a href="{{ route('aset-lahan.index') }}"
+                    <a href="{{ route('kesejahteraankeluarga.index') }}"
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Aset Ternak</h4>
                         <p class="text-gray-700">Kelola data Aset Ternak</p>
+                    </a>
+
+                    <!-- Kesejahteraan Keluarga -->
+                    <a href="{{ route('kesejahteraankeluarga.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Kesejahteraan Keluarga</h4>
+                        <p class="text-gray-700">Kelola data kesejahteraan keluarga</p>
                     </a>
                 </div>
             </div>
