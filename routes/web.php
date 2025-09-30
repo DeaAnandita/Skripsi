@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
+use App\Http\Controllers\UmkmController;
 
 // routes/web.php
 use App\Http\Controllers\ReportController;
@@ -51,6 +52,8 @@ Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportC
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+Route::get('/umkm/export/csv', [UmkmController::class, 'exportCsv'])->name('umkm.export.csv');
+Route::get('/umkm/export/pdf', [UmkmController::class, 'exportPdf'])->name('umkm.export.pdf');
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 
 
@@ -92,3 +95,14 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/umkm', [UmkmController::class, 'index'])->name('umkm.index');
+    Route::get('/umkm/create', [UmkmController::class, 'create'])->name('umkm.create');
+    Route::post('/umkm', [UmkmController::class, 'store'])->name('umkm.store');
+    Route::get('/umkm/{id}', [UmkmController::class, 'show'])->name('umkm.show');
+    Route::get('/umkm/{id}/edit', [UmkmController::class, 'edit'])->name('umkm.edit');
+    Route::put('/umkm/{id}', [UmkmController::class, 'update'])->name('umkm.update');
+    Route::delete('/umkm/{id}', [UmkmController::class, 'destroy'])->name('umkm.destroy');
+});
+
