@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
-
+use App\Http\Controllers\BantuanSosialController;
 // routes/web.php
 use App\Http\Controllers\ReportController;
 use App\Models\AsetLahan;
@@ -47,12 +47,25 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/bantuan-sosial', [BantuanSosialController::class, 'index'])->name('bantuan-sosial.index');
+    Route::get('/bantuan-sosial/create', [BantuanSosialController::class, 'create'])->name('bantuan-sosial.create');
+    Route::post('/bantuan-sosial', [BantuanSosialController::class, 'store'])->name('bantuan-sosial.store');
+    Route::get('/bantuan-sosial/{id}', [BantuanSosialController::class, 'show'])->name('bantuan-sosial.show');
+    Route::get('/bantuan-sosial/{id}/edit', [BantuanSosialController::class, 'edit'])->name('bantuan-sosial.edit');
+    Route::put('/bantuan-sosial/{id}', [BantuanSosialController::class, 'update'])->name('bantuan-sosial.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/bantuan-sosial/{id}', [BantuanSosialController::class, 'destroy'])->name('bantuan-sosial.destroy');
+});
+
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+Route::get('/bantuan-sosial/export/csv', [BantuanSosialController::class, 'exportCsv'])->name('bantuan-sosial.export.csv');
+Route::get('/bantuan-sosial/export/pdf', [BantuanSosialController::class, 'exportPdf'])->name('bantuan-sosial.export.pdf');
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
-
 
 
 Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
@@ -92,3 +105,5 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
+
+
