@@ -86,16 +86,18 @@
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Kualitas Ibu Hamil</h4>
                         <p class="text-gray-700">Kelola data kualitas ibu hamil</p>
 
+
+                     <!-- Kelahiran -->
+                    <a href="{{ route('kelahiran.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Kelahiran</h4>
+                        <p class="text-gray-700">Kelahiran</p>
+
                     <!-- Konflik Sosial -->
                     <a href="{{ route('konfliksosial.index') }}"
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Konflik Sosial</h4>
                         <p class="text-gray-700">Kelola data Konflik Sosial</p>
-
-
-
-
-
                     </a>
                 </div>
             </div>
