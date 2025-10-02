@@ -59,11 +59,24 @@
                     </a>
 
 
-                    <!-- umkm -->
+                    <!-- Layanan Ekonomi -->
                     <a href="{{ route('umkm.index') }}"
+
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Layanan Ekonomi</h4>
+                        <p class="text-gray-700">Kelola data Layanan Ekonomi</p>
+
+                    <!-- Layanan Masyarakat -->
+                    <a href="{{ route('layananmasyarakat.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Layanan Masyarakat</h4>
+                        <p class="text-gray-700">Kelola data Layanan Masyarakat</p>
+
+
                        class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
                         <h4 class="text-xl font-bold text-green-800 mb-2">umkm</h4>
                         <p class="text-gray-700">Kelola data umkm</p>
+
 
 
 
