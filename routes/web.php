@@ -264,6 +264,25 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
 });
 
+//amd pembangunan
+use App\Http\Controllers\AdmPembangunanController;
+
+Route::resource('admin-pembangunan', AdmPembangunanController::class)->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admpembangunan', [AdmpembangunanController::class, 'index'])->name('admpembangunan.index');
+    Route::get('admpembangunan/report', [AdmPembangunanController::class, 'report'])
+        ->name('admpembangunan.report');
+    Route::get('/admpembangunan/create', [AdmpembangunanController::class, 'create'])->name('admpembangunan.create');
+    Route::post('/admpembangunan', [AdmpembangunanController::class, 'store'])->name('admpembangunan.store');
+    Route::get('/admpembangunan/{id}', [AdmpembangunanController::class, 'show'])->name('admpembangunan.show');
+    Route::get('/admpembangunan/{id}/edit', [AdmpembangunanController::class, 'edit'])->name('admpembangunan.edit');
+    Route::put('/admpembangunan/{id}', [AdmpembangunanController::class, 'update'])->name('admpembangunan.update');
+   
+// Untuk hapus data juga sekalian
+    Route::delete('/admpembangunan/{id}', [AdmpembangunanController::class, 'destroy'])->name('admpembangunan.destroy');
+});
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/kelahiran', [KelahiranController::class, 'index'])->name('kelahiran.index');
     Route::get('/kelahiran/create', [KelahiranController::class, 'create'])->name('kelahiran.create');
@@ -275,6 +294,7 @@ Route::middleware(['auth'])->group(function () {
 // Untuk hapus data juga sekalian
     Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
 });
+
 
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
@@ -383,7 +403,6 @@ Route::get('/buat-soal', function () {
 
 require __DIR__.'/auth.php';
 
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/konfliksosial', [KonflikSosialController::class, 'index'])->name('konfliksosial.index');
     Route::get('/konfliksosial/create', [KonflikSosialController::class, 'create'])->name('konfliksosial.create');
@@ -411,6 +430,7 @@ Route::middleware(['auth'])->group(function () {
 // Untuk hapus data juga sekalian
     Route::delete('/admpembangunan/{id}', [AdmpembangunanController::class, 'destroy'])->name('admpembangunan.destroy');
 });
+
 
 
 

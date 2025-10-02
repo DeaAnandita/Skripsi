@@ -10,16 +10,17 @@ class AdmpembangunanController extends Controller
 {
     public function index()
     {
-        $data = Admpembangunan::orderBy('tanggal', 'desc')->get();
-        return view('admpembangunan.index', compact('data'));
+    $data = Admpembangunan::orderBy('judul', 'desc')->paginate(10); // <= pakai paginate
+    return view('admpembangunan.index', compact('data'));
+
     }
 
     // Laporan (semua data)
-    public function report()
-    {
-        $data = Admpembangunan::orderBy('tanggal', 'desc')->get();
-        return view('admpembangunan.report', compact('data'));
-    }
+   public function report()
+{
+    $data = Admpembangunan::orderBy('tanggal', 'desc')->get();
+    return view('admpembangunan.report', compact('data'));
+}
 
     public function create()
     {
