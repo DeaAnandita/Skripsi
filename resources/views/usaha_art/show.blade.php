@@ -21,7 +21,7 @@
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-700">Omset per Bulan</p>
-                            <p class="mt-1 text-gray-900">{{ $item->omset_per_bulan }}</p>
+                            <p class="mt-1 text-gray-900">{{ $item->omset_usaha_bulan }}</p>
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-700">Pendapatan per Bulan</p>
@@ -68,16 +68,16 @@
                             <p class="mt-1 text-gray-900">{{ $item->updated_at->format('d-m-Y H:i') }}</p>
                         </div>
                     </div>
-                    <div class="mt-6 flex gap-4">
-                        <a href="{{ route('usaha-art.edit', $item->id) }}"
-                           class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</a>
-                        <form action="{{ route('usaha-art.destroy', $item->id) }}" method="POST"
-                              onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Hapus</button>
-                        </form>
-                    </div>
+                    <div class="mt-4">
+                    <a href="{{ route('sosial_ekonomi.edit', $item->id) }}"
+                       class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
+                        Edit Data
+                    </a>
+                    <a href="{{ route('sosial_ekonomi.index') }}"
+                       class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded ml-2">
+                        Kembali
+                    </a>
+                </div>
                 </div>
             </div>
         </div>
