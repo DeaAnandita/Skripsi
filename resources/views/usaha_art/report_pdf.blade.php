@@ -33,7 +33,7 @@
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $item->user->name ?? '-' }}</td>
                     <td>{{ $item->lapangan_usaha }}</td>
-                    <td>{{ $item->omset_per_bulan }}</td>
+                    <td>{{ $item->omset_usaha_bulan }}</td>
                     <td>{{ $item->pendapatan_per_bulan }}</td>
                     <td>{{ $item->jumlah_pekerja }}</td>
                     <td>{{ $item->status_kedudukan_kerja }}</td>

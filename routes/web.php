@@ -12,6 +12,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UsahaArtController;
 use App\Http\Controllers\SaprasKerjaController;
 use App\Http\Controllers\SarpraskerjaController;
+use App\Http\Controllers\SosialEkonomiController;
 use App\Http\Controllers\SuratController;
 use App\Models\AsetLahan;
 use App\Models\KesejahteraanKeluarga;
@@ -64,9 +65,23 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/usaha_art/{id}', [UsahaArtController::class, 'show'])->name('usaha_art.show');
     Route::get('/usaha_art/{id}/edit', [UsahaArtController::class, 'edit'])->name('usaha_art.edit');
     Route::put('/usaha_art/{id}', [UsahaArtController::class, 'update'])->name('usaha_art.update');
+    Route::get('usaha_art/export-pdf', [UsahaArtController::class, 'exportPdf'])->name('usaha_art.export.pdf');
 
 // Untuk hapus data juga sekalian
     Route::delete('/usaha_art/{id}', [UsahaArtController::class, 'destroy'])->name('usaha_art.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sosial_ekonomi', [SosialEkonomiController::class, 'index'])->name('sosial_ekonomi.index');
+    Route::get('/sosial_ekonomi/create', [SosialEkonomiController::class, 'create'])->name('sosial_ekonomi.create');
+    Route::post('/sosial_ekonomi', [SosialEkonomiController::class, 'store'])->name('sosial_ekonomi.store');
+    Route::get('/sosial_ekonomi/{id}', [SosialEkonomiController::class, 'show'])->name('sosial_ekonomi.show');
+    Route::get('/sosial_ekonomi/{id}/edit', [SosialEkonomiController::class, 'edit'])->name('sosial_ekonomi.edit');
+    Route::put('/sosial_ekonomi/{id}', [SosialEkonomiController::class, 'update'])->name('sosial_ekonomi.update');
+    Route::get('sosial_ekonomi/export-pdf', [SosialEkonomiController::class, 'exportPdf'])->name('sosial_ekonomi.export.pdf');
+
+    // Untuk hapus data juga sekalian
+    Route::delete('/sosial_ekonomi/{id}', [SosialEkonomiController::class, 'destroy'])->name('sosial_ekonomi.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {
