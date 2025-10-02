@@ -33,7 +33,7 @@
                     <!-- Aset Lahan & Tanah -->
                     <a href="{{ route('aset-lahan.index') }}"
                        class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Aset Lahan dan Tanah</h4>
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Aset Lahan dan Tanah</h4>
                         <p class="text-gray-700">Kelola data Aset Lahan dan Tanah</p>
                     </a>
 
@@ -46,8 +46,8 @@
 
                     <!-- Kesejahteraan Keluarga -->
                     <a href="{{ route('kesejahteraankeluarga.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Kesejahteraan Keluarga</h4>
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Kesejahteraan Keluarga</h4>
                         <p class="text-gray-700">Kelola data kesejahteraan keluarga</p>
 
 
@@ -61,6 +61,7 @@
 
                     <!-- Layanan Ekonomi -->
                     <a href="{{ route('umkm.index') }}"
+
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Layanan Ekonomi</h4>
                         <p class="text-gray-700">Kelola data Layanan Ekonomi</p>
@@ -70,6 +71,11 @@
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Layanan Masyarakat</h4>
                         <p class="text-gray-700">Kelola data Layanan Masyarakat</p>
+
+
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">umkm</h4>
+                        <p class="text-gray-700">Kelola data umkm</p>
 
 
 
@@ -83,8 +89,8 @@
 
                     <!-- Anggota Keluarga -->
                     <a href="{{ route('anggota-keluarga.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Anggota Keluarga</h4>
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Anggota Keluarga</h4>
                         <p class="text-gray-700">Kelola Data Anggota Keluarga</p>
 
                     <!-- Ibu Hamil -->
@@ -93,8 +99,30 @@
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Kualitas Ibu Hamil</h4>
                         <p class="text-gray-700">Kelola data kualitas ibu hamil</p>
 
+                    <!-- Usaha Art -->
+                    <a href="{{ route('usaha_art.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Usaha Art</h4>
+                        <p class="text-gray-700">Kelola data usaha art</p>
 
 
+                    <!-- Sosial Ekonomi -->
+                    <a href="{{ route('sosial_ekonomi.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Sosial Ekonomi</h4>
+                        <p class="text-gray-700">Kelola data sosial ekonomi</p>
+
+                     <!-- Kelahiran -->
+                    <a href="{{ route('kelahiran.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Kelahiran</h4>
+                        <p class="text-gray-700">Kelahiran</p>
+
+                    <!-- Konflik Sosial -->
+                    <a href="{{ route('konfliksosial.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Konflik Sosial</h4>
+                        <p class="text-gray-700">Kelola data Konflik Sosial</p>
 
                     </a>
                 </div>

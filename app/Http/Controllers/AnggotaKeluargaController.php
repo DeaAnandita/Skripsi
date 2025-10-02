@@ -18,7 +18,9 @@ class AnggotaKeluargaController extends Controller
 
         if ($request->has('search')) {
             $search = $request->search;
-            $query->where('nama_lengkap', 'like', "%$search%");
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('nama_lengkap', 'like', "%$search%");
+            });
         }
 
         $anggotas = $query->orderBy('created_at', 'desc')->paginate(5);
@@ -58,11 +60,8 @@ class AnggotaKeluargaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AnggotaKeluarga $anggotaKeluarga)
-    {
-        $anggotaKeluarga->load(['user']);
-        return view('anggota-keluarga.show', compact('anggotaKeluarga'));
-    }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -73,13 +72,20 @@ class AnggotaKeluargaController extends Controller
     //     return view('anggota-keluarga.edit', compact('anggotaKeluarga',  'users'));
     // }
 
-     public function edit($id)
+     public function show($id)
+    {
+        $item = AnggotaKeluarga::with('user')->findOrFail($id);
+        return view('anggota-keluarga.show', compact('item'));
+    }
+
+        public function edit($id)
     {
         $item = AnggotaKeluarga::findOrFail($id);
         $users = User::all();
         return view('anggota-keluarga.edit', compact('item', 'users'));
     }
 
+   
     /**
      * Update the specified resource in storage.
      */
@@ -89,7 +95,7 @@ class AnggotaKeluargaController extends Controller
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
             // 'id_keluarga' => 'required|exists:master_keluarga,id_keluarga',
-            'nik' => 'required|string|max:16|unique:anggota_keluarga,nik,' . $id->id_anggota . ',id_anggota',
+            'nik' => 'required|string|max:16|unique:anggota_keluarga,nik,' . ',id_anggota',
             'nama_lengkap' => 'required|string|max:100',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
@@ -105,16 +111,12 @@ class AnggotaKeluargaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AnggotaKeluarga $anggotaKeluarga)
+     public function destroy($id)
     {
-        if ($anggotaKeluarga->dokumenKependudukan()->exists()) {
-            return redirect()->route('anggota-keluarga.index')->with('error', 'Tidak dapat menghapus karena terkait dengan dokumen kependudukan.');
-        }
-
-        $anggotaKeluarga->delete();
+        $item = AnggotaKeluarga::findOrFail($id);
+        $item->delete();
         return redirect()->route('anggota-keluarga.index')->with('success', 'Data anggota keluarga dihapus.');
     }
-
     /**
      * Export data to PDF.
      */

@@ -7,7 +7,7 @@ class AnggotaKeluarga extends Model {
     protected $table = 'anggota_keluarga';
 
      protected $fillable = [
-        'id',
+        'user_id',
         'nik',
         'nama_lengkap',
         'tanggal_lahir',
