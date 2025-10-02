@@ -36,21 +36,18 @@
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Aset Lahan dan Tanah</h4>
                         <p class="text-gray-700">Kelola data Aset Lahan dan Tanah</p>
                     </a>
-
-                    <!-- Aset Ternak -->
-                    <a href="{{ route('kesejahteraankeluarga.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Aset Ternak</h4>
-                        <p class="text-gray-700">Kelola data Aset Ternak</p>
-                    </a>
-
+                <<!-- Penyewaan lahan -->
+                  <a href="{{ route('penyewaan-lahan.index') }}"
+                    class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                       <h4 class="text-xl font-bold text-blue-800 mb-2">Penyewaan Lahan</h4>
+                       <p class="text-gray-700">Kelola data Penyewaan Lahan Ternak dan Perikanan</p>
+                  </a>
                     <!-- Kesejahteraan Keluarga -->
                     <a href="{{ route('kesejahteraankeluarga.index') }}"
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Kesejahteraan Keluarga</h4>
                         <p class="text-gray-700">Kelola data kesejahteraan keluarga</p>
-
-
+                    </a>
                     <!-- Sarpras Kerja -->
                     <a href="{{ route('sarpraskerja.index') }}"
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
