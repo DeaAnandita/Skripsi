@@ -2,64 +2,100 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\sarpraskerja;
+use App\Models\Sarpraskerja; // Pastikan nama model juga disesuaikan
+use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class SarpraskerjaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Sarpraskerja::with('user');
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->whereHas('user', function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%");
+            });
+        }
+
+        $sarpraskerja = $query->orderBy('created_at', 'desc')->paginate(5);
+        return view('sarpraskerja.index', compact('sarpraskerja'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('sarpraskerja.create', compact('users'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'mesin_kerja' => 'nullable|string',
+            'komputer_kerja' => 'nullable|string',
+            'meja_kantor' => 'nullable|string',
+            'kursi_kantor' => 'nullable|string',
+            'mobil_operasional' => 'nullable|string',
+            'sepeda_motor_kerja' => 'nullable|string',
+            'alat_berat' => 'nullable|string',
+            'internet_kerja' => 'nullable|string',
+            'printer_scanner' => 'nullable|string',
+            'telepon_kantor' => 'nullable|string',
+        ]);
+
+        Sarpraskerja::create($data);
+        return redirect()->route('sarpraskerja.index')->with('success', 'Data sarana prasarana kerja ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(sarpraskerja $sarpraskerja)
+    public function show($id)
     {
-        //
+        $item = Sarpraskerja::with('user')->findOrFail($id);
+        return view('sarpraskerja.show', compact('item'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(sarpraskerja $sarpraskerja)
+    public function edit($id)
     {
-        //
+        $item = Sarpraskerja::findOrFail($id);
+        $users = User::all();
+        return view('sarpraskerja.edit', compact('item', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, sarpraskerja $sarpraskerja)
+    public function update(Request $request, $id)
     {
-        //
+        $item = Sarpraskerja::findOrFail($id);
+
+        $data = $request->validate([
+            'user_id' => 'sometimes|exists:users,id',
+            'mesin_kerja' => 'nullable|string',
+            'komputer_kerja' => 'nullable|string',
+            'meja_kantor' => 'nullable|string',
+            'kursi_kantor' => 'nullable|string',
+            'mobil_operasional' => 'nullable|string',
+            'sepeda_motor_kerja' => 'nullable|string',
+            'alat_berat' => 'nullable|string',
+            'internet_kerja' => 'nullable|string',
+            'printer_scanner' => 'nullable|string',
+            'telepon_kantor' => 'nullable|string',
+        ]);
+
+        $item->update($data);
+        return redirect()->route('sarpraskerja.index')->with('success', 'Data sarana prasarana kerja diupdate.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(sarpraskerja $sarpraskerja)
+    public function destroy($id)
     {
-        //
+        $item = Sarpraskerja::findOrFail($id);
+        $item->delete();
+        return redirect()->route('sarpraskerja.index')->with('success', 'Data sarana prasarana kerja dihapus.');
+    }
+
+    public function exportPdf()
+    {
+        $data = Sarpraskerja::with('user')->get();
+        $pdf = Pdf::loadView('sarpraskerja.report.pdf', compact('data'))->setPaper('a4', 'landscape');
+        return $pdf->download('sarpraskerja.pdf');
     }
 }
