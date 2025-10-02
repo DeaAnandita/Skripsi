@@ -126,15 +126,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/jenis-hewan/{id}/edit', [JenisHewanController::class, 'edit'])->name('jenis-hewan.edit');
     Route::put('/jenis-hewan/{id}/update', [JenisHewanController::class, 'update'])->name('jenis-hewan.update');
     Route::delete('/jenis-hewan/{id}/delete', [JenisHewanController::class, 'destroy'])->name('jenis-hewan.destroy');
+    Route::get('/get-jenis-hewan/{namaHewanId}', [AsetTernakController::class, 'getJenisHewan']);
 });
 
 
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/menu-master data', function () {
-    return view('menu-master-data');
-})->name('menu-master-data');
-
+        return view('menu-master-data');
+    })->name('menu-master-data');
 });
 // Submenu CRUD (butuh controller nanti)
 // Route::get('/data-dasar', [DataDasarController::class, 'index'])->name('data-dasar.index');

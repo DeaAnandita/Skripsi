@@ -13,4 +13,5 @@ class NamaHewan extends Model
     {
         return $this->hasMany(JenisHewan::class, 'nama_hewan_id');
     }
+    
 }

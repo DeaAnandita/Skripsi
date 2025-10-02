@@ -38,28 +38,28 @@
                         </div>
 
                         {{-- Nama Hewan --}}
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Nama Hewan</label>
-                            <select name="nama_hewan_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                @foreach($namaHewan as $nh)
-                                    <option value="{{ $nh->id }}" {{ $asetternak->nama_hewan_id == $nh->id ? 'selected' : '' }}>
-                                        {{ $nh->nama }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+<div>
+    <label class="block text-sm font-medium text-gray-700">Nama Hewan</label>
+    <select id="namaHewan" name="nama_hewan_id" required 
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        <option value="">-- Pilih Hewan --</option>
+        @foreach($namaHewan as $nh)
+            <option value="{{ $nh->id }}" {{ $asetternak->nama_hewan_id == $nh->id ? 'selected' : '' }}>
+                {{ $nh->nama }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
-                        {{-- Jenis Hewan --}}
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Jenis Hewan</label>
-                            <select name="jenis_hewan_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                @foreach($jenisHewan as $jh)
-                                    <option value="{{ $jh->id }}" {{ $asetternak->jenis_hewan_id == $jh->id ? 'selected' : '' }}>
-                                        {{ $jh->jenis }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+{{-- Jenis Hewan --}}
+<div>
+    <label class="block text-sm font-medium text-gray-700">Jenis Hewan</label>
+    <select id="jenisHewan" name="jenis_hewan_id" required 
+            class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+        <option value="">-- Pilih Jenis --</option>
+    </select>
+</div>
+
 
                         {{-- Kategori --}}
                         <div>
@@ -119,4 +119,40 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function loadJenisHewan(namaHewanId, selectedId = null) {
+        if (namaHewanId) {
+            $.ajax({
+                url: '/get-jenis-hewan/' + namaHewanId,
+                type: 'GET',
+                success: function (data) {
+                    $('#jenisHewan').empty();
+                    $('#jenisHewan').append('<option value="">-- Pilih Jenis --</option>');
+                    $.each(data, function (key, value) {
+                        let selected = (value.id == selectedId) ? 'selected' : '';
+                        $('#jenisHewan').append('<option value="' + value.id + '" ' + selected + '>' + value.jenis + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#jenisHewan').empty().append('<option value="">-- Pilih Jenis --</option>');
+        }
+    }
+
+    // saat halaman edit pertama kali dibuka
+    $(document).ready(function () {
+        let currentNamaHewanId = $('#namaHewan').val(); // nama hewan yang sudah tersimpan
+        let currentJenisHewanId = "{{ $asetternak->jenis_hewan_id }}"; // jenis hewan tersimpan
+        loadJenisHewan(currentNamaHewanId, currentJenisHewanId);
+    });
+
+    // saat user ganti Nama Hewan
+    $('#namaHewan').on('change', function () {
+        let namaHewanId = $(this).val();
+        loadJenisHewan(namaHewanId);
+    });
+</script>
+
 </x-app-layout>

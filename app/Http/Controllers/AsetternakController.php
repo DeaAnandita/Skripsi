@@ -164,9 +164,13 @@ class AsetternakController extends Controller
         $asetTernaks = AsetTernak::all();
 
         $pdf = PDF::loadView('aset_ternak.pdf', compact('asetTernaks'))
-                  ->setPaper('a4', 'landscape');
+            ->setPaper('a4', 'landscape');
 
         return $pdf->download('aset_ternak_' . date('Ymd_His') . '.pdf');
     }
-
+    public function getJenisHewan($namaHewanId)
+    {
+        $jenisHewan = JenisHewan::where('nama_hewan_id', $namaHewanId)->get();
+        return response()->json($jenisHewan);
+    }
 }

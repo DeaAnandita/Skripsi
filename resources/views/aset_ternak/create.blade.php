@@ -34,23 +34,26 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Nama Hewan</label>
-                            <select name="nama_hewan_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                @foreach($namaHewan as $nh)
-                                    <option value="{{ $nh->id }}">{{ $nh->nama }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Nama Hewan</label>
+        <select id="namaHewan" name="nama_hewan_id" required 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <option value="">-- Pilih Hewan --</option>
+            @foreach($namaHewan as $nh)
+                <option value="{{ $nh->id }}">{{ $nh->nama }}</option>
+            @endforeach
+        </select>
+    </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Jenis Hewan</label>
-                            <select name="jenis_hewan_id" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                @foreach($jenisHewan as $jh)
-                                    <option value="{{ $jh->id }}">{{ $jh->jenis }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+    <div>
+        <label class="block text-sm font-medium text-gray-700">Jenis Hewan</label>
+        <select id="jenisHewan" name="jenis_hewan_id" required 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            <option value="">-- Pilih Jenis --</option>
+        </select>
+    </div>
+</div>
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Kategori</label>
@@ -103,4 +106,27 @@
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('#namaHewan').on('change', function () {
+        let namaHewanId = $(this).val();
+
+        if (namaHewanId) {
+            $.ajax({
+                url: '/get-jenis-hewan/' + namaHewanId,
+                type: 'GET',
+                success: function (data) {
+                    $('#jenisHewan').empty();
+                    $('#jenisHewan').append('<option value="">-- Pilih Jenis --</option>');
+                    $.each(data, function (key, value) {
+                        $('#jenisHewan').append('<option value="' + value.id + '">' + value.jenis + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#jenisHewan').empty().append('<option value="">-- Pilih Jenis --</option>');
+        }
+    });
+</script>
 </x-app-layout>

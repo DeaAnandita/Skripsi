@@ -63,4 +63,6 @@ class JenisHewanController extends Controller
         return redirect()->route('jenis-hewan.index')
                          ->with('success', 'Jenis Hewan berhasil dihapus');
     }
+    // AsetTernakController.php
+
 }
