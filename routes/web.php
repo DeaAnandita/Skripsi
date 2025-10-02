@@ -10,11 +10,9 @@ use App\Http\Controllers\BangunKeluargaController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\BayiController;
 use App\Http\Controllers\JenisSuratController;
-
+use App\Http\Controllers\PenyewaanLahanController;
 use App\Http\Controllers\LayananMasyarakatController;
-
 use App\Http\Controllers\KonflikSosialController;
-
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UsahaArtController;
 use App\Http\Controllers\SaprasKerjaController;
@@ -118,7 +116,17 @@ Route::middleware(['auth'])->group(function () {
 // Untuk hapus data juga sekalian
     Route::delete('/anggota-keluarga/{id}', [AnggotaKeluargaController::class, 'destroy'])->name('anggota-keluarga.destroy');
 });
+Route::middleware(['auth'])->group(function () {
+    Route::get('/penyewaan-lahan', [PenyewaanLahanController::class, 'index'])->name('penyewaan-lahan.index');
+    Route::get('/penyewaan-lahan/create', [PenyewaanLahanController::class, 'create'])->name('penyewaan-lahan.create');
+    Route::post('/penyewaan-lahan', [PenyewaanLahanController::class, 'store'])->name('penyewaan-lahan.store');
+    Route::get('/penyewaan-lahan/{id}', [PenyewaanLahanController::class, 'show'])->name('penyewaan-lahan.show');
+    Route::get('/penyewaan-lahan/{id}/edit', [PenyewaanLahanController::class, 'edit'])->name('penyewaan-lahan.edit');
+    Route::put('/penyewaan-lahan/{id}', [PenyewaanLahanController::class, 'update'])->name('penyewaan-lahan.update');
 
+// Untuk hapus data penyewaan lahan
+    Route::delete('/penyewaan-lahan/{id}', [PenyewaanLahanController::class, 'destroy'])->name('penyewaan-lahan.destroy');
+});
 //Ibu Hamil
 Route::middleware(['auth'])->group(function () {
     Route::get('/ibu-hamil', [IbuHamilController::class, 'index'])->name('ibu-hamil.index');
@@ -266,6 +274,7 @@ Route::get('/reports/export', [ReportController::class, 'export'])->name('report
 
 Route::get('/menu-utama')->name('menu-utama');
 Route::get('/menu-kependudukan')->name('menu-kependudukan');
+
 
 
 // Menu tingkat 1
