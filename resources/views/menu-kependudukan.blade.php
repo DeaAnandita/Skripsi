@@ -33,7 +33,7 @@
                     <!-- Aset Lahan & Tanah -->
                     <a href="{{ route('aset-lahan.index') }}"
                        class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Aset Lahan dan Tanah</h4>
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Aset Lahan dan Tanah</h4>
                         <p class="text-gray-700">Kelola data Aset Lahan dan Tanah</p>
                     </a>
 
@@ -46,8 +46,8 @@
 
                     <!-- Kesejahteraan Keluarga -->
                     <a href="{{ route('kesejahteraankeluarga.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Kesejahteraan Keluarga</h4>
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Kesejahteraan Keluarga</h4>
                         <p class="text-gray-700">Kelola data kesejahteraan keluarga</p>
 
 
@@ -61,8 +61,8 @@
 
                     <!-- umkm -->
                     <a href="{{ route('umkm.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">umkm</h4>
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">umkm</h4>
                         <p class="text-gray-700">Kelola data umkm</p>
 
 
@@ -76,8 +76,8 @@
 
                     <!-- Anggota Keluarga -->
                     <a href="{{ route('anggota-keluarga.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Anggota Keluarga</h4>
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Anggota Keluarga</h4>
                         <p class="text-gray-700">Kelola Data Anggota Keluarga</p>
 
                     <!-- Ibu Hamil -->
