@@ -2,64 +2,93 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\admpembangunan;
 use Illuminate\Http\Request;
+use App\Models\Admpembangunan;
+use Illuminate\Support\Facades\Storage;
 
 class AdmpembangunanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $data = Admpembangunan::orderBy('tanggal', 'desc')->get();
+        return view('admpembangunan.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Laporan (semua data)
+    public function report()
+    {
+        $data = Admpembangunan::orderBy('tanggal', 'desc')->get();
+        return view('admpembangunan.report', compact('data'));
+    }
+
     public function create()
     {
-        //
+        return view('admpembangunan.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'jenis_buku' => 'required|string|max:255',
+            'judul'      => 'required|string|max:255',
+            'dokumen'    => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'tanggal'    => 'required|date',
+        ]);
+
+        $payload = $request->only(['jenis_buku', 'judul', 'tanggal']);
+
+        if ($request->hasFile('dokumen')) {
+            $payload['dokumen'] = $request->file('dokumen')->store('dokumen_pembangunan', 'public');
+        }
+
+        Admpembangunan::create($payload);
+
+        return redirect()->route('admpembangunan.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(admpembangunan $admpembangunan)
+    // Show detail (route-model binding)
+    public function show(Admpembangunan $admpembangunan)
     {
-        //
+        return view('admpembangunan.show', ['item' => $admpembangunan]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(admpembangunan $admpembangunan)
+    public function edit(Admpembangunan $admpembangunan)
     {
-        //
+        return view('admpembangunan.edit', ['item' => $admpembangunan]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, admpembangunan $admpembangunan)
+    public function update(Request $request, Admpembangunan $admpembangunan)
     {
-        //
+        $request->validate([
+            'jenis_buku' => 'required|string|max:255',
+            'judul'      => 'required|string|max:255',
+            'dokumen'    => 'nullable|file|mimes:pdf,doc,docx,jpg,png|max:2048',
+            'tanggal'    => 'required|date',
+        ]);
+
+        $payload = $request->only(['jenis_buku', 'judul', 'tanggal']);
+
+        if ($request->hasFile('dokumen')) {
+            // hapus file lama jika ada
+            if ($admpembangunan->dokumen && Storage::disk('public')->exists($admpembangunan->dokumen)) {
+                Storage::disk('public')->delete($admpembangunan->dokumen);
+            }
+            $payload['dokumen'] = $request->file('dokumen')->store('dokumen_pembangunan', 'public');
+        }
+
+        $admpembangunan->update($payload);
+
+        return redirect()->route('admpembangunan.index')->with('success', 'Data berhasil diupdate!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(admpembangunan $admpembangunan)
+    public function destroy(Admpembangunan $admpembangunan)
     {
-        //
+        if ($admpembangunan->dokumen && Storage::disk('public')->exists($admpembangunan->dokumen)) {
+            Storage::disk('public')->delete($admpembangunan->dokumen);
+        }
+
+        $admpembangunan->delete();
+
+        return redirect()->route('admpembangunan.index')->with('success', 'Data berhasil dihapus!');
     }
 }
