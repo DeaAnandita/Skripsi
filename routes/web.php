@@ -16,6 +16,7 @@ use App\Http\Controllers\SuratController;
 use App\Models\AsetLahan;
 use App\Models\KesejahteraanKeluarga;
 use App\Models\Sarpraskerja;
+use App\Http\Controllers\KelahiranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -150,6 +151,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'show'])->name('kesejahtraankeluarga.show');
     Route::get('/kesejahteraankeluarga/{id}/edit', [KesejahteraanKeluargaController::class, 'edit'])->name('kesejahteraankeluarga.edit');
     Route::put('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'update'])->name('kesejahteraankeluarga.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/kelahiran', [KelahiranController::class, 'index'])->name('kelahiran.index');
+    Route::get('/kelahiran/create', [KelahiranController::class, 'create'])->name('kelahiran.create');
+    Route::post('/kelahiran', [KelahiranController::class, 'store'])->name('kelahiran.store');
+    Route::get('/kelahiran/{id}', [KelahiranController::class, 'show'])->name('kelahiran.show');
+    Route::get('/kelahiran/{id}/edit', [KelahiranController::class, 'edit'])->name('kelahiran.edit');
+    Route::put('/kelahiran/{id}', [KelahiranController::class, 'update'])->name('kelahiran.update');
 
 // Untuk hapus data juga sekalian
     Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
