@@ -1,35 +1,21 @@
 <?php
-
 use App\Http\Controllers\KesejahteraanKeluargaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
 use App\Http\Controllers\UmkmController;
-
 use App\Http\Controllers\BantuanSosialController;
-
 use App\Http\Controllers\AnggotaKeluargaController;
-
 use App\Http\Controllers\IbuHamilController;
-
-
 use App\Http\Controllers\JenisSuratController;
-
-
-// routes/web.php
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\UsahaArtController;
 use App\Http\Controllers\SaprasKerjaController;
 use App\Http\Controllers\SarpraskerjaController;
-
 use App\Http\Controllers\SuratController;
-
 use App\Models\AsetLahan;
-
 use App\Models\KesejahteraanKeluarga;
-
 use App\Models\Sarpraskerja;
-
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -70,6 +56,18 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
 });
 
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/usaha_art', [UsahaArtController::class, 'index'])->name('usaha_art.index');
+    Route::get('/usaha_art/create', [UsahaArtController::class, 'create'])->name('usaha_art.create');
+    Route::post('/usaha_art', [UsahaArtController::class, 'store'])->name('usaha_art.store');
+    Route::get('/usaha_art/{id}', [UsahaArtController::class, 'show'])->name('usaha_art.show');
+    Route::get('/usaha_art/{id}/edit', [UsahaArtController::class, 'edit'])->name('usaha_art.edit');
+    Route::put('/usaha_art/{id}', [UsahaArtController::class, 'update'])->name('usaha_art.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/usaha_art/{id}', [UsahaArtController::class, 'destroy'])->name('usaha_art.destroy');
+});
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/bantuan-sosial', [BantuanSosialController::class, 'index'])->name('bantuan-sosial.index');
@@ -161,32 +159,19 @@ Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportC
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
-
 Route::get('/kesejahteraan_keluarga/export/csv', [KesejahteraanKeluarga::class, 'exportCsv'])->name('kesejahteraan_keluarga.export.csv');
 Route::get('/kesejahteraan_keluarga/export/pdf', [KesejahteraanKeluarga::class, 'exportPdf'])->name('kesejahteraan_keluarga.export.pdf');
-
 Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');
 Route::get('/sarpraskerja/export/pdf', [SarpraskerjaController::class, 'exportPdf'])->name('sarpraskerja.export.pdf');
-
-
 Route::get('/umkm/export/csv', [UmkmController::class, 'exportCsv'])->name('umkm.export.csv');
 Route::get('/umkm/export/pdf', [UmkmController::class, 'exportPdf'])->name('umkm.export.pdf');
-
-
-Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
-
 Route::get('/bantuan-sosial/export/csv', [BantuanSosialController::class, 'exportCsv'])->name('bantuan-sosial.export.csv');
 Route::get('/bantuan-sosial/export/pdf', [BantuanSosialController::class, 'exportPdf'])->name('bantuan-sosial.export.pdf');
 Route::get('/anggota-keluarga/export/csv', [AnggotaKeluargaController::class, 'exportCsv'])->name('anggota-keluarga.export.csv');
 Route::get('/anggota-keluarga/export/pdf', [AnggotaKeluargaController::class, 'exportPdf'])->name('anggota-keluarga.export.pdf');
 Route::get('/ibu-hamil/export/csv', [IbuHamilController::class, 'exportCsv'])->name('ibu-hamil.export.csv');
 Route::get('/ibu-hamil/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('ibu-hamil.export.pdf');
-
-
-
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
-
-
 Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
 
 Route::get('/menu-utama')->name('menu-utama');
