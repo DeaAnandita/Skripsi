@@ -6,6 +6,7 @@ use App\Http\Controllers\AsetLahanController;
 
 // routes/web.php
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UsahaArtController;
 use App\Models\AsetLahan;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,18 @@ Route::middleware(['auth'])->group(function () {
 
 // Untuk hapus data juga sekalian
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/usaha_art', [UsahaArtController::class, 'index'])->name('usaha_art.index');
+    Route::get('/usaha_art/create', [UsahaArtController::class, 'create'])->name('usaha_art.create');
+    Route::post('/usaha_art', [UsahaArtController::class, 'store'])->name('usaha_art.store');
+    Route::get('/usaha_art/{id}', [UsahaArtController::class, 'show'])->name('usaha_art.show');
+    Route::get('/usaha_art/{id}/edit', [UsahaArtController::class, 'edit'])->name('usaha_art.edit');
+    Route::put('/usaha_art/{id}', [UsahaArtController::class, 'update'])->name('usaha_art.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/usaha_art/{id}', [UsahaArtController::class, 'destroy'])->name('usaha_art.destroy');
 });
 
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
