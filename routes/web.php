@@ -8,6 +8,7 @@ use App\Http\Controllers\BantuanSosialController;
 use App\Http\Controllers\AnggotaKeluargaController;
 use App\Http\Controllers\BangunKeluargaController;
 use App\Http\Controllers\IbuHamilController;
+use App\Http\Controllers\BayiController;
 use App\Http\Controllers\JenisSuratController;
 
 use App\Http\Controllers\LayananMasyarakatController;
@@ -131,6 +132,19 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/ibu-hamil/{id}', [IbuHamilController::class, 'destroy'])->name('ibu-hamil.destroy');
 });
 
+//Bayi
+Route::middleware(['auth'])->group(function () {
+    Route::get('/bayi', [BayiController::class, 'index'])->name('bayi.index');
+    Route::get('/bayi/create', [BayiController::class, 'create'])->name('bayi.create');
+    Route::post('/bayi', [BayiController::class, 'store'])->name('bayi.store');
+    Route::get('/bayi/{id}', [BayiController::class, 'show'])->name('bayi.show');
+    Route::get('/bayi/{id}/edit', [BayiController::class, 'edit'])->name('bayi.edit');
+    Route::put('/bayi/{id}', [BayiController::class, 'update'])->name('bayi.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/bayi/{id}', [BayiController::class, 'destroy'])->name('bayi.destroy');
+});
+
 //Layanan Umum
 Route::middleware(['auth'])->group(function () {
 Route::get('/surat-online', [SuratController::class, 'index'])->name('surats.index');
@@ -241,6 +255,8 @@ Route::get('/anggota-keluarga/export/csv', [AnggotaKeluargaController::class, 'e
 Route::get('/anggota-keluarga/export/pdf', [AnggotaKeluargaController::class, 'exportPdf'])->name('anggota-keluarga.export.pdf');
 Route::get('/ibu-hamil/export/csv', [IbuHamilController::class, 'exportCsv'])->name('ibu-hamil.export.csv');
 Route::get('/ibu-hamil/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('ibu-hamil.export.pdf');
+Route::get('/bayi/export/csv', [IbuHamilController::class, 'exportCsv'])->name('bayi.export.csv');
+Route::get('/bayi/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('bayi.export.pdf');
 Route::get('/bangunkeluarga/export/csv', [BangunKeluargaController::class, 'exportCsv'])->name('bangunkeluarga.export.csv');
 Route::get('/bangunkeluarga/export/pdf', [BangunKeluargaController::class, 'exportPdf'])->name('bangunkeluarga.export.Pdf');
 Route::get('/konfliksosial/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('konfliksosial.export.pdf');

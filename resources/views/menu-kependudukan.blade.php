@@ -82,8 +82,7 @@
                        class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
                         <h4 class="text-xl font-bold text-green-800 mb-2">umkm</h4>
                         <p class="text-gray-700">Kelola data umkm</p>
-
-
+                    </a>
 
 
                     <!-- Bantuan Sosial -->
@@ -91,19 +90,28 @@
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Bantuan Sosial</h4>
                         <p class="text-gray-700">Kelola data Bantuan Sosial</p>
-
+                    </a>
 
                     <!-- Anggota Keluarga -->
                     <a href="{{ route('anggota-keluarga.index') }}"
                        class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
                         <h4 class="text-xl font-bold text-green-800 mb-2">Anggota Keluarga</h4>
                         <p class="text-gray-700">Kelola Data Anggota Keluarga</p>
+                    </a>
 
                     <!-- Ibu Hamil -->
                     <a href="{{ route('ibu-hamil.index') }}"
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Kualitas Ibu Hamil</h4>
                         <p class="text-gray-700">Kelola data kualitas ibu hamil</p>
+                    </a>
+
+
+                    <!-- Bayi -->
+                    <a href="{{ route('bayi.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Kualitas Bayi</h4>
+                        <p class="text-gray-700">Kelola data kualitas bayi</p>
 
                     <!-- Usaha Art -->
                     <a href="{{ route('usaha_art.index') }}"
@@ -130,7 +138,9 @@
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Konflik Sosial</h4>
                         <p class="text-gray-700">Kelola data Konflik Sosial</p>
 
+
                     </a>
+                    
                 </div>
             </div>
         </div>

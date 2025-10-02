@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit Kualitas Bayi
+            Edit Bayi
         </h2>
     </x-slot>
 
@@ -25,9 +25,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-        <h2 class="mb-4">Edit Data Bayi</h2>
+        <h2 class="mb-4">Edit Bayi</h2>
 
-        <form action="{{ route('aset-keluarga.update', $item->id) }}" method="POST">
+        <form action="{{ route('bayi.update', $item->id) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -44,38 +44,45 @@
                 </select>
             </div>
 
-                 {{-- Nama Ibu Hamil --}}
+                 {{-- Nama Bayi --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Nama Ibu Hamil</label>
-                    <input type="text" name="nama" value="{{ old('nama', $item->nama) }}"
+                    <label class="block text-sm font-medium text-gray-700">Nama Bayi</label>
+                    <input type="text" name="nama_bayi" value="{{ old('nama_bayi', $item->nama_bayi) }}"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 </div>
 
-                 {{-- NIK Ibu Hamil --}}
+                 {{-- Nama Bayi --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">NIK Ibu Hamil</label>
-                    <input type="text" name="nik" value="{{ old('nik', $item->nik) }}"
+                    <label class="block text-sm font-medium text-gray-700">NIK Bayi</label>
+                    <input type="text" name="nama_bayi" value="{{ old('nama_bayi', $item->nama_bayi) }}"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 </div>
 
-                {{-- Alamat Ibu Hamil --}}
+                {{-- Tanggal Lahir --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Alamat Ibu Hamil</label>
-                    <input type="text" name="alamat" value="{{ old('alamat', $item->alamat) }}"
+                    <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
+                    <input type="text" name="tgl_lahir" value="{{ old('tgl_lahir', $item->tgl_lahir) }}"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 </div>
 
-                {{-- NO.HP Ibu Hamil --}}
+                {{-- Jenis Kelamin --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">NO.HP Ibu Hamil</label>
-                    <input type="text" name="no_hp" value="{{ old('no_hp', $item->no_hp) }}"
+                    <label class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
+                    <input type="text" name="jenbis_kelamin" value="{{ old('jenis_kelamin', $item->jenis_kelamin) }}"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 </div>
 
-                {{-- Status Ibu Hamil --}}
+                {{-- Berat Badan --}}
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Status Ibu Hamil</label>
-                    <input type="text" name="status_hamil" value="{{ old('status_hamil', $item->status_hamil) }}"
+                    <label class="block text-sm font-medium text-gray-700">Berat Badan</label>
+                    <input type="text" name="berat_badan" value="{{ old('berat_badan', $item->berat_badan) }}"
+                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                </div>
+
+                 {{-- Tinggi Badan --}}
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Tinggi Badan</label>
+                    <input type="text" name="tinggi_badan" value="{{ old('tinggi_badan', $item->tinggi_badan) }}"
                         class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                 </div>
 
@@ -83,7 +90,7 @@
 
             <div class="mt-4">
                 <button type="submit" class="btn btn-primary">Update</button>
-                <a href="{{ route('ibu-hamil.index') }}" class="btn btn-secondary">Kembali</a>
+                <a href="{{ route('bayi.index') }}" class="btn btn-secondary">Kembali</a>
             </div>
         </form>
                 </div>
