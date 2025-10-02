@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class cuba extends Model
 {
-    //
+    protected $guarded=[];
 }

@@ -1,7 +1,7 @@
-{{-- <x-app-layout>
+<x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kelola Aset Keluarga') }}
+            {{ __('Kelola Kualitas Bayi') }}
         </h2>
     </x-slot>
 
@@ -17,7 +17,7 @@
                 <div class="p-6 space-y-6">
                     <!-- Header: Search + Add -->
                     <div class="flex justify-between items-center">
-                        <form action="{{ route('aset-keluarga.index') }}" method="GET" class="flex gap-2">
+                        <form action="{{ route('ibu-hamil.index') }}" method="GET" class="flex gap-2">
                             <input type="text" name="search" value="{{ request('search') }}"
                                 placeholder="🔍 Cari berdasarkan nama user..."
                                 class="px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
@@ -27,9 +27,9 @@
                             </button>
                         </form>
 
-                        <a href="{{ route('aset-keluarga.create') }}"
+                        <a href="{{ route('ibu-hamil.create') }}"
                            class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            + Tambah Aset
+                            + Tambah Data
                         </a>
                     </div>
 

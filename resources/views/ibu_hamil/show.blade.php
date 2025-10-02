@@ -35,12 +35,12 @@
                 </table>
 
                 <div class="mt-4">
-                    <a href="{{ route('ibu-hamil'.edit', $item->id) }}"
-                       class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
+                    <a href="{{ route('ibu-hamil.edit', $item->id) }}"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
                         Edit Data
                     </a>
                     <a href="{{ route('ibu-hamil.index') }}"
-                       class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded ml-2">
+                    class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded ml-2">
                         Kembali
                     </a>
                 </div>
