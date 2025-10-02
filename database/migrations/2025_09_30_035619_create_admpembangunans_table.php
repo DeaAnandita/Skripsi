@@ -7,21 +7,25 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Jalankan migration.
      */
     public function up(): void
     {
-        Schema::create('admpembangunans', function (Blueprint $table) {
+        Schema::create('admpembangunan', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('jenis_buku', 255);
+            $table->string('judul', 255);
+            $table->string('dokumen')->nullable(); // file dokumen disimpan path nya
+            $table->date('tanggal');
+            $table->timestamps(); // created_at & updated_at
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Rollback migration.
      */
     public function down(): void
     {
-        Schema::dropIfExists('admpembangunans');
+        Schema::dropIfExists('admpembangunan');
     }
 };
