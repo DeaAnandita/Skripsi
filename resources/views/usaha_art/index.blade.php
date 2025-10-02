@@ -16,7 +16,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 space-y-6">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <form action="{{ route('usaha-art.index') }}" method="GET" class="flex gap-2 w-full md:w-1/2">
+                        <form action="{{ route('usaha_art.index') }}" method="GET" class="flex gap-2 w-full md:w-1/2">
                             <input type="text" name="search" value="{{ request('search') }}"
                                 placeholder="🔍 Cari berdasarkan nama user atau lapangan usaha..."
                                 class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
@@ -24,11 +24,11 @@
                                 class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Cari</button>
                         </form>
                         <div class="flex items-center gap-3">
-                            <a href="{{ route('usaha-art.export.pdf') }}"
+                            <a href="{{ route('usaha_art.export.pdf') }}"
                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
                                 Export PDF
                             </a>
-                            <a href="{{ route('usaha-art.create') }}"
+                            <a href="{{ route('usaha_art.create') }}"
                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
                                 + Tambah Usaha
                             </a>
@@ -56,7 +56,7 @@
                                         <td class="px-3 py-2 border">{{ $loop->iteration + ($usaha->currentPage() - 1) * $usaha->perPage() }}</td>
                                         <td class="px-4 py-2 border">{{ $item->user->name ?? '-' }}</td>
                                         <td class="px-4 py-2 border">{{ $item->lapangan_usaha }}</td>
-                                        <td class="px-4 py-2 border">{{ $item->omset_per_bulan }}</td>
+                                        <td class="px-4 py-2 border">{{ $item->omset_usaha_bulan }}</td>
                                         <td class="px-4 py-2 border">{{ $item->pendapatan_per_bulan }}</td>
                                         <td class="px-4 py-2 border">{{ $item->jumlah_pekerja }}</td>
                                         <td class="px-4 py-2 border">{{ $item->status_kedudukan_kerja }}</td>
@@ -69,11 +69,11 @@
                                         </td>
                                         <td class="px-3 py-2 border text-center">
                                             <div class="flex justify-center gap-2">
-                                                <a href="{{ route('usaha-art.show', $item->id) }}"
+                                                <a href="{{ route('usaha_art.show', $item->id) }}"
                                                    class="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Lihat</a>
-                                                <a href="{{ route('usaha-art.edit', $item->id) }}"
+                                                <a href="{{ route('usaha_art.edit', $item->id) }}"
                                                    class="px-2 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Edit</a>
-                                                <form action="{{ route('usaha-art.destroy', $item->id) }}" method="POST" class="inline"
+                                                <form action="{{ route('usaha_art.destroy', $item->id) }}" method="POST" class="inline"
                                                       onsubmit="return confirm('Yakin ingin menghapus data ini?')">
                                                     @csrf
                                                     @method('DELETE')

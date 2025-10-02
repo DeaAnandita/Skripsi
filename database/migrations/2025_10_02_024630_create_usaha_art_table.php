@@ -34,7 +34,7 @@ return new class extends Migration {
                 'Pemulung',
                 'Lainnya'
             ]);
-            $table->enum('omset_per_bulan', [
+            $table->enum('omset_usaha_bulan', [
                 'Kurang dari/sama dengan Rp. 1 Juta',
                 'Rp. 1 Juta s/d Rp. 5 Juta',
                 'Rp. 5 Juta s/d Rp. 10 Juta',

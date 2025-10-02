@@ -16,9 +16,9 @@
                         <p class="text-gray-700">Buat Surat Online Berbasis Barcode</p>
                     </a>
 
-                                    <a href="{{ route('jenis-surat.index') }}"
-                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
-                        <h4 class="text-xl font-bold text-blue-800 mb-2">Jenis Surat Online</h4>
+                    <a href="{{ route('jenis-surat.index') }}"
+                       class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-green-800 mb-2">Jenis Surat Online</h4>
                         <p class="text-gray-700">Buat Surat Online Berbasis Barcode</p>
                     </a>
 
