@@ -86,6 +86,18 @@
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Kualitas Ibu Hamil</h4>
                         <p class="text-gray-700">Kelola data kualitas ibu hamil</p>
 
+                    <!-- Usaha Art -->
+                    <a href="{{ route('usaha_art.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Usaha Art</h4>
+                        <p class="text-gray-700">Kelola data usaha art</p>
+
+
+                    <!-- Sosial Ekonomi -->
+                    <a href="{{ route('sosial_ekonomi.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Sosial Ekonomi</h4>
+                        <p class="text-gray-700">Kelola data sosial ekonomi</p>
 
                      <!-- Kelahiran -->
                     <a href="{{ route('kelahiran.index') }}"
@@ -98,6 +110,7 @@
                        class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
                         <h4 class="text-xl font-bold text-blue-800 mb-2">Konflik Sosial</h4>
                         <p class="text-gray-700">Kelola data Konflik Sosial</p>
+
                     </a>
                 </div>
             </div>
