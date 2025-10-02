@@ -19,7 +19,7 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="{{ route('usaha-art.update', $item->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('usaha_art.update', $item->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-4">
@@ -65,8 +65,8 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="omset_per_bulan" class="block text-sm font-medium text-gray-700">Omset per Bulan</label>
-                            <select name="omset_per_bulan" id="omset_per_bulan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                            <label for="omset_usaha_bulan" class="block text-sm font-medium text-gray-700">Omset Usaha/Bulan</label>
+                            <select name="omset_usaha_bulan" id="omset_usaha_bulan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
                                 <option value="">-- Pilih Omset --</option>
                                 @foreach([
                                     'Kurang dari/sama dengan Rp. 1 Juta' => 'Kurang dari/sama dengan Rp. 1 Juta',
@@ -74,9 +74,12 @@
                                     'Rp. 5 Juta s/d Rp. 10 Juta' => 'Rp. 5 Juta s/d Rp. 10 Juta',
                                     'Lebih dari/sama dengan Rp. 10 Juta' => 'Lebih dari/sama dengan Rp. 10 Juta'
                                 ] as $value => $label)
-                                    <option value="{{ $value }}" {{ old('omset_per_bulan', $item->omset_per_bulan) == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    <option value="{{ $value }}" {{ old('omset_usaha_bulan', $item->omset_usaha_bulan) == $value ? 'selected' : '' }}>{{ $label }}</option>
                                 @endforeach
                             </select>
+                            @error('omset_usaha_bulan')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="mb-4">
@@ -152,4 +155,3 @@
         </div>
     </div>
 </x-app-layout>
-

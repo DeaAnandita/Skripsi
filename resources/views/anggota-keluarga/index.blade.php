@@ -38,7 +38,6 @@
                             <thead class="bg-gray-50 text-gray-700">
                                 <tr>
                                     <th class="px-3 py-2 border">No</th>
-                                    <th class="px-3 py-2 border">User</th>
                                     <th class="px-3 py-2 border">NIK</th>
                                     <th class="px-3 py-2 border">Nama Lengkap</th>
                                     <th class="px-3 py-2 border">Tanggal Lahir</th>
@@ -52,7 +51,6 @@
                                 @forelse ($anggotas as $anggota)
                                     <tr class="hover:bg-gray-50">
                                         <td class="px-3 py-2 border">{{ $loop->iteration + ($anggotas->currentPage()-1)*$anggotas->perPage() }}</td>
-                                        <td class="px-3 py-2 border align-top">{{ $anggota->user->name ?? '-' }}</td>
                                         <td class="px-3 py-2 border">{{ $anggota->nik }}</td>
                                         <td class="px-3 py-2 border">{{ $anggota->nama_lengkap }}</td>
                                         <td class="px-3 py-2 border">{{ $anggota->tanggal_lahir }}</td>

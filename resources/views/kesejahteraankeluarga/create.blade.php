@@ -59,14 +59,20 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            <div>
+                            {{-- <div>
                                 <label for="akses_pendidikan" class="block text-sm font-medium text-gray-700">Akses pendidikan :</label>
                                 <select name="akses_pendidikan" id="akses_pendidikan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     <option value="">Silahkan Pilih</option>
                                     <option value="Ya">Ya</option>
                                     <option value="Tidak">Tidak</option>
                                 </select>
+                            </div> --}}
+                            {{-- isian --}}
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Akses Pendidikan</label>
+                                <input type="text" name="akses_pendidikan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
+                            
                             <div>
                                 <label for="akses_kesehatan" class="block text-sm font-medium text-gray-700">Akses kesehatan :</label>
                                 <select name="akses_kesehatan" id="akses_kesehatan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
