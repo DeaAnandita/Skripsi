@@ -58,6 +58,12 @@
                         <p class="text-gray-700">Kelola data Sarpras Kerja</p>
                     </a>
 
+                     <!-- Bangun Keluarga -->
+                    <a href="{{ route('bangunkeluarga.index') }}"
+                       class="p-6 bg-blue-100 rounded-2xl shadow hover:bg-blue-200 transition">
+                        <h4 class="text-xl font-bold text-blue-800 mb-2">Bangun Keluarga</h4>
+                        <p class="text-gray-700">Kelola data Bangun Keluarga</p>
+                    </a>
 
                     <!-- Layanan Ekonomi -->
                     <a href="{{ route('umkm.index') }}"
