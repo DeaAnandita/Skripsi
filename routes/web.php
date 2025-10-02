@@ -19,8 +19,6 @@ use App\Http\Controllers\SaprasKerjaController;
 use App\Http\Controllers\SarpraskerjaController;
 use App\Http\Controllers\SosialEkonomiController;
 use App\Http\Controllers\SuratController;
-
-
 use App\Models\AsetLahan;
 use App\Models\KesejahteraanKeluarga;
 use App\Models\Sarpraskerja;
@@ -105,6 +103,31 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/bantuan-sosial/{id}', [BantuanSosialController::class, 'destroy'])->name('bantuan-sosial.destroy');
 });
 
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/usaha_art', [UsahaArtController::class, 'index'])->name('usaha_art.index');
+    Route::get('/usaha_art/create', [UsahaArtController::class, 'create'])->name('usaha_art.create');
+    Route::post('/usaha_art', [UsahaArtController::class, 'store'])->name('usaha_art.store');
+    Route::get('/usaha_art/{id}', [UsahaArtController::class, 'show'])->name('usaha_art.show');
+    Route::get('/usaha_art/{id}/edit', [UsahaArtController::class, 'edit'])->name('usaha_art.edit');
+    Route::put('/usaha_art/{id}', [UsahaArtController::class, 'update'])->name('usaha_art.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/usaha_art/{id}', [UsahaArtController::class, 'destroy'])->name('usaha_art.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/bantuan_sosial', [BantuanSosialController::class, 'index'])->name('bantuan_sosial.index');
+    Route::get('/bantuan_sosial/create', [BantuanSosialController::class, 'create'])->name('bantuan_sosial.create');
+    Route::post('/bantua_-sosial', [BantuanSosialController::class, 'store'])->name('bantuan_sosial.store');
+    Route::get('/bantuan_sosial/{id}', [BantuanSosialController::class, 'show'])->name('bantuan_sosial.show');
+    Route::get('/bantuan_sosial/{id}/edit', [BantuanSosialController::class, 'edit'])->name('bantuan_sosial.edit');
+    Route::put('/bantuan_sosial/{id}', [BantuanSosialController::class, 'update'])->name('bantuan_sosial.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/bantuan_sosial/{id}', [BantuanSosialController::class, 'destroy'])->name('bantuan_sosial.destroy');
+});
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/anggota-keluarga', [AnggotaKeluargaController::class, 'index'])->name('anggota-keluarga.index');
     Route::get('/anggota-keluarga/create', [AnggotaKeluargaController::class, 'create'])->name('anggota-keluarga.create');
@@ -116,6 +139,7 @@ Route::middleware(['auth'])->group(function () {
 // Untuk hapus data juga sekalian
     Route::delete('/anggota-keluarga/{id}', [AnggotaKeluargaController::class, 'destroy'])->name('anggota-keluarga.destroy');
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/penyewaan-lahan', [PenyewaanLahanController::class, 'index'])->name('penyewaan-lahan.index');
     Route::get('/penyewaan-lahan/create', [PenyewaanLahanController::class, 'create'])->name('penyewaan-lahan.create');
@@ -127,6 +151,7 @@ Route::middleware(['auth'])->group(function () {
 // Untuk hapus data penyewaan lahan
     Route::delete('/penyewaan-lahan/{id}', [PenyewaanLahanController::class, 'destroy'])->name('penyewaan-lahan.destroy');
 });
+
 //Ibu Hamil
 Route::middleware(['auth'])->group(function () {
     Route::get('/ibu-hamil', [IbuHamilController::class, 'index'])->name('ibu-hamil.index');
