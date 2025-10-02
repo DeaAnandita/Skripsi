@@ -8,6 +8,7 @@ use App\Http\Controllers\BantuanSosialController;
 use App\Http\Controllers\AnggotaKeluargaController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\JenisSuratController;
+use App\Http\Controllers\KonflikSosialController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UsahaArtController;
 use App\Http\Controllers\SaprasKerjaController;
@@ -184,6 +185,8 @@ Route::get('/anggota-keluarga/export/csv', [AnggotaKeluargaController::class, 'e
 Route::get('/anggota-keluarga/export/pdf', [AnggotaKeluargaController::class, 'exportPdf'])->name('anggota-keluarga.export.pdf');
 Route::get('/ibu-hamil/export/csv', [IbuHamilController::class, 'exportCsv'])->name('ibu-hamil.export.csv');
 Route::get('/ibu-hamil/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('ibu-hamil.export.pdf');
+Route::get('/konfliksosial/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('konfliksosial.export.pdf');
+Route::get('/konfliksosial/export/csv', [IbuHamilController::class, 'exportCsv'])->name('konfliksosial.export.csv');
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
 
@@ -228,3 +231,35 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/konfliksosial', [KonflikSosialController::class, 'index'])->name('konfliksosial.index');
+    Route::get('/konfliksosial/create', [KonflikSosialController::class, 'create'])->name('konfliksosial.create');
+    Route::post('/konfliksosial', [KonflikSosialController::class, 'store'])->name('konfliksosial.store');
+    Route::get('/konfliksosial/{id}', [KonflikSosialController::class, 'show'])->name('konfliksosial.show');
+    Route::get('/konfliksosial/{id}/edit', [KonflikSosialController::class, 'edit'])->name('konfliksosial.edit');
+    Route::put('/konfliksosial/{id}', [KonflikSosialController::class, 'update'])->name('konfliksosial.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/konfliksosial/{id}', [KonflikSosialController::class, 'destroy'])->name('konfliksosial.destroy');
+});
+
+//amd pembangunan
+use App\Http\Controllers\AdmPembangunanController;
+
+Route::resource('admin-pembangunan', AdmPembangunanController::class)->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admpembangunan', [AdmpembangunanController::class, 'index'])->name('admpembangunan.index');
+    Route::get('/admpembangunan/create', [AdmpembangunanController::class, 'create'])->name('admpembangunan.create');
+    Route::post('/admpembangunan', [AdmpembangunanController::class, 'store'])->name('admpembangunan.store');
+    Route::get('/admpembangunan/{id}', [AdmpembangunanController::class, 'show'])->name('admpembangunan.show');
+    Route::get('/admpembangunan/{id}/edit', [AdmpembangunanController::class, 'edit'])->name('admpembangunan.edit');
+    Route::put('/admpembangunan/{id}', [AdmpembangunanController::class, 'update'])->name('admpembangunan.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/admpembangunan/{id}', [AdmpembangunanController::class, 'destroy'])->name('admpembangunan.destroy');
+});
+
+
+
