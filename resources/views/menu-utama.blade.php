@@ -16,7 +16,28 @@
                         <h4 class="text-xl font-bold text-white-800 mb-2">Kependudukan</h4>
                         <p class="text-gray-700">Kelola Data</p>
                     </a>
+<<<<<<< Updated upstream
 
+=======
+                    <!-- Menu Layanan Umum -->
+                    <a href="{{ route('menu-LayananUmum') }}"
+                    class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Layanan Umum</h4>
+                        <p class="text-gray-700">Kelola Data</p>
+                    </a>
+                    {{-- Menu Utama --}}
+                    <a href="{{ route('menu-master-data') }}"
+                    class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Master Data</h4>
+                        <p class="text-gray-700">Kelola Master Data</p>
+                    </a>
+                    {{-- Menu Daftar KK --}}
+                    <a href="{{ route('menu-daftarkeluarga') }}"
+                    class="p-6 bg-green-100 rounded-2xl shadow hover:bg-green-200 transition">
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Daftar Keluarga</h4>
+                        <p class="text-gray-700">Kelola Daftar Keluarga</p>
+                    </a>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
