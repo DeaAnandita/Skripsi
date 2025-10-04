@@ -13,6 +13,24 @@ use App\Http\Controllers\AnggotaKeluargaController;
 use App\Http\Controllers\BangunKeluargaController;
 use App\Http\Controllers\IbuHamilController;
 use App\Http\Controllers\BayiController;
+use App\Http\Controllers\PenyewaanLahanController;
+use App\Http\Controllers\LayananMasyarakatController;
+use App\Http\Controllers\KonflikSosialController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\UsahaArtController;
+use App\Http\Controllers\SaprasKerjaController;
+use App\Http\Controllers\SarpraskerjaController;
+use App\Http\Controllers\SosialEkonomiController;
+use App\Http\Controllers\SuratController;
+use App\Http\Controllers\AsetternakController;
+use App\Http\Controllers\JenisHewanController;
+use App\Http\Controllers\NamaHewanController;
+use App\Http\Controllers\UmkmController;
+use App\Http\Controllers\BantuanSosialController;
+use App\Http\Controllers\AnggotaKeluargaController;
+use App\Http\Controllers\BangunKeluargaController;
+use App\Http\Controllers\IbuHamilController;
+use App\Http\Controllers\BayiController;
 use App\Http\Controllers\JenisSuratController;
 use App\Http\Controllers\PenyewaanLahanController;
 use App\Http\Controllers\LayananMasyarakatController;
@@ -23,11 +41,16 @@ use App\Http\Controllers\SaprasKerjaController;
 use App\Http\Controllers\SarpraskerjaController;
 use App\Http\Controllers\SosialEkonomiController;
 use App\Http\Controllers\SuratController;
+use App\Http\Controllers\AdmPembangunanController;
+use App\Http\Controllers\DasarKeluargaController;
 use App\Models\AsetLahan;
 use App\Models\KesejahteraanKeluarga;
 use App\Models\Sarpraskerja;
 use App\Http\Controllers\KelahiranController;
-
+use App\Http\Controllers\KeluargaController;
+use App\Models\KesejahteraanKeluarga;
+use App\Models\Sarpraskerja;
+use App\Http\Controllers\KelahiranController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -42,6 +65,32 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/keluarga', [KeluargaController::class, 'index'])->name('keluarga.index');
+    Route::get('/keluarga/create', [KeluargaController::class, 'create'])->name('keluarga.create');
+    Route::post('/keluarga', [KeluargaController::class, 'store'])->name('keluarga.store');
+    Route::get('/keluarga/{id}', [KeluargaController::class, 'show'])->name('keluarga.show');
+    Route::get('/keluarga/{id}/edit', [KeluargaController::class, 'edit'])->name('keluarga.edit');
+    Route::put('/keluarga/{id}', [KeluargaController::class, 'update'])->name('keluarga.update');
+
+    // Untuk hapus data juga sekalian
+    Route::delete('/keluarga/{id}', [KeluargaController::class, 'destroy'])->name('keluarga.destroy');
+});
+
+Route::resource('keluarga', KeluargaController::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dasar-keluarga', [DasarKeluargaController::class, 'index'])->name('dasar-keluarga.index');
+    Route::get('/dasar-keluarga/create', [DasarKeluargaController::class, 'create'])->name('dasar-keluarga.create');
+    Route::post('/dasar-keluarga', [DasarKeluargaController::class, 'store'])->name('dasar-keluarga.store');
+    Route::get('/dasar-keluarga/{id}', [DasarKeluargaController::class, 'show'])->name('dasar-keluarga.show');
+    Route::get('/dasar-keluarga/{id}/edit', [DasarKeluargaController::class, 'edit'])->name('dasar-keluarga.edit');
+    Route::put('/dasar-keluarga/{id}', [DasarKeluargaController::class, 'update'])->name('dasar-keluarga.update');
+
+    // Untuk hapus data juga sekalian
+    Route::delete('/dasar-keluarga/{id}', [DasarKeluargaController::class, 'destroy'])->name('dasar-keluarga.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -67,7 +116,6 @@ Route::middleware(['auth'])->group(function () {
     // Untuk hapus data juga sekalian
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
 });
-
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/usaha_art', [UsahaArtController::class, 'index'])->name('usaha_art.index');
@@ -264,10 +312,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
 });
 
-//amd pembangunan
-use App\Http\Controllers\AdmPembangunanController;
-
-Route::resource('admin-pembangunan', AdmPembangunanController::class)->middleware('auth');
 Route::middleware(['auth'])->group(function () {
     Route::get('/admpembangunan', [AdmpembangunanController::class, 'index'])->name('admpembangunan.index');
     Route::get('admpembangunan/report', [AdmPembangunanController::class, 'report'])
@@ -295,11 +339,56 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/kesejahteraankeluarga/{id}', [KesejahteraanKeluargaController::class, 'destroy'])->name('kesejahteraankeluarga.destroy');
 });
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/konfliksosial', [KonflikSosialController::class, 'index'])->name('konfliksosial.index');
+    Route::get('/konfliksosial/create', [KonflikSosialController::class, 'create'])->name('konfliksosial.create');
+    Route::post('/konfliksosial', [KonflikSosialController::class, 'store'])->name('konfliksosial.store');
+    Route::get('/konfliksosial/{id}', [KonflikSosialController::class, 'show'])->name('konfliksosial.show');
+    Route::get('/konfliksosial/{id}/edit', [KonflikSosialController::class, 'edit'])->name('konfliksosial.edit');
+    Route::put('/konfliksosial/{id}', [KonflikSosialController::class, 'update'])->name('konfliksosial.update');
+
+// Untuk hapus data juga sekalian
+    Route::delete('/konfliksosial/{id}', [KonflikSosialController::class, 'destroy'])->name('konfliksosial.destroy');
+});
+
+//Aset Ternak
+Route::middleware(['auth'])->group(function () {
+    //aset ternak
+    Route::get('/aset-ternak', [AsetTernakController::class, 'index'])->name('aset-ternak.index');
+    Route::get('/aset-ternak/create', [AsetTernakController::class, 'create'])->name('aset-ternak.create');
+    Route::post('/aset-ternak/store', [AsetTernakController::class, 'store'])->name('aset-ternak.store');
+    Route::get('/aset-ternak/{id}/edit', [AsetTernakController::class, 'edit'])->name('aset-ternak.edit');
+    Route::put('/aset-ternak/{id}/update', [AsetTernakController::class, 'update'])->name('aset-ternak.update');
+    Route::delete('/aset-ternak/{id}/delete', [AsetTernakController::class, 'destroy'])->name('aset-ternak.destroy');
+    Route::get('/aset-ternak/{id}', [AsetTernakController::class, 'show'])->name('aset-ternak.show');
+
+    //cetak
+    Route::get('/aset-ternak/export/csv', [AsetTernakController::class, 'exportCsv'])->name('aset_ternak.export.csv');
+    Route::get('/aset-ternak/export/pdf', [AsetTernakController::class, 'exportPdf'])->name('aset_ternak.export.pdf');
+
+    //nama hewan
+    Route::get('/nama-hewan', [NamaHewanController::class, 'index'])->name('nama-hewan.index');
+    Route::get('/nama-hewan/create', [NamaHewanController::class, 'create'])->name('nama-hewan.create');
+    Route::post('/nama-hewan/store', [NamaHewanController::class, 'store'])->name('nama-hewan.store');
+    Route::get('/nama-hewan/{id}/edit', [NamaHewanController::class, 'edit'])->name('nama-hewan.edit');
+    Route::put('/nama-hewan/{id}/update', [NamaHewanController::class, 'update'])->name('nama-hewan.update');
+    Route::delete('/nama-hewan/{id}/delete', [NamaHewanController::class, 'destroy'])->name('nama-hewan.destroy');
+
+    //jenis hewan
+    Route::get('/jenis-hewan', [JenisHewanController::class, 'index'])->name('jenis-hewan.index');
+    Route::get('/jenis-hewan/create', [JenisHewanController::class, 'create'])->name('jenis-hewan.create');
+    Route::post('/jenis-hewan/store', [JenisHewanController::class, 'store'])->name('jenis-hewan.store');
+    Route::get('/jenis-hewan/{id}/edit', [JenisHewanController::class, 'edit'])->name('jenis-hewan.edit');
+    Route::put('/jenis-hewan/{id}/update', [JenisHewanController::class, 'update'])->name('jenis-hewan.update');
+    Route::delete('/jenis-hewan/{id}/delete', [JenisHewanController::class, 'destroy'])->name('jenis-hewan.destroy');
+    Route::get('/get-jenis-hewan/{namaHewanId}', [AsetTernakController::class, 'getJenisHewan']);
+});
 
 Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
 Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
 Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
 Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 Route::get('/kesejahteraan_keluarga/export/csv', [KesejahteraanKeluargaController::class, 'exportCsv'])->name('kesejahteraan_keluarga.export.csv');
 Route::get('/kesejahteraan_keluarga/export/pdf', [KesejahteraanKeluargaController::class, 'exportPdf'])->name('kesejahteraan_keluarga.export.pdf');
 Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');
@@ -323,8 +412,6 @@ Route::get('/reports/export', [ReportController::class, 'export'])->name('report
 
 Route::get('/menu-utama')->name('menu-utama');
 Route::get('/menu-kependudukan')->name('menu-kependudukan');
-
-
 
 // Menu tingkat 1
 Route::get('/menu-utama', function () {
@@ -386,15 +473,23 @@ Route::middleware(['auth'])->group(function () {
         return view('menu-master-data');
     })->name('menu-master-data');
 });
-// Submenu CRUD (butuh controller nanti)
-// Route::get('/data-dasar', [DataDasarController::class, 'index'])->name('data-dasar.index');
-// Route::get('/prasarana', [PrasaranaController::class, 'index'])->name('prasarana.index');
-// Route::get('/aset-keluarga', [AsetKeluargaController::class, 'index'])->name('aset-keluarga.index');
-// Route::get('/aset-lahan', [AsetLahanController::class, 'index'])->name('aset-lahan.index');
-// Route::get('/aset-ternak', [AsetTernakController::class, 'index'])->name('aset-ternak.index');
-// Route::get('/aset-perikanan', [AsetPerikananController::class, 'index'])->name('aset-perikanan.index');
-// Route::get('/sarpras-kerja', [SarprasKerjaController::class, 'index'])->name('sarpras-kerja.index');
-// Route::get('/bangun-keluarga', [BangunKeluargaController::class, 'index'])->name('bangun-keluarga.index');
+
+//Menu Layanan Umum
+Route::get('/menu-LayananUmum', function () {
+    return view('LayananUmum.menu-LayananUmum');
+})->name('menu-LayananUmum');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/menu-master data', function () {
+        return view('menu-master-data');
+    })->name('menu-master-data');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/menu-daftarkeluarga', function () {
+        return view('keluarga.index');
+    })->name('menu-daftarkeluarga');
+});
 
 // Menu buat soal survey (voice)
 Route::get('/buat-soal', function () {
@@ -402,35 +497,3 @@ Route::get('/buat-soal', function () {
 })->name('buat-soal');
 
 require __DIR__.'/auth.php';
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/konfliksosial', [KonflikSosialController::class, 'index'])->name('konfliksosial.index');
-    Route::get('/konfliksosial/create', [KonflikSosialController::class, 'create'])->name('konfliksosial.create');
-    Route::post('/konfliksosial', [KonflikSosialController::class, 'store'])->name('konfliksosial.store');
-    Route::get('/konfliksosial/{id}', [KonflikSosialController::class, 'show'])->name('konfliksosial.show');
-    Route::get('/konfliksosial/{id}/edit', [KonflikSosialController::class, 'edit'])->name('konfliksosial.edit');
-    Route::put('/konfliksosial/{id}', [KonflikSosialController::class, 'update'])->name('konfliksosial.update');
-
-// Untuk hapus data juga sekalian
-    Route::delete('/konfliksosial/{id}', [KonflikSosialController::class, 'destroy'])->name('konfliksosial.destroy');
-});
-
-//amd pembangunan
-use App\Http\Controllers\AdmPembangunanController;
-
-Route::resource('admin-pembangunan', AdmPembangunanController::class)->middleware('auth');
-Route::middleware(['auth'])->group(function () {
-    Route::get('/admpembangunan', [AdmpembangunanController::class, 'index'])->name('admpembangunan.index');
-    Route::get('/admpembangunan/create', [AdmpembangunanController::class, 'create'])->name('admpembangunan.create');
-    Route::post('/admpembangunan', [AdmpembangunanController::class, 'store'])->name('admpembangunan.store');
-    Route::get('/admpembangunan/{id}', [AdmpembangunanController::class, 'show'])->name('admpembangunan.show');
-    Route::get('/admpembangunan/{id}/edit', [AdmpembangunanController::class, 'edit'])->name('admpembangunan.edit');
-    Route::put('/admpembangunan/{id}', [AdmpembangunanController::class, 'update'])->name('admpembangunan.update');
-
-// Untuk hapus data juga sekalian
-    Route::delete('/admpembangunan/{id}', [AdmpembangunanController::class, 'destroy'])->name('admpembangunan.destroy');
-});
-
-
-
-

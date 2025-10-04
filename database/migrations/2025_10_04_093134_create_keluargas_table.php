@@ -11,10 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dasar_keluargas', function (Blueprint $table) {
+         Schema::create('keluargas', function (Blueprint $table) {
             $table->id();
+            $table->string('no_kk')->unique();
+            $table->string('kepala_keluarga');
+            $table->string('dusun')->nullable();
+            $table->string('rw')->nullable();
+            $table->string('rt')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -22,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dasar_keluargas');
+        Schema::dropIfExists('keluargas');
     }
 };
