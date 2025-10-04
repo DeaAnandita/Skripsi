@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('umkms', function (Blueprint $table) {
+        Schema::create('nama_hewan', function (Blueprint $table) {
             $table->id();
+            $table->string('nama'); // contoh: Sapi, Kambing, Ikan
             $table->timestamps();
         });
     }
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('umkms');
+        Schema::dropIfExists('nama_hewan');
     }
 };
