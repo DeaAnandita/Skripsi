@@ -33,7 +33,7 @@
         }
         </style>
 
-       <div class="py-12">
+       <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -56,14 +56,14 @@
                             {{-- Nama Bayi --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Nama Bayi</label>
-                                <input type="text" name="nama_bayi" 
+                                <input type="text" name="nama_bayi"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
 
                              {{-- Nama Ibu --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Nama Ibu</label>
-                                <input type="text" name="nama_ibu" 
+                                <input type="text" name="nama_ibu"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                 </input>
                             </div>
@@ -71,7 +71,7 @@
                              {{-- Tanggal Lahir --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                                <input type="text" name="tgl_lahir" 
+                                <input type="text" name="tgl_lahir"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                     </input>
                             </div>
@@ -87,7 +87,7 @@
                              {{-- Berat Badan --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Berat Badan</label>
-                                <input type="text" name="berat_badan" 
+                                <input type="text" name="berat_badan"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                     </input>
                             </div>
@@ -95,7 +95,7 @@
                             {{-- Tinggi Badan --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Tinggi Badan</label>
-                                <input type="text" name="tinggi_badan" 
+                                <input type="text" name="tinggi_badan"
                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                     </input>
                             </div>

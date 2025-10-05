@@ -31,7 +31,7 @@
         }
     </style>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -59,7 +59,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
                             <!-- Row 2 -->
                             <div>
                                 <label for="komputer_kerja" class="block text-sm font-medium text-gray-700">Memiliki komputer kerja :</label>
@@ -69,7 +69,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
 
                             <!-- Row 3 -->
                             <div>
@@ -80,8 +80,8 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                           
-                           
+
+
 
                             <!-- Row 4 -->
                             <div>
@@ -92,7 +92,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
 
                             <!-- Row 5 -->
                             <div>
@@ -103,7 +103,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
 
                             <!-- Row 6 -->
                             <div>
@@ -114,7 +114,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                           
+
 
                             <!-- Row 7 -->
                             <div>
@@ -125,7 +125,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                           
+
 
                             <!-- Row 8 -->
                             <div>
@@ -136,7 +136,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
 
                             <!-- Row 9 -->
                             <div>
@@ -147,7 +147,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
 
                             <!-- Row 10 -->
                             <div>
@@ -158,7 +158,7 @@
                                     <option value="Tidak">Tidak</option>
                                 </select>
                             </div>
-                            
+
                         </div>
                         <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-600">KIRIM</button>
                     </form>
