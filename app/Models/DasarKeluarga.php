@@ -7,12 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class DasarKeluarga extends Model
 {
-    protected $fillable = ['user_id', 'keluarga_id', 'jenis_mutasi', 'tanggal_mutasi'];
-
-    public function keluarga()
-    {
-        return $this->belongsTo(Keluarga::class, 'no_kk');
-    }
+    use HasFactory;
+    protected $table = 'dasar_keluargas';
+    protected $fillable = [
+        'user_id',
+        'no_kk',
+        'kepala_keluarga',
+        'dusun',
+        'rw',
+        'rt',
+        'alamat',
+        'jenis_mutasi',
+        'tanggal_mutasi',
+        'provinsi',
+        'kabupaten',
+        'kecamatan',
+        'desa',
+    ];
 
     public function user()
     {

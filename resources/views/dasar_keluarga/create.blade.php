@@ -15,8 +15,8 @@
         </div>
     @endif
 
-    <div class="py-12">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="text-2xl font-bold mb-4">PENDATAAN DASAR KELUARGA</h2>
@@ -27,62 +27,44 @@
                         <!-- Surveyor -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Surveyor --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                             <!-- Nomor KK -->
                             <div>
                                 <label for="no_kk" class="block text-sm font-medium text-gray-700">Nomor Kartu Keluarga</label>
-                                <select name="no_kk" id="no_kk" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                                    <option value="">-- Pilih Nomor KK --</option>
-                                    @foreach($keluarga as $kk)
-                                        <option value="{{ $kk->id }}" 
-                                            data-kepala="{{ $kk->nama_kepala_keluarga }}"
-                                            data-dusun="{{ $kk->dusun }}"
-                                            data-rt="{{ $kk->rt }}"
-                                            data-rw="{{ $kk->rw }}"
-                                            data-alamat="{{ $kk->alamat }}">
-                                            {{ $kk->no_kk }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="no_kk" id="no_kk" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                             </div>
-
-                            <!-- Kepala Rumah Tangga -->
+                            <!-- Kepala Keluarga -->
                             <div>
-                                <label for="kepala_rumah_tangga" class="block text-sm font-medium text-gray-700">Kepala Rumah Tangga</label>
-                                <input type="text" name="kepala_rumah_tangga" id="kepala_rumah_tangga" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                <label for="kepala_keluarga" class="block text-sm font-medium text-gray-700">Kepala Keluarga</label>
+                                <input type="text" name="kepala_keluarga" id="kepala_keluarga" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                             </div>
-
                             <!-- Dusun -->
                             <div>
                                 <label for="dusun" class="block text-sm font-medium text-gray-700">Dusun/Lingkungan</label>
-                                <input type="text" name="dusun" id="dusun" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                <input type="text" name="dusun" id="dusun" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                             </div>
 
                             <!-- RW -->
                             <div>
                                 <label for="rw" class="block text-sm font-medium text-gray-700">RW</label>
-                                <input type="text" name="rw" id="rw" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                <input type="text" name="rw" id="rw" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                             </div>
 
                             <!-- RT -->
                             <div>
                                 <label for="rt" class="block text-sm font-medium text-gray-700">RT</label>
-                                <input type="text" name="rt" id="rt" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100">
+                                <input type="text" name="rt" id="rt" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                             </div>
 
                             <!-- Alamat Lengkap -->
                             <div class="md:col-span-2">
-                                <label for="alamat_lengkap" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
-                                <textarea name="alamat_lengkap" id="alamat_lengkap" rows="3" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-100"></textarea>
+                                <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
+                                <textarea name="alamat" id="alamat" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
                             </div>
 
                             <!-- Jenis Mutasi -->
@@ -144,16 +126,6 @@
             const wilayah = document.getElementById('wilayah_datang');
             if (this.value === 'Datang') wilayah.classList.remove('hidden');
             else wilayah.classList.add('hidden');
-        });
-
-        // Saat pilih No KK, otomatis isi data keluarga
-        document.getElementById('no_kk').addEventListener('change', function() {
-            const selected = this.options[this.selectedIndex];
-            document.getElementById('kepala_rumah_tangga').value = selected.dataset.kepala || '';
-            document.getElementById('dusun').value = selected.dataset.dusun || '';
-            document.getElementById('rw').value = selected.dataset.rw || '';
-            document.getElementById('rt').value = selected.dataset.rt || '';
-            document.getElementById('alamat_lengkap').value = selected.dataset.alamat || '';
         });
     </script>
 </x-app-layout>
