@@ -36,20 +36,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="text-2xl font-bold mb-4">PENDATAAN SARANA PRASARANA KERJA</h2>
-                    <form method="POST" action="{{ route('sarpraskerja.store') }}">
+                    <form method="POST" action="{{ route('sarpras-kerja.store') }}">
                         @csrf
-                        <div>
+                        <!-- Surveyor -->
+                        <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Surveyor --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         </div>
-                        <div class="grid-container gap-4">
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Row 1 -->
                             <div>
                                 <label for="mesin_kerja" class="block text-sm font-medium text-gray-700">Memiliki mesin kerja :</label>

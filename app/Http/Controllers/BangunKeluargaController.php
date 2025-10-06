@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BangunKeluarga;
+use App\Models\DasarKeluarga;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -27,13 +28,15 @@ class BangunKeluargaController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('bangunkeluarga.create', compact('users'));
+        $dasar_keluargas = DasarKeluarga::all();
+        return view('bangunkeluarga.create', compact('users', 'dasar_keluargas'));
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
+            'dasar_keluarga_id' => 'required|exists:dasar_keluargas,id',
 
             // Indikator sesuai migration bangun_keluargas
             'pakaian_berbeda' => 'nullable|string',
@@ -63,7 +66,7 @@ class BangunKeluargaController extends Controller
         ]);
 
         BangunKeluarga::create($data);
-        return redirect()->route('bangunkeluarga.index')->with('success', 'Data bangun keluarga berhasil ditambahkan.');
+        return redirect()->route('bangun-keluarga.index')->with('success', 'Data bangun keluarga berhasil ditambahkan.');
     }
 
     public function show($id)
@@ -114,14 +117,14 @@ class BangunKeluargaController extends Controller
         ]);
 
         $item->update($data);
-        return redirect()->route('bangunkeluarga.index')->with('success', 'Data bangun keluarga berhasil diperbarui.');
+        return redirect()->route('bangun-keluarga.index')->with('success', 'Data bangun keluarga berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $item = BangunKeluarga::findOrFail($id);
         $item->delete();
-        return redirect()->route('bangunkeluarga.index')->with('success', 'Data bangun keluarga berhasil dihapus.');
+        return redirect()->route('bangun-keluarga.index')->with('success', 'Data bangun keluarga berhasil dihapus.');
     }
 
     public function exportPdf()
