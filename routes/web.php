@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
         'kelahiran' => KelahiranController::class,
         'konflik-sosial' => KonflikSosialController::class,
         'nama-hewan' => NamaHewanController::class,
-        'jenis-hewan' => JenisHewanController::class,
+        'jenis-hewan'=> JenisHewanController::class,
         'reports' => ReportController::class,
     ]);
 
@@ -82,6 +82,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
     Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
     Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+    Route::get('/aset-ternak/export/csv', [AsetternakController::class, 'exportCsv'])->name('aset-ternak.export.csv');
+    Route::get('/aset-ternak/export/pdf', [AsetternakController::class, 'exportPdf'])->name('aset-ternak.export.pdf');
+    Route::get('/penyewaan-lahan/export/csv', [PenyewaanLahanController::class, 'exportCsv'])->name('penyewaan-lahan.export.csv');
+    Route::get('/penyewaan-lahan/export/pdf', [PenyewaanLahanController::class, 'exportPdf'])->name('penyewaan-lahan.export.pdf');
     Route::get('/kesejahteraan_keluarga/export/csv', [KesejahteraanKeluargaController::class, 'exportCsv'])->name('kesejahteraan_keluarga.export.csv');
     Route::get('/kesejahteraan_keluarga/export/pdf', [KesejahteraanKeluargaController::class, 'exportPdf'])->name('kesejahteraan_keluarga.export.pdf');
     Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');

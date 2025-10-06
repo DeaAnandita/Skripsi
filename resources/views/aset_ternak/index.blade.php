@@ -37,8 +37,8 @@
       <div x-show="open" @click.away="open = false"
      x-transition
      class="absolute left-0 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden z-20">
-    <a href="{{ route('aset_ternak.export.csv') }}" class="block px-4 py-2 hover:bg-gray-100">📄 Export CSV</a>
-    <a href="{{ route('aset_ternak.export.pdf') }}" class="block px-4 py-2 hover:bg-gray-100">🖨 Export PDF</a>
+    <a href="{{ route('aset-ternak.export.csv') }}" class="block px-4 py-2 hover:bg-gray-100">📄 Export CSV</a>
+    <a href="{{ route('aset-ternak.export.pdf') }}" class="block px-4 py-2 hover:bg-gray-100">🖨 Export PDF</a>
 </div>
 
     </div>

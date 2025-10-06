@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PenyewaanLahan;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Validator;
 
 class PenyewaanLahanController extends Controller
@@ -105,5 +106,14 @@ class PenyewaanLahanController extends Controller
         $total_luas = $penyewaan->sum('luas_lahan');
 
         return view('Penyewaanlahan.report', compact('penyewaan', 'total_biaya', 'total_luas'));
+   
+   
     }
+    public function exportPdf()
+    {
+        $data = PenyewaanLahan::with('user')->get();
+        $pdf = Pdf::loadView('Penyewaanlahan.report', compact('data'))->setPaper('a4', 'landscape');
+        return $pdf->download('Penyewaanlahan.pdf');
+    }
+    
 }

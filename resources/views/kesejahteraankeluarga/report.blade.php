@@ -14,7 +14,7 @@
                     <option value="">-- Kategori --</option>
                     @foreach(['Pendapatan', 'Kesehatan', 'Pendidikan', 'Sanitasi', 'Pangan', 'Lainnya'] as $kat)
                         <option value="{{ $kat }}" @selected(request('kategori')==$kat)>{{ $kat }}</option>
-                    @endforeach
+         []           @endforeach
                 </select>
 
                 <select name="status_kesejahteraan" class="border rounded px-2">

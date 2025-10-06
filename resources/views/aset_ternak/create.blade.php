@@ -4,6 +4,7 @@
             {{ __('Tambah Aset Ternak') }}
         </h2>
     </x-slot>
+    
 
     <div class="py-6">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
@@ -51,6 +52,9 @@
         <select id="jenisHewan" name="jenis_hewan_id" required 
                 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
             <option value="">-- Pilih Jenis --</option>
+            @foreach($jenisHewan as $jh)
+                <option value="{{ $jh->id }}">{{ $jh->jenis }}</option>
+            @endforeach
         </select>
     </div>
 </div>
