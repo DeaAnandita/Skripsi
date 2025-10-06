@@ -20,4 +20,8 @@ class PenyewaanLahan extends Model
         'biaya_sewa',
         'status'
     ];
+
+    public function user() {
+         return $this->belongsTo(User::class);
+        }
 }

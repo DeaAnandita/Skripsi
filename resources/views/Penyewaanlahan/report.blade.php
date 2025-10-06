@@ -11,27 +11,49 @@
             <form method="GET" class="flex gap-4 bg-white p-4 rounded shadow">
                 <select name="jenis_aset" class="border rounded px-2">
                     <option value="">-- Jenis Aset --</option>
-                    <option value="ternak" {{ request('jenis_aset') == 'ternak' ? 'selected' : '' }}>Ternak</option>
-                    <option value="perikanan" {{ request('jenis_aset') == 'perikanan' ? 'selected' : '' }}>Perikanan</option>
+                    @foreach(['Ternak', 'Perikanan'] as $kat)
+                        <option value="{{ $kat }}" @selected(request('jenis_aset') == $kat)>{{ $kat }}</option>
+                    @endforeach
                 </select>
 
                 <select name="status" class="border rounded px-2">
                     <option value="">-- Status --</option>
-                    <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                    <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
-                    <option value="batal" {{ request('status') == 'batal' ? 'selected' : '' }}>Batal</option>
+                    @foreach(['Aktif', 'Selesai', 'Batal'] as $status)
+                        <option value="{{ $status }}" @selected(request('status') == $status)>{{ $status }}</option>
+                    @endforeach
                 </select>
 
+                <input type="number" name="tahun" value="{{ request('tahun') }}" placeholder="Tahun" class="border rounded px-2">
+
                 <button type="submit" class="px-3 py-1 bg-blue-600 text-white rounded">Filter</button>
-                <a href="{{ route('penyewaan-lahan.report') }}" class="px-3 py-1 bg-gray-500 text-white rounded">Reset</a>
             </form>
 
             <!-- Ringkasan -->
             <div class="bg-white p-6 rounded shadow">
                 <h3 class="font-bold text-lg mb-4">Ringkasan</h3>
-                <p>Total Biaya Sewa: <b>Rp {{ number_format($total_biaya, 2) }}</b></p>
-                <p>Total Luas Lahan: <b>{{ number_format($total_luas, 2) }} m²</b></p>
-                <p>Total Data: <b>{{ $penyewaan->count() }} penyewaan</b></p>
+                <p>total biaya : <b>Rp {{ number_format($total_biaya ?: 0, 2) }}</b></p>
+                <p>Total Bayar: <b>{{ number_format($total_luas ?: 0, 2) }} m²</b></p>
+                <p>Total Data: <b>{{ $penyewaan->count() }}</b> penyewaan</p>
+
+                <div class="grid grid-cols-2 gap-6 mt-4">
+                    <div>
+                        <h4 class="font-semibold">Per Jenis Aset</h4>
+                        <ul>
+                            @foreach($perJenisAset as $kat => $jumlah)
+                                <li>{{ $kat }}: {{ $jumlah }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="font-semibold">Per Status</h4>
+                        <ul>
+                            @foreach($perStatus as $status => $jumlah)
+                                <li>{{ $status }}: {{ $jumlah }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- Tabel Detail -->
@@ -59,8 +81,8 @@
                                 <td class="border p-2">{{ $item->lokasi_lahan }}</td>
                                 <td class="border p-2">{{ $item->luas_lahan }}</td>
                                 <td class="border p-2">{{ $item->jenis_aset }}</td>
-                                <td class="border p-2">{{ $item->tanggal_mulai }}</td>
-                                <td class="border p-2">{{ $item->tanggal_selesai }}</td>
+                                <td class="border p-2">{{ \Carbon\Carbon::parse($item->tanggal_mulai)->format('d/m/Y') }}</td>
+                                <td class="border p-2">{{ \Carbon\Carbon::parse($item->tanggal_selesai)->format('d/m/Y') }}</td>
                                 <td class="border p-2">Rp {{ number_format($item->biaya_sewa, 2) }}</td>
                                 <td class="border p-2">{{ $item->status }}</td>
                             </tr>
@@ -73,7 +95,10 @@
                 </table>
             </div>
 
-            <a href="{{ route('penyewaan-lahan.index') }}" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600 transition">Kembali ke Daftar</a>
+            <!-- Pagination -->
+            <div class="mt-4">
+                {{ $penyewaan->appends(['jenis_aset' => request('jenis_aset'), 'status' => request('status'), 'tahun' => request('tahun')])->links() }}
+            </div>
         </div>
     </div>
 </x-app-layout>

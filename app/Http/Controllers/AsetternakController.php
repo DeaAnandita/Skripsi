@@ -61,7 +61,7 @@ class AsetternakController extends Controller
             'keterangan' => 'nullable|string',
         ]);
 
-        AsetTernak::create($request->all());
+        Asetternak::create($request->all());
 
         return redirect()->route('aset-ternak.index')
             ->with('success', 'Aset ternak berhasil ditambahkan');
@@ -173,4 +173,4 @@ class AsetternakController extends Controller
         $jenisHewan = JenisHewan::where('nama_hewan_id', $namaHewanId)->get();
         return response()->json($jenisHewan);
     }
-}
+}   
