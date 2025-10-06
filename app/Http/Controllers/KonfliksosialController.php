@@ -57,7 +57,7 @@ class KonflikSosialController extends Controller
         }
 
         KonflikSosial::create($data);
-        return redirect()->route('konfliksosial.index')->with('success', 'Data konflik sosial ditambahkan.');
+        return redirect()->route('konflik-sosial.index')->with('success', 'Data konflik sosial ditambahkan.');
     }
 
     public function show($id)
@@ -93,14 +93,14 @@ class KonflikSosialController extends Controller
         ]);
 
         $item->update($data);
-        return redirect()->route('konfliksosial.index')->with('success', 'Data konflik sosial diupdate.');
+        return redirect()->route('konflik-sosial.index')->with('success', 'Data konflik sosial diupdate.');
     }
 
     public function destroy($id)
     {
         $item = KonflikSosial::findOrFail($id);
         $item->delete();
-        return redirect()->route('konfliksosial.index')->with('success', 'Data konflik sosial dihapus.');
+        return redirect()->route('konflik-sosial.index')->with('success', 'Data konflik sosial dihapus.');
     }
 
     public function exportPdf()
