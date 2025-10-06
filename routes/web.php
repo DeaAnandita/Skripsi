@@ -100,6 +100,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/bangunkeluarga/export/pdf', [BangunKeluargaController::class, 'exportPdf'])->name('bangunkeluarga.export.Pdf');
     Route::get('/konfliksosial/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('konfliksosial.export.pdf');
     Route::get('/konfliksosial/export/csv', [IbuHamilController::class, 'exportCsv'])->name('konfliksosial.export.csv');
+    Route::get('/kelahiran/export/pdf', [KelahiranController::class, 'exportPdf'])->name('kelahiran.export.pdf');
+    Route::get('/kelahiran/export/csv', [KelahiranController::class, 'exportCsv'])->name('kelahiran.export.csv');
     Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
     Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
 });

@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
 
             // Field indikator
+            $table->string('no_kk', 16);
             $table->string('nik', 16);
             $table->string('nama_lengkap', 100);
             $table->date('tanggal_lahir');

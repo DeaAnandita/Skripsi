@@ -12,6 +12,10 @@
                 <table class="table-auto w-full border">
                     <tbody>
                         <tr>
+                            <td class="p-3 font-semibold w-1/3 bg-gray-50">Surveyor</td>
+                            <td class="p-3">{{ $item->user->name ?? '-' }}</td>
+                        </tr>
+                        <tr>
                             <td class="border px-4 py-2 font-semibold">Nomor KK</td>
                             <td class="border px-4 py-2">{{ $item->keluarga->nomor_kk ?? '-' }}</td>
                         </tr>

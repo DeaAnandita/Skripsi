@@ -42,6 +42,8 @@ class KelahiranController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
+            'user_id' => 'required|exists:users,id',
+             // 'No_KK' => 'required|exists:master_keluarga,No_KK',
             'nik' => 'required|string|max:16|unique:kelahiran,nik',
             'nama_lengkap' => 'required|string|max:100',
             'tempat_lahir' => 'required|string|max:100',
@@ -81,6 +83,7 @@ class KelahiranController extends Controller
         $item = Kelahiran::findOrFail($id);
 
         $data = $request->validate([
+            'user_id' => 'required|exists:users,id',
             'nik' => 'required|string|max:16|unique:kelahiran,nik',
             'nama_lengkap' => 'required|string|max:100',
             'tempat_lahir' => 'required|string|max:100',
