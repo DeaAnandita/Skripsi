@@ -3,6 +3,9 @@ use App\Http\Controllers\KesejahteraanKeluargaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AsetKeluargaController;
 use App\Http\Controllers\AsetLahanController;
+use App\Http\Controllers\AsetternakController;
+use App\Http\Controllers\JenisHewanController;
+use App\Http\Controllers\NamaHewanController;
 use App\Http\Controllers\UmkmController;
 use App\Http\Controllers\BantuanSosialController;
 use App\Http\Controllers\AnggotaKeluargaController;
@@ -189,6 +192,10 @@ Route::get('/konfliksosial/export/pdf', [IbuHamilController::class, 'exportPdf']
 Route::get('/konfliksosial/export/csv', [IbuHamilController::class, 'exportCsv'])->name('konfliksosial.export.csv');
 Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
 Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+Route::get('/anggota-keluarga/export/csv', [AnggotaKeluargaController::class, 'exportCsv'])->name('anggota-keluarga.export.csv');
+Route::get('/anggota-keluarga/export/pdf', [AnggotaKeluargaController::class, 'exportPdf'])->name('anggota-keluarga.export.pdf');
+Route::get('/kelahiran/export/csv', [KelahiranController::class, 'exportCsv'])->name('kelahiran.export.csv');
+Route::get('/kelahiran/export/pdf', [KelahiranController::class, 'exportPdf'])->name('kelahiran.export.pdf');
 
 Route::get('/menu-utama')->name('menu-utama');
 Route::get('/menu-kependudukan')->name('menu-kependudukan');

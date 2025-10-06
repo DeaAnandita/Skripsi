@@ -95,7 +95,7 @@ class AnggotaKeluargaController extends Controller
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
             // 'id_keluarga' => 'required|exists:master_keluarga,id_keluarga',
-            'nik' => 'required|string|max:16|unique:anggota_keluarga,nik,' . ',id_anggota',
+            'nik' => 'required|string|max:16|unique:anggota_keluarga',
             'nama_lengkap' => 'required|string|max:100',
             'tanggal_lahir' => 'required|date',
             'jenis_kelamin' => 'required|in:laki-laki,perempuan',
