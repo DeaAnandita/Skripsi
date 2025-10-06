@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-6">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="text-2xl font-bold mb-4">EDIT DATA DASAR KELUARGA</h2>
@@ -38,10 +38,10 @@
 
                             <!-- Kepala Rumah Tangga -->
                             <div>
-                                <label for="kepala_rumah_tangga" class="block text-sm font-medium text-gray-700">Kepala Rumah Tangga</label>
-                                <input type="text" name="kepala_rumah_tangga" id="kepala_rumah_tangga"
+                                <label for="kepala_keluarga" class="block text-sm font-medium text-gray-700">Kepala Rumah Tangga</label>
+                                <input type="text" name="kepala_keluarga" id="kepala_keluarga"
                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
-                                       value="{{ old('kepala_rumah_tangga', $item->kepala_rumah_tangga) }}">
+                                       value="{{ old('kepala_keluarga', $item->kepala_keluarga) }}">
                             </div>
 
                             <!-- Dusun -->
@@ -67,8 +67,8 @@
 
                             <!-- Alamat -->
                             <div class="md:col-span-2">
-                                <label for="alamat_lengkap" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
-                                <textarea name="alamat_lengkap" id="alamat_lengkap" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ old('alamat_lengkap', $item->alamat_lengkap) }}</textarea>
+                                <label for="alamat" class="block text-sm font-medium text-gray-700">Alamat Lengkap</label>
+                                <textarea name="alamat" id="alamat" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ old('alamat', $item->alamat) }}</textarea>
                             </div>
 
                             <!-- Jenis Mutasi -->

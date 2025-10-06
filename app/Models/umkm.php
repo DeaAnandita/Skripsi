@@ -9,15 +9,19 @@ class Umkm extends Model
 {
     use HasFactory;
 
-    // pakai 'umkms' karena tabel di database ada huruf s
     protected $table = 'umkm';
 
     protected $fillable = [
         'user_id',
-        'npwp', 'npwp_lainnya',
-        'nib', 'nib_lainnya',
-        'sku', 'sku_lainnya',
-        'iumk', 'iumk_lainnya'
+        'Koperasi','Koperasi_lainnya',
+        'Unit_Usaha_Simpan_Pinjam', 'Unit_Usaha_Simpan_Pinjam_lainnya',
+        'Industri_Kerajinan_Tangan', 'Industri_Kerajinan_Tangan_lainnya',
+        'Industir_Pakaian', 'Industri_Pakaian_lainnya',
+        'Industri_Usaha_Makanan','Industri_Usaha_Makanan',
+        'Industri_Alat_Rumah_Tangga','Industri_Alat_Rumah_Tangga',
+        'Industri_Usaha_Bahan_Bangunan','Industri_Usaha_Bahan_Bangunan',
+        'Industri_Alat_Pertanian','Industri_Alat_Pertanian',
+        'Restoran','Restoran',
     ];
 
     public function user()

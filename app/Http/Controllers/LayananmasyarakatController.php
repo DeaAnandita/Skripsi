@@ -35,92 +35,40 @@ class LayananMasyarakatController extends Controller
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
             // Indikator layanan berupa boolean (Ya/Tidak) dan string untuk detail lainnya
-            'layanan_ktp' => 'nullable|boolean',
-            'layanan_ktp_lainnya' => 'nullable|string|max:255',
-            'layanan_kk' => 'nullable|boolean',
-            'layanan_kk_lainnya' => 'nullable|string|max:255',
-            'layanan_akta_kelahiran' => 'nullable|boolean',
-            'layanan_akta_kelahiran_lainnya' => 'nullable|string|max:255',
-            'layanan_akta_kematian' => 'nullable|boolean',
-            'layanan_akta_kematian_lainnya' => 'nullable|string|max:255',
-            'layanan_akta_perkawinan' => 'nullable|boolean',
-            'layanan_akta_perkawinan_lainnya' => 'nullable|string|max:255',
-            'layanan_akta_cerai' => 'nullable|boolean',
-            'layanan_akta_cerai_lainnya' => 'nullable|string|max:255',
-            'layanan_sim' => 'nullable|boolean',
-            'layanan_sim_lainnya' => 'nullable|string|max:255',
-            'layanan_stnk' => 'nullable|boolean',
-            'layanan_stnk_lainnya' => 'nullable|string|max:255',
-            'layanan_pbb' => 'nullable|boolean',
-            'layanan_pbb_lainnya' => 'nullable|string|max:255',
-            'layanan_bpjs_kesehatan' => 'nullable|boolean',
-            'layanan_bpjs_kesehatan_lainnya' => 'nullable|string|max:255',
-            'layanan_bpjs_ketenagakerjaan' => 'nullable|boolean',
-            'layanan_bpjs_ketenagakerjaan_lainnya' => 'nullable|string|max:255',
-            'layanan_kartu_keluarga_sejahtera' => 'nullable|boolean',
-            'layanan_kartu_keluarga_sejahtera_lainnya' => 'nullable|string|max:255',
-            'layanan_bantuan_langsung_tunai' => 'nullable|boolean',
-            'layanan_bantuan_langsung_tunai_lainnya' => 'nullable|string|max:255',
-            'layanan_sertifikat_tanah' => 'nullable|boolean',
-            'layanan_sertifikat_tanah_lainnya' => 'nullable|string|max:255',
-            'layanan_izin_usaha' => 'nullable|boolean',
-            'layanan_izin_usaha_lainnya' => 'nullable|string|max:255',
-            'layanan_bantuan_pendidikan' => 'nullable|boolean',
-            'layanan_bantuan_pendidikan_lainnya' => 'nullable|string|max:255',
-            'layanan_bantuan_kesehatan' => 'nullable|boolean',
-            'layanan_bantuan_kesehatan_lainnya' => 'nullable|string|max:255',
-            'layanan_pengaduan_masyarakat' => 'nullable|boolean',
-            'layanan_pengaduan_masyarakat_lainnya' => 'nullable|string|max:255',
-            'layanan_informasi_publik' => 'nullable|boolean',
-            'layanan_informasi_publik_lainnya' => 'nullable|string|max:255',
-            'layanan_pendaftaran_sekolah' => 'nullable|boolean',
-            'layanan_pendaftaran_sekolah_lainnya' => 'nullable|string|max:255',
-            'layanan_vaksinasi' => 'nullable|boolean',
-            'layanan_vaksinasi_lainnya' => 'nullable|string|max:255',
-            'layanan_posyandu' => 'nullable|boolean',
-            'layanan_posyandu_lainnya' => 'nullable|string|max:255',
-            'layanan_program_keluarga_berencana' => 'nullable|boolean',
-            'layanan_program_keluarga_berencana_lainnya' => 'nullable|string|max:255',
-            'layanan_rehabilitasi_narkoba' => 'nullable|boolean',
-            'layanan_rehabilitasi_narkoba_lainnya' => 'nullable|string|max:255',
-            'layanan_bantuan_hukum' => 'nullable|boolean',
-            'layanan_bantuan_hukum_lainnya' => 'nullable|string|max:255',
-            'layanan_pemakaman' => 'nullable|boolean',
-            'layanan_pemakaman_lainnya' => 'nullable|string|max:255',
-            'layanan_transportasi_sosial' => 'nullable|boolean',
-            'layanan_transportasi_sosial_lainnya' => 'nullable|string|max:255',
-            'layanan_penerangan_jalan' => 'nullable|boolean',
-            'layanan_penerangan_jalan_lainnya' => 'nullable|string|max:255',
-            'layanan_air_bersih' => 'nullable|boolean',
-            'layanan_air_bersih_lainnya' => 'nullable|string|max:255',
-            'status_pengajuan' => 'nullable|in:pending,proses,selesai,ditolak',
-            'deskripsi_lengkap' => 'nullable|string',
-            'tanggal_pengajuan' => 'nullable|date',
-            'tanggal_selesai' => 'nullable|date',
+            'Pengurus_RT' => 'nullable|string',
+            'Anggota_Pengurus_RT' => 'nullable|string',
+            'Pengurus_RW' => 'nullable|string',
+            'Anggota_Pengurus_RW' => 'nullable|string',
+            'Pengurus_LKMD/K/LPM' => 'nullable|string',
+            'Anggota_LKMD/K/LPM' => 'nullable|string',
+            'Pengurus_PKK' => 'nullable|string',
+            'Anggota_PKK' => 'nullable|string',
+            'Pengurus_Lembaga_Adat'=> 'nullable|string',
+            'Anggota_Lembaga_Adat'=> 'nullable|string',
+
         ]);
 
-        // Ubah nilai null boolean jadi false
-        foreach ($data as $key => $value) {
-            if (str_ends_with($key, '_lainnya') === false && $value === null) {
-                $data[$key] = false;
+        foreach (['Pengurus_RT','Anggota_Pengurus_RT','Pengurus_RW','Anggota_Pengurus_RW','Pengurus_LKMD/K/LPM','Anggota_LKMD/K/LPM','Pengurus_PKK','Pengurus_Lembaga_Adat','Anggota_Lembaga_Adat'] as $field) {
+            if (empty($data[$field])) {
+                $data[$field] = 'Tidak';
             }
         }
 
-        LayananMasyarakat::create($data);
-        return redirect()->route('layananmasyarakat.index')->with('success', 'Data layanan masyarakat ditambahkan.');
+        layananmasyarakat::create($data);
+        return redirect()->route('layanan-masyarakat.index')->with('success', 'Data layanan masyarakat ditambahkan.');
     }
 
     public function show($id)
     {
         $item = LayananMasyarakat::with('user')->findOrFail($id);
-        return view('layanan_masyarakat.show', compact('item'));
+        return view('layananmasyarakat.show', compact('item'));
     }
 
     public function edit($id)
     {
         $item = LayananMasyarakat::findOrFail($id);
         $users = User::all();
-        return view('layanan_masyarakat.edit', compact('item', 'users'));
+        return view('layananmasyarakat.edit', compact('item', 'users'));
     }
 
     public function update(Request $request, $id)
@@ -128,83 +76,35 @@ class LayananMasyarakatController extends Controller
     $item = LayananMasyarakat::findOrFail($id);
 
     $data = $request->validate([
-        'user_id' => 'sometimes|exists:users,id',
-        'layanan_ktp' => 'nullable|boolean',
-        'layanan_ktp_lainnya' => 'nullable|string|max:255',
-        'layanan_kk' => 'nullable|boolean',
-        'layanan_kk_lainnya' => 'nullable|string|max:255',
-        'layanan_akta_kelahiran' => 'nullable|boolean',
-        'layanan_akta_kelahiran_lainnya' => 'nullable|string|max:255',
-        'layanan_akta_kematian' => 'nullable|boolean',
-        'layanan_akta_kematian_lainnya' => 'nullable|string|max:255',
-        'layanan_akta_perkawinan' => 'nullable|boolean',
-        'layanan_akta_perkawinan_lainnya' => 'nullable|string|max:255',
-        'layanan_akta_cerai' => 'nullable|boolean',
-        'layanan_akta_cerai_lainnya' => 'nullable|string|max:255',
-        'layanan_sim' => 'nullable|boolean',
-        'layanan_sim_lainnya' => 'nullable|string|max:255',
-        'layanan_stnk' => 'nullable|boolean',
-        'layanan_stnk_lainnya' => 'nullable|string|max:255',
-        'layanan_pbb' => 'nullable|boolean',
-        'layanan_pbb_lainnya' => 'nullable|string|max:255',
-        'layanan_bpjs_kesehatan' => 'nullable|boolean',
-        'layanan_bpjs_kesehatan_lainnya' => 'nullable|string|max:255',
-        'layanan_bpjs_ketenagakerjaan' => 'nullable|boolean',
-        'layanan_bpjs_ketenagakerjaan_lainnya' => 'nullable|string|max:255',
-        'layanan_kartu_keluarga_sejahtera' => 'nullable|boolean',
-        'layanan_kartu_keluarga_sejahtera_lainnya' => 'nullable|string|max:255',
-        'layanan_bantuan_langsung_tunai' => 'nullable|boolean',
-        'layanan_bantuan_langsung_tunai_lainnya' => 'nullable|string|max:255',
-        'layanan_sertifikat_tanah' => 'nullable|boolean',
-        'layanan_sertifikat_tanah_lainnya' => 'nullable|string|max:255',
-        'layanan_izin_usaha' => 'nullable|boolean',
-        'layanan_izin_usaha_lainnya' => 'nullable|string|max:255',
-        'layanan_bantuan_pendidikan' => 'nullable|boolean',
-        'layanan_bantuan_pendidikan_lainnya' => 'nullable|string|max:255',
-        'layanan_bantuan_kesehatan' => 'nullable|boolean',
-        'layanan_bantuan_kesehatan_lainnya' => 'nullable|string|max:255',
-        'layanan_pengaduan_masyarakat' => 'nullable|boolean',
-        'layanan_pengaduan_masyarakat_lainnya' => 'nullable|string|max:255',
-        'layanan_informasi_publik' => 'nullable|boolean',
-        'layanan_informasi_publik_lainnya' => 'nullable|string|max:255',
-        'layanan_pendaftaran_sekolah' => 'nullable|boolean',
-        'layanan_pendaftaran_sekolah_lainnya' => 'nullable|string|max:255',
-        'layanan_vaksinasi' => 'nullable|boolean',
-        'layanan_vaksinasi_lainnya' => 'nullable|string|max:255',
-        'layanan_posyandu' => 'nullable|boolean',
-        'layanan_posyandu_lainnya' => 'nullable|string|max:255',
-        'layanan_program_keluarga_berencana' => 'nullable|boolean',
-        'layanan_program_keluarga_berencana_lainnya' => 'nullable|string|max:255',
-        'layanan_rehabilitasi_narkoba' => 'nullable|boolean',
-        'layanan_rehabilitasi_narkoba_lainnya' => 'nullable|string|max:255',
-        'layanan_bantuan_hukum' => 'nullable|boolean',
-        'layanan_bantuan_hukum_lainnya' => 'nullable|string|max:255',
-        'layanan_pemakaman' => 'nullable|boolean',
-        'layanan_pemakaman_lainnya' => 'nullable|string|max:255',
-        'layanan_transportasi_sosial' => 'nullable|boolean',
-        'layanan_transportasi_sosial_lainnya' => 'nullable|string|max:255',
-        'layanan_penerangan_jalan' => 'nullable|boolean',
-        'layanan_penerangan_jalan_lainnya' => 'nullable|string|max:255',
-        'layanan_air_bersih' => 'nullable|boolean',
-        'layanan_air_bersih_lainnya' => 'nullable|string|max:255',
-        'status_pengajuan' => 'sometimes|in:pending,proses,selesai,ditolak',
-        'deskripsi_lengkap' => 'nullable|string',
-        'tanggal_pengajuan' => 'nullable|date',
-        'tanggal_selesai' => 'nullable|date',
+            'user_id' => 'sometimes|exists:users,id',
+            'Pengurus_RT' => 'nullable|string',
+            'Anggota_Pengurus_RT' => 'nullable|string',
+            'Pengurus_RW' => 'nullable|string',
+            'Anggota_Pengurus_RW' => 'nullable|string',
+            'Pengurus_LKMD/K/LPM' => 'nullable|string',
+            'Anggota_LKMD/K/LPM' => 'nullable|string',
+            'Pengurus_PKK' => 'nullable|string',
+            'Anggota_PKK' => 'nullable|string',
+            'Pengurus_Lembaga_Adat'=> 'nullable|string',
+            'Anggota_Lembaga_Adat'=> 'nullable|string',
+
     ]);
 
-    
-
-    // Ubah nilai null boolean jadi false
-    foreach ($data as $key => $value) {
-        if (str_ends_with($key, '_lainnya') === false && $value === null) {
-            $data[$key] = false;
-        }
+     $item->update($data);
+        return redirect()->route('layanan-masyarakat.index')->with('success', 'Data Layanan Masyarakat Diupdate.');
     }
 
-    // Update data
-    $item->update($data);
+    public function destroy($id)
+    {
+        $item = LayananMasyarakat::findOrFail($id);
+        $item->delete();
+        return redirect()->route('layanan-masyarakat.index')->with('success', 'Data Layanan Masyarakat dihapus.');
+    }
 
-    return redirect()->route('layananmasyarakat.index')->with('success', 'Data layanan masyarakat diperbarui.');
-}
+    public function exportPdf()
+    {
+        $data = LayananMasyarakat::with('user')->get();
+        $pdf = Pdf::loadView('layananmasyarakat.report-pdf', compact('data'))->setPaper('a4', 'landscape');
+        return $pdf->download('layananmasyarakat.pdf');
+    }
 }

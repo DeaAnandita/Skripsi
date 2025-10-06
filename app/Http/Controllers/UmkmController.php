@@ -32,19 +32,24 @@ class UmkmController extends Controller
     {
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
-            'npwp' => 'nullable|string',
-            'nib' => 'nullable|string',
-            'sku' => 'nullable|string',
-            'iumk' => 'nullable|string',
+            'Koperasi' => 'nullable|string',
+            'Unit_Usaha_Simpan_Pinjam' => 'nullable|string',
+            'Industri_Kerajinan_Tangan' => 'nullable|string',
+            'Industri_Pakaian' => 'nullable|string',
+            'Industri_Usaha_Makanan' => 'nullable|string',
+            'Industri_Alat_Rumah_Tangga' => 'nullable|string',
+            'Industri_Usaha_Bahan_Bangunan' => 'nullable|string',
+            'Industri_Alat_Pertanian' => 'nullable|string',
+            'Restoran'=> 'nullable|string',
         ]);
 
-        foreach (['npwp','nib','sku','iumk'] as $field) {
+        foreach (['Koperasi','Unit_Usaha_Simpan_Pinjam','Industri_Kerajinan_Tangan','Industri_Pakaian','Industri_Usaha_Makanan','Industri_Alat_Rumah_Tangga','Industri_Usaha_Bahan_Bangunan','Industri_Alat_Pertanian','Restoran'] as $field) {
             if (empty($data[$field])) {
                 $data[$field] = 'Tidak';
             }
         }
 
-        Umkm::create($data);
+        umkm::create($data);
         return redirect()->route('umkm.index')->with('success', 'Data UMKM ditambahkan.');
     }
 
@@ -67,10 +72,15 @@ class UmkmController extends Controller
 
         $data = $request->validate([
             'user_id' => 'sometimes|exists:users,id',
-            'npwp' => 'nullable|string',
-            'nib' => 'nullable|string',
-            'sku' => 'nullable|string',
-            'iumk' => 'nullable|string',
+            'Koperasi' => 'nullable|string',
+            'Unit_Usaha_Simpan_Pinjam' => 'nullable|string',
+            'Industri_Kerajinan_Tangan' => 'nullable|string',
+            'Industri_Pakaian' => 'nullable|string',
+            'Industri_Usaha_Makanan' => 'nullable|string',
+            'Industri_Alat_Rumah_Tangga' => 'nullable|string',
+            'Industri_Usaha_Bahan_Bangunan' => 'nullable|string',
+            'Industri_Alat_Pertanian' => 'nullable|string',
+            'Restoran'=> 'nullable|string',
         ]);
 
         $item->update($data);

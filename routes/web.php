@@ -30,6 +30,16 @@ use App\Http\Controllers\{
     DashboardController
 };
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/api/statistik-desa', [StatistikController::class, 'getData']);
+
 // Halaman awal
 Route::get('/', fn() => view('welcome'));
 Route::get('/statistik-data', [DashboardController::class, 'getStatistik'])->name('statistik.data');

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tambah Layanan Masyarakat') }}
+            {{ __('Tambah Data Layanan Masyarakat') }}
         </h2>
     </x-slot>
 
@@ -15,128 +15,138 @@
         </div>
     @endif
 
-    <div class="py-6">
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h2 class="text-2xl font-bold mb-6">FORM INPUT LAYANAN MASYARAKAT</h2>
+                    <h2 class="text-2xl font-bold mb-4">PENDATAAN Layanan Masyarakat?</h2>
 
-                    <form method="POST" action="{{ route('layananmasyarakat.store')}}">
+                    <form method="POST" action="{{ route('layanan-masyarakat.store') }}">
                         @csrf
 
-                        {{-- Surveyor --}}
+                        <!-- Surveyor -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Surveyor --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         </div>
 
-                        {{-- Data Layanan Kependudukan --}}
-                        <h3 class="text-lg font-semibold mt-6 mb-2">Layanan Kependudukan</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Pengurus RT -->
                             <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_ktp" value="1" class="mr-2"> KTP
-                                </label>
-                                <input type="text" name="layanan_ktp_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <label for="Pengurus_RT" class="block text-sm font-medium text-gray-700">Pengurus RT</label>
+                                <select name="Pengurus_RT" id="Pengurus_RT" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
                             </div>
+
+                            <!-- Anggota Pengurus RT -->
                             <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_kk" value="1" class="mr-2"> Kartu Keluarga
-                                </label>
-                                <input type="text" name="layanan_kk_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <label for="Anggota_Pengurus_RT" class="block text-sm font-medium text-gray-700">Anggota Pengurus RT</label>
+                                <select name="Anggota_Pengurus_RT" id="Anggota_Pengurus_RT" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
                             </div>
+
+                            <!-- Pengurus RW -->
                             <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_akta_kelahiran" value="1" class="mr-2"> Akta Kelahiran
-                                </label>
-                                <input type="text" name="layanan_akta_kelahiran_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <label for="Pengurus_RW" class="block text-sm font-medium text-gray-700">Pengurus RW</label>
+                                <select name="Pengurus_RW" id="Pengurus_RW" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
                             </div>
+
+                            <!-- Anggota Pengurus RW -->
                             <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_akta_kematian" value="1" class="mr-2"> Akta Kematian
-                                </label>
-                                <input type="text" name="layanan_akta_kematian_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <label for="Anggota_Pengurus_RW" class="block text-sm font-medium text-gray-700">Anggota Pengurus RW</label>
+                                <select name="Anggota_Pengurus_RW" id="Anggota_Pengurus_RW" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus LKMD/K/LPM -->
+                            <div>
+                                <label for="Pengurus_LKMD_K_LPM" class="block text-sm font-medium text-gray-700">Pengurus LKMD/K/LPM</label>
+                                <select name="Pengurus_LKMD_K_LPM" id="Pengurus_LKMD_K_LPM" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota LKMD/K/LPM -->
+                            <div>
+                                <label for="Anggota_LKMD_K_LPM" class="block text-sm font-medium text-gray-700">Anggota LKMD/K/LPM</label>
+                                <select name="Anggota_LKMD_K_LPM" id="Anggota_LKMD_K_LPM" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus PKK -->
+                            <div>
+                                <label for="Pengurus_PKK" class="block text-sm font-medium text-gray-700">Pengurus PKK</label>
+                                <select name="Pengurus_PKK" id="Pengurus_PKK" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota PKK -->
+                            <div>
+                                <label for="Anggota_PKK" class="block text-sm font-medium text-gray-700">Anggota PKK</label>
+                                <select name="Anggota_PKK" id="Anggota_PKK" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus Lembaga Adat -->
+                            <div>
+                                <label for="Pengurus_Lembaga_Adat" class="block text-sm font-medium text-gray-700">Pengurus Lembaga Adat</label>
+                                <select name="Pengurus_Lembaga_Adat" id="Pengurus_Lembaga_Adat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota Lembaga Adat -->
+                            <div>
+                                <label for="Anggota_Lembaga_Adat" class="block text-sm font-medium text-gray-700">Anggota Lembaga Adat</label>
+                                <select name="Anggota_Lembaga_Adat" id="Anggota_Lembaga_Adat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
                             </div>
                         </div>
 
-                        {{-- Data Layanan Lainnya (contoh BPJS, Pendidikan, dll.) --}}
-                        <h3 class="text-lg font-semibold mt-6 mb-2">Layanan Sosial & Kesehatan</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_bpjs_kesehatan" value="1" class="mr-2"> BPJS Kesehatan
-                                </label>
-                                <input type="text" name="layanan_bpjs_kesehatan_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-                            <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_bpjs_ketenagakerjaan" value="1" class="mr-2"> BPJS Ketenagakerjaan
-                                </label>
-                                <input type="text" name="layanan_bpjs_ketenagakerjaan_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-                            <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_bantuan_pendidikan" value="1" class="mr-2"> Bantuan Pendidikan
-                                </label>
-                                <input type="text" name="layanan_bantuan_pendidikan_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-                            <div>
-                                <label class="flex items-center">
-                                    <input type="checkbox" name="layanan_bantuan_kesehatan" value="1" class="mr-2"> Bantuan Kesehatan
-                                </label>
-                                <input type="text" name="layanan_bantuan_kesehatan_lainnya" placeholder="Keterangan lain"
-                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                            </div>
-                        </div>
-
-                        {{-- Status Pengajuan --}}
-                        <div class="mt-6 mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Status Pengajuan</label>
-                            <select name="status_pengajuan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Status --</option>
-                                <option value="pending">Pending</option>
-                                <option value="proses">Proses</option>
-                                <option value="selesai">Selesai</option>
-                                <option value="ditolak">Ditolak</option>
-                            </select>
-                        </div>
-
-                        {{-- Deskripsi --}}
-                        <div class="mb-4">
-                            <label for="deskripsi_lengkap" class="block text-sm font-medium text-gray-700">Deskripsi Lengkap</label>
-                            <textarea name="deskripsi_lengkap" id="deskripsi_lengkap" rows="3"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
-                        </div>
-
-                        {{-- Tanggal --}}
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div>
-                                <label for="tanggal_pengajuan" class="block text-sm font-medium text-gray-700">Tanggal Pengajuan</label>
-                                <input type="date" name="tanggal_pengajuan" id="tanggal_pengajuan"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                            </div>
-                            <div>
-                                <label for="tanggal_selesai" class="block text-sm font-medium text-gray-700">Tanggal Selesai</label>
-                                <input type="date" name="tanggal_selesai" id="tanggal_selesai"
-                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
-                            </div>
-                        </div>
-
-                        <button type="submit"
-                            class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-600">
-                            SIMPAN
+                        <!-- Submit -->
+                        <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                            Simpan
                         </button>
                     </form>
                 </div>
