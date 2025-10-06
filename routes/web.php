@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ProfileController,
@@ -105,7 +104,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
 });
 
-    //Menu-menu
 
     Route::get('/menu-utama')->name('menu-utama');
     Route::get('/menu-kependudukan')->name('menu-kependudukan');
