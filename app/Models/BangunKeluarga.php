@@ -45,4 +45,9 @@ class BangunKeluarga extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function dasar_keluarga()
+    {
+        return $this->belongsTo(DasarKeluarga::class);
+    }
 }

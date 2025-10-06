@@ -47,7 +47,7 @@ class SarpraskerjaController extends Controller
         ]);
 
         Sarpraskerja::create($data);
-        return redirect()->route('sarpraskerja.index')->with('success', 'Data sarana prasarana kerja ditambahkan.');
+        return redirect()->route('sarpras-kerja.index')->with('success', 'Data sarana prasarana kerja ditambahkan.');
     }
 
     public function show($id)
@@ -82,14 +82,14 @@ class SarpraskerjaController extends Controller
         ]);
 
         $item->update($data);
-        return redirect()->route('sarpraskerja.index')->with('success', 'Data sarana prasarana kerja diupdate.');
+        return redirect()->route('sarpras-kerja.index')->with('success', 'Data sarana prasarana kerja diupdate.');
     }
 
     public function destroy($id)
     {
         $item = Sarpraskerja::findOrFail($id);
         $item->delete();
-        return redirect()->route('sarpraskerja.index')->with('success', 'Data sarana prasarana kerja dihapus.');
+        return redirect()->route('sarpras-kerja.index')->with('success', 'Data sarana prasarana kerja dihapus.');
     }
 
     public function exportPdf()
