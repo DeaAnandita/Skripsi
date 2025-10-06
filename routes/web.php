@@ -30,6 +30,10 @@ use App\Http\Controllers\{
     DashboardController
 };
 
+use App\Http\Controllers\StatistikController;
+
+Route::get('/api/statistik-desa', [StatistikController::class, 'getData']);
+
 // Halaman awal
 Route::get('/', fn() => view('welcome'));
 Route::get('/statistik-data', [DashboardController::class, 'getStatistik'])->name('statistik.data');
