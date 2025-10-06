@@ -26,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($data as $item)
+            @forelse ($sosialEkonomi as $item)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->user->name ?? '-' }}</td>
