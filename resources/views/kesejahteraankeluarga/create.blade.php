@@ -31,7 +31,7 @@
     }
     </style>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -72,7 +72,7 @@
                                 <label class="block text-sm font-medium text-gray-700">Akses Pendidikan</label>
                                 <input type="text" name="akses_pendidikan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
-                            
+
                             <div>
                                 <label for="akses_kesehatan" class="block text-sm font-medium text-gray-700">Akses kesehatan :</label>
                                 <select name="akses_kesehatan" id="akses_kesehatan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
