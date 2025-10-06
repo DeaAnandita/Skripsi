@@ -39,7 +39,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'dimas'],
             [
-                'role_id' => 4,
+                'role_id' => 3,
                 'name' => 'Putra Nurhadi',
                 'email' => 'dimas@desa.com',
                 'password' => Hash::make('dimas123'),
@@ -49,7 +49,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'rema'],
             [
-                'role_id' => 5,
+                'role_id' => 3,
                 'name' => 'Rema Cantika Ralita Triya',
                 'email' => 'rema@desa.com',
                 'password' => Hash::make('rema1234'),
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'bela'],
             [
-                'role_id' => 6,
+                'role_id' => 3,
                 'name' => 'Belani Estiningtyas',
                 'email' => 'bela@desa.com',
                 'password' => Hash::make('bela1234'),
@@ -69,7 +69,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'nayla'],
             [
-                'role_id' => 7,
+                'role_id' => 3,
                 'name' => 'Nayla Desti Fitriani',
                 'email' => 'nayla@desa.com',
                 'password' => Hash::make('nayla123'),
@@ -79,7 +79,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'sri'],
             [
-                'role_id' => 8,
+                'role_id' => 3,
                 'name' => 'Sri Lutfiningsih',
                 'email' => 'sri@desa.com',
                 'password' => Hash::make('sri12345'),
@@ -89,7 +89,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'sofi'],
             [
-                'role_id' => 9,
+                'role_id' => 3,
                 'name' => 'Ina Dia Sofiana Putri',
                 'email' => 'sofi@desa.com',
                 'password' => Hash::make('sofi1234'),
@@ -99,7 +99,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'disa'],
             [
-                'role_id' => 10,
+                'role_id' => 3,
                 'name' => 'Andisa Diandra Pramita',
                 'email' => 'disa@desa.com',
                 'password' => Hash::make('disa1234'),
@@ -109,7 +109,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'anysa'],
             [
-                'role_id' => 11,
+                'role_id' => 3,
                 'name' => 'Anysa Puji Rahayu',
                 'email' => 'anysa@desa.com',
                 'password' => Hash::make('anysa123'),
@@ -119,7 +119,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'luthfiah'],
             [
-                'role_id' => 12,
+                'role_id' => 3,
                 'name' => 'Luthfiah Nur Faizah',
                 'email' => 'luthfiah@desa.com',
                 'password' => Hash::make('luthfiah'),
@@ -129,7 +129,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'fathir'],
             [
-                'role_id' => 13,
+                'role_id' => 3,
                 'name' => 'Mohammad Fathir Ramdhani',
                 'email' => 'fathir@desa.com',
                 'password' => Hash::make('fathir12'),
@@ -139,7 +139,7 @@ class UserSeeder extends Seeder {
         User::firstOrCreate(
             ['username' => 'aghib'],
             [
-                'role_id' => 14,
+                'role_id' => 3,
                 'name' => 'Helmi Aghib Rizki',
                 'email' => 'aghib@desa.com',
                 'password' => Hash::make('aghib123'),

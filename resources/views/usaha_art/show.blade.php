@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -49,7 +49,7 @@
                             <p class="text-sm font-medium text-gray-700">Status Verifikasi</p>
                             <p class="mt-1 text-gray-900">
                                 <span class="px-2 py-1 rounded text-xs
-                                    {{ $item->status_verifikasi == 'verified' ? 'bg-green-100 text-green-800' : 
+                                    {{ $item->status_verifikasi == 'verified' ? 'bg-green-100 text-green-800' :
                                        ($item->status_verifikasi == 'rejected' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800') }}">
                                     {{ $item->status_verifikasi }}
                                 </span>

@@ -23,21 +23,38 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 space-y-6">
-                    <!-- Header bar: search + export + add -->
+                    
+            {{-- Header bar: search + export + add --}}
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <form action="{{ route('kelahiran.index') }}" method="GET" class="flex gap-2 w-full md:w-1/2">
                             <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="🔍 Cari berdasarkan nama surveyor..."
+                                placeholder="🔍 Cari berdasarkan surveyor"
                                 class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             <button type="submit"
                                 class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Cari</button>
-                        </form>
+
+                        <a href="{{ route('kelahiran.create') }}"
+                           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            + Tambah Kelahiran
+                        </a>
+                    </form>
 
                         <div class="flex items-center gap-3">
-                            <a href="{{ route('kelahiran.export-pdf') }}"
-                               class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                                🖨 Export PDF
-                            </a>
+                            <div x-data="{ open:false }" class="relative">
+                                <button @click="open = !open"
+                                    class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                                    <span>Export</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                                <div x-show="open" @click.away="open=false" x-transition
+                                     class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow z-30">
+                                    <a href="{{ route('kelahiran.export.csv') }}" class="block px-4 py-2 hover:bg-gray-50">📄 Export CSV</a>
+                                    <a href="{{ route('kelahiran.export.pdf') }}" class="block px-4 py-2 hover:bg-gray-50">🖨 Export PDF</a>
+                                </div>
+                            </div>
+
                             <a href="{{ route('kelahiran.create') }}"
                                class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
                                 + Tambah Kelahiran
@@ -50,7 +67,7 @@
                         <table class="min-w-full text-sm text-left border-collapse">
                             <thead class="bg-gray-50 text-gray-700">
                                 <tr>
-                                    <th class="px-3 py-2 border">#</th>
+                                    <th class="px-3 py-2 border">No</th>
                                     <th class="px-3 py-2 border">Surveyor</th>
                                     <th class="px-3 py-2 border">NIK</th>
                                     <th class="px-3 py-2 border">Nama Bayi</th>

@@ -12,6 +12,10 @@ class BantuanSosial extends Model
     protected $table = 'bantuan_sosials';
 
     protected $fillable = [
+        'petugas_id',
+        'nik_manual',
+        'nama_lengkap',
+        'dokumen_pendukung',
         'kks_kps',
         'kks_kps_lainnya',
         'pkh',
@@ -26,38 +30,24 @@ class BantuanSosial extends Model
         'jamsostek_bpjs_ketenagakerjaan_lainnya',
         'peserta_mandiri_asuransi_lain',
         'peserta_mandiri_asuransi_lain_lainnya',
+        'verifikasi_identitas',
+        'verifikasi_identitas_lainnya',
+        'data_lintas_sektor',
+        'data_lintas_sektor_lainnya',
+        'konfirmasi_kepala_desa',
+        'konfirmasi_kepala_desa_lainnya',
         'status_verifikasi',
         'alasan_ditolak',
-        'tanggal_usul',
-        'tanggal_verifikasi',
-        'tanggal_penetapan',
-        'sk_nomor',
         'jenis_distribusi',
         'jumlah_bantuan',
         'tanggal_distribusi',
-        'catatan_monitoring',
-        'status_transparansi',
+        'bukti_distribusi',
+        'bukti_distribusi_lainnya',
+        'status_program',
     ];
-
-    protected $casts = [
-        'tanggal_usul' => 'date',
-        'tanggal_verifikasi' => 'date',
-        'tanggal_penetapan' => 'date',
-        'tanggal_distribusi' => 'date',
-        'jumlah_bantuan' => 'decimal:2',
-    ];
-
-    // public function keluarga()
-    // {
-    //     return $this->belongsTo(Keluarga::class, 'keluarga_id');
-    // }
 
     public function petugas()
     {
         return $this->belongsTo(User::class, 'petugas_id');
     }
-
-    public function user() {
-         return $this->belongsTo(User::class);
-        }
 }

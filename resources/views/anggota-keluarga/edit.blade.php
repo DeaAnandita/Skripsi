@@ -31,7 +31,7 @@
         }
         </style>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -53,6 +53,14 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                         {{-- NIK --}}
+                        <div class="mb-4">
+                            <label for="nik" class="block text-sm font-medium text-gray-700">NIK</label>
+                            <input type="text" name="nik" id="nik" value="{{ old('nik') }}"
+                                    value="{{ old('nik', $item->nik) }}"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                        </div>
 
                         {{-- contoh field lain --}}
                         <div class="mb-4">
@@ -88,12 +96,15 @@
                             </select>
                         </div>
 
-
+                        {{-- Status Perkawinan --}}
                         <div class="mb-4">
-                            <label class="block text-sm font-medium text-gray-700">Status Perkawinan</label>
-                            <input type="text" name="status_perkawinan"
-                                   value="{{ old('status_perkawinan', $item->status_perkawinan) }}"
-                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            <label for="status_perkawinan" class="block text-sm font-medium text-gray-700">Status Perkawinan</label>
+                            <select name="status_perkawinan" id="status_perkawinan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="Belum Kawin" {{ $item->tv == 'belum kawin' ? 'selected' : '' }}>Belum Kawin</option>
+                                <option value="Kawin" {{ $item->tv == 'kawin' ? 'selected' : '' }}>Kawin</option>
+                                <option value="Cerai Hidup" {{ $item->tv == 'cerai hidup' ? 'selected' : '' }}>Cerai Hidup</option>
+                                <option value="Cerai Mati" {{ $item->tv == 'cerai mati' ? 'selected' : '' }}>Cerai Mati</option>
+                            </select>
                         </div>
 
                         {{-- tombol submit --}}

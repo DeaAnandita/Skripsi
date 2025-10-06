@@ -22,7 +22,7 @@
         }
     </style>
 
-    <div class="py-12">
+    <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -94,11 +94,6 @@
                                 </div>
                             @endforeach
                         </div>
-
-                        <!-- Tombol -->
-                        <div class="mt-6 flex gap-3">
-                            <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Update</button>
-                            <a href="{{ route('bangun-keluarga.index') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-600">Kembali</a>
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,13 @@
 import './bootstrap';
+import 'alpinejs';
+import { createApp } from 'vue';
+import DashboardPage from './components/Dashboard.vue';
 
-import Alpine from 'alpinejs';
+// Buat app baru
+const app = createApp({});
 
-window.Alpine = Alpine;
+// Daftarkan komponen
+app.component('dashboard-page', DashboardPage);
 
-Alpine.start();
+// Mount ke #app
+app.mount('#app');
