@@ -39,11 +39,11 @@
                 </table>
 
                 <div class="mt-4">
-                    <a href="{{ route('kesejahteraan_keluarga.edit', $item->id) }}"
+                    <a href="{{ route('kesejahteraan-keluarga.edit', $item->id) }}"
                        class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded">
                         Edit Data
                     </a>
-                    <a href="{{ route('kesejahteraankeluarga.index') }}"
+                    <a href="{{ route('kesejahteraan-keluarga.index') }}"
                        class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded ml-2">
                         Kembali
                     </a>

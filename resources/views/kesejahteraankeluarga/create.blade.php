@@ -36,37 +36,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="text-2xl font-bold mb-4">PENDATAAN KESEJAHTERAAN KELUARGA</h2>
-                    <form method="POST" action="{{ route('kesejahteraankeluarga.store') }}">
+                    <form method="POST" action="{{ route('kesejahteraan-keluarga.store') }}">
                         @csrf
-                        <div>
+                        <!-- Surveyor -->
+                        <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Surveyor --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         </div>
-                        <div class="grid-container gap-4">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- Nomor KK -->
+                            <div>
+                                <label for="no_kk" class="block text-sm font-medium text-gray-700">Nomor Kartu Keluarga</label>
+                                <input type="text" name="no_kk" id="no_kk" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+                        </div>
+                            
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <!-- Row 1 -->
                             <div>
-                                <label for="pendapatan_stabil" class="block text-sm font-medium text-gray-700">Pendapatan stabil :</label>
-                                <select name="pendapatan_stabil" id="pendapatan_stabil" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Pendapatan Stabil</label>
+                                <input type="text" name="pendapatan_stabil" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
-                            {{-- <div>
-                                <label for="akses_pendidikan" class="block text-sm font-medium text-gray-700">Akses pendidikan :</label>
-                                <select name="akses_pendidikan" id="akses_pendidikan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
-                            </div> --}}
                             {{-- isian --}}
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Akses Pendidikan</label>
@@ -74,111 +67,68 @@
                             </div>
 
                             <div>
-                                <label for="akses_kesehatan" class="block text-sm font-medium text-gray-700">Akses kesehatan :</label>
-                                <select name="akses_kesehatan" id="akses_kesehatan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Akses Kesehatan</label>
+                                <input type="text" name="akses_kesehatan" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
 
                             <!-- Row 2 -->
                             <div>
-                                <label for="sanitasi_baik" class="block text-sm font-medium text-gray-700">Sanitasi baik :</label>
-                                <select name="sanitasi_baik" id="sanitasi_baik" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Sanitasi Baik</label>
+                                <input type="text" name="sanitasi_baik" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
                             <div>
-                                <label for="air_bersih" class="block text-sm font-medium text-gray-700">Air bersih :</label>
-                                <select name="air_bersih" id="air_bersih" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Air Bersih</label>
+                                <input type="text" name="air_bersih" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
-                            <div>
-                                <label for="listrik_rumah" class="block text-sm font-medium text-gray-700">Listrik rumah :</label>
-                                <select name="listrik_rumah" id="listrik_rumah" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                           <div>
+                                <label class="block text-sm font-medium text-gray-700">Listrik Rumah</label>
+                                <input type="text" name="listrik_rumah" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
 
                             <!-- Row 3 -->
                             <div>
-                                <label for="pangan_cukup" class="block text-sm font-medium text-gray-700">Pangan cukup :</label>
-                                <select name="pangan_cukup" id="pangan_cukup" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Pangan Cukup</label>
+                                <input type="text" name="pangan_cukup" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
                             <div>
-                                <label for="tabungan_aset" class="block text-sm font-medium text-gray-700">Tabungan/aset :</label>
-                                <select name="tabungan_aset" id="tabungan_aset" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Tabungan Aset</label>
+                                <input type="text" name="tabungan_aset" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
                             <div>
-                                <label for="jaminan_sosial" class="block text-sm font-medium text-gray-700">Jaminan sosial :</label>
-                                <select name="jaminan_sosial" id="jaminan_sosial" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Jaminan Sosial</label>
+                                <input type="text" name="jaminan_sosial" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
 
                             <!-- Row 4 -->
                             <div>
-                                <label for="pekerjaan_keluarga" class="block text-sm font-medium text-gray-700">Pekerjaan keluarga :</label>
-                                <select name="pekerjaan_keluarga" id="pekerjaan_keluarga" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Pekerjaan Keluarga</label>
+                                <input type="text" name="pekerjaan_keluarga" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                            </div>
+                           <div>
+                                <label class="block text-sm font-medium text-gray-700">Akses Internet</label>
+                                <input type="text" name="akses_internet" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
                             <div>
-                                <label for="akses_internet" class="block text-sm font-medium text-gray-700">Akses internet :</label>
-                                <select name="akses_internet" id="akses_internet" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="transportasi" class="block text-sm font-medium text-gray-700">Transportasi :</label>
-                                <select name="transportasi" id="transportasi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Transportasi</label>
+                                <input type="text" name="transportasi" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
 
                             <!-- Row 5 -->
-                            <div>
-                                <label for="rumah_layak_huni" class="block text-sm font-medium text-gray-700">Rumah layak huni :</label>
-                                <select name="rumah_layak_huni" id="rumah_layak_huni" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                           <div>
+                                <label class="block text-sm font-medium text-gray-700">Rumah Layak Huni</label>
+                                <input type="text" name="rumah_layak_huni" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
                             <div>
-                                <label for="pakaian_layak" class="block text-sm font-medium text-gray-700">Pakaian layak :</label>
-                                <select name="pakaian_layak" id="pakaian_layak" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">Silahkan Pilih</option>
-                                    <option value="Ya">Ya</option>
-                                    <option value="Tidak">Tidak</option>
-                                </select>
+                                <label class="block text-sm font-medium text-gray-700">Pakaian Layak</label>
+                                <input type="text" name="pakaian_layak" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                             </div>
                         </div>
-                        <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-600">KIRIM</button>
+                    </div>
+                        
+                        <!-- Submit -->
+                        <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                            Simpan
+                        </button>
                     </form>
                 </div>
             </div>

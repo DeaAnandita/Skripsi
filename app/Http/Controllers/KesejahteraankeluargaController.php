@@ -60,7 +60,7 @@ class KesejahteraanKeluargaController extends Controller
         }
 
         KesejahteraanKeluarga::create($data);
-        return redirect()->route('kesejahteraankeluarga.index')->with('success', 'Data kesejahteraan keluarga ditambahkan.');
+        return redirect()->route('kesejahteraan-keluarga.index')->with('success', 'Data kesejahteraan keluarga ditambahkan.');
     }
 
     public function show($id)
@@ -99,14 +99,14 @@ class KesejahteraanKeluargaController extends Controller
         ]);
 
         $item->update($data);
-        return redirect()->route('kesejahteraankeluarga.index')->with('success', 'Data kesejahteraan keluarga diupdate.');
+        return redirect()->route('kesejahteraan-keluarga.index')->with('success', 'Data kesejahteraan keluarga diupdate.');
     }
 
     public function destroy($id)
     {
         $item = KesejahteraanKeluarga::findOrFail($id);
         $item->delete();
-        return redirect()->route('kesejahteraankeluarga.index')->with('success', 'Data kesejahteraan keluarga dihapus.');
+        return redirect()->route('kesejahteraan-keluarga.index')->with('success', 'Data kesejahteraan keluarga dihapus.');
     }
 
     public function exportPdf()

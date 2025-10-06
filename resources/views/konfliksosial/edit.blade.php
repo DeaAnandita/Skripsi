@@ -27,14 +27,14 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h2 class="mb-4">Edit Data Konflik Sosial</h2>
 
-                    <form action="{{ route('konfliksosial.update', $item->id) }}" method="POST">
+                    <form action="{{ route('konflik-sosial.update', $item->id) }}" method="POST">
                         @csrf
                         @method('PUT')
 
-                        {{-- Pilih User --}}
-                        <div class="mb-3">
-                            <label for="user_id" class="form-label">Pilih User</label>
-                            <select name="user_id" id="user_id" class="form-control" required>
+                        <!-- Surveyor -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Surveyor</label>
+                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
                                 <option value="">-- Pilih User --</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}" {{ $item->user_id == $user->id ? 'selected' : '' }}>
@@ -156,10 +156,10 @@
                             </div>
                         </div>
 
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="{{ route('konfliksosial.index') }}" class="btn btn-secondary">Kembali</a>
-                        </div>
+                        </div><!-- Tombol -->
+                        <div class="mt-6 flex gap-3">
+                            <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Update</button>
+                            <a href="{{ route('dasar-keluarga.index') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-600">Kembali</a>
                     </form>
                 </div>
             </div>
