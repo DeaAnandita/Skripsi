@@ -1,136 +1,154 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Edit Data Layanan Masyarakat
+            {{ __('Edit Data Layanan Masyarakat') }}
         </h2>
     </x-slot>
 
-    <style>
-        .form-control {
-            margin-top: 0.25rem;
-            width: 100%;
-            border-radius: 0.375rem;
-            border: 1px solid #d1d5db;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-        .form-control:focus {
-            border-color: #4f46e5;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
-        .btn {
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-weight: bold;
-        }
-        .btn-primary {
-            background-color: #2563eb;
-            color: white;
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-secondary {
-            background-color: #6b7280;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background-color: #4b5563;
-        }
-    </style>
+    @if ($errors->any())
+        <div class="mb-4 p-4 rounded-md bg-red-100 text-red-800">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <div class="py-6">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h2 class="mb-4 text-2xl font-bold">Edit Layanan Masyarakat</h2>
+                    <h2 class="text-2xl font-bold mb-4">EDIT DATA LAYANAN MASYARAKAT</h2>
 
-                    <form action="{{ route('layanan-masyarakat.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('layanan-masyarakat.update', $item->id) }}">
                         @csrf
                         @method('PUT')
 
-                        <!-- Pilih Keluarga -->
-                        <div class="mb-3">
-                            <label for="keluarga_id" class="block text-sm font-medium text-gray-700">Pilih Keluarga</label>
-                            <select name="keluarga_id" id="keluarga_id" class="form-control" required>
-                                <option value="">-- Pilih Keluarga --</option>
-                                @foreach($keluargas as $keluarga)
-                                    <option value="{{ $keluarga->id }}" {{ $item->keluarga_id == $keluarga->id ? 'selected' : '' }}>
-                                        {{ $keluarga->nama_kepala_keluarga }} (KK: {{ $keluarga->nomor_kk }})
-                                    </option>
-                                @endforeach
-                            </select>
+                        <!-- Surveyor -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Surveyor</label>
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         </div>
 
-                        <!-- Jenis Layanan -->
-                        <div class="mb-3">
-                            <label for="jenis_layanan" class="block text-sm font-medium text-gray-700">Jenis Layanan</label>
-                            <select name="jenis_layanan" id="jenis_layanan" class="form-control" required>
-                                <option value="">-- Pilih Jenis Layanan --</option>
-                                <option value="Surat Pengantar" {{ $item->jenis_layanan == 'Surat Pengantar' ? 'selected' : '' }}>Surat Pengantar</option>
-                                <option value="Surat Keterangan Usaha" {{ $item->jenis_layanan == 'Surat Keterangan Usaha' ? 'selected' : '' }}>Surat Keterangan Usaha</option>
-                                <option value="Surat Domisili" {{ $item->jenis_layanan == 'Surat Domisili' ? 'selected' : '' }}>Surat Domisili</option>
-                                <option value="Lainnya" {{ $item->jenis_layanan == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
-                            </select>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <!-- Pengurus RT -->
+                            <div>
+                                <label for="Pengurus_RT" class="block text-sm font-medium text-gray-700">Pengurus RT</label>
+                                <select name="Pengurus_RT" id="Pengurus_RT" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Pengurus_RT', $item->Pengurus_RT) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Pengurus_RT', $item->Pengurus_RT) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Pengurus_RT', $item->Pengurus_RT) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota Pengurus RT -->
+                            <div>
+                                <label for="Anggota_Pengurus_RT" class="block text-sm font-medium text-gray-700">Anggota Pengurus RT</label>
+                                <select name="Anggota_Pengurus_RT" id="Anggota_Pengurus_RT" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Anggota_Pengurus_RT', $item->Anggota_Pengurus_RT) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Anggota_Pengurus_RT', $item->Anggota_Pengurus_RT) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Anggota_Pengurus_RT', $item->Anggota_Pengurus_RT) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus RW -->
+                            <div>
+                                <label for="Pengurus_RW" class="block text-sm font-medium text-gray-700">Pengurus RW</label>
+                                <select name="Pengurus_RW" id="Pengurus_RW" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Pengurus_RW', $item->Pengurus_RW) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Pengurus_RW', $item->Pengurus_RW) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Pengurus_RW', $item->Pengurus_RW) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota Pengurus RW -->
+                            <div>
+                                <label for="Anggota_Pengurus_RW" class="block text-sm font-medium text-gray-700">Anggota Pengurus RW</label>
+                                <select name="Anggota_Pengurus_RW" id="Anggota_Pengurus_RW" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Anggota_Pengurus_RW', $item->Anggota_Pengurus_RW) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Anggota_Pengurus_RW', $item->Anggota_Pengurus_RW) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Anggota_Pengurus_RW', $item->Anggota_Pengurus_RW) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus LKMD/K/LPM -->
+                            <div>
+                                <label for="Pengurus_LKMD_K_LPM" class="block text-sm font-medium text-gray-700">Pengurus LKMD/K/LPM</label>
+                                <select name="Pengurus_LKMD_K_LPM" id="Pengurus_LKMD_K_LPM" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Pengurus_LKMD_K_LPM', $item->Pengurus_LKMD_K_LPM) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Pengurus_LKMD_K_LPM', $item->Pengurus_LKMD_K_LPM) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Pengurus_LKMD_K_LPM', $item->Pengurus_LKMD_K_LPM) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota LKMD/K/LPM -->
+                            <div>
+                                <label for="Anggota_LKMD_K_LPM" class="block text-sm font-medium text-gray-700">Anggota LKMD/K/LPM</label>
+                                <select name="Anggota_LKMD_K_LPM" id="Anggota_LKMD_K_LPM" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Anggota_LKMD_K_LPM', $item->Anggota_LKMD_K_LPM) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Anggota_LKMD_K_LPM', $item->Anggota_LKMD_K_LPM) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Anggota_LKMD_K_LPM', $item->Anggota_LKMD_K_LPM) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus PKK -->
+                            <div>
+                                <label for="Pengurus_PKK" class="block text-sm font-medium text-gray-700">Pengurus PKK</label>
+                                <select name="Pengurus_PKK" id="Pengurus_PKK" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Pengurus_PKK', $item->Pengurus_PKK) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Pengurus_PKK', $item->Pengurus_PKK) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Pengurus_PKK', $item->Pengurus_PKK) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota PKK -->
+                            <div>
+                                <label for="Anggota_PKK" class="block text-sm font-medium text-gray-700">Anggota PKK</label>
+                                <select name="Anggota_PKK" id="Anggota_PKK" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Anggota_PKK', $item->Anggota_PKK) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Anggota_PKK', $item->Anggota_PKK) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Anggota_PKK', $item->Anggota_PKK) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Pengurus Lembaga Adat -->
+                            <div>
+                                <label for="Pengurus_Lembaga_Adat" class="block text-sm font-medium text-gray-700">Pengurus Lembaga Adat</label>
+                                <select name="Pengurus_Lembaga_Adat" id="Pengurus_Lembaga_Adat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Pengurus_Lembaga_Adat', $item->Pengurus_Lembaga_Adat) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Pengurus_Lembaga_Adat', $item->Pengurus_Lembaga_Adat) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Pengurus_Lembaga_Adat', $item->Pengurus_Lembaga_Adat) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
+
+                            <!-- Anggota Lembaga Adat -->
+                            <div>
+                                <label for="Anggota_Lembaga_Adat" class="block text-sm font-medium text-gray-700">Anggota Lembaga Adat</label>
+                                <select name="Anggota_Lembaga_Adat" id="Anggota_Lembaga_Adat" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya" {{ old('Anggota_Lembaga_Adat', $item->Anggota_Lembaga_Adat) == 'Ya' ? 'selected' : '' }}>Ya</option>
+                                    <option value="Tidak" {{ old('Anggota_Lembaga_Adat', $item->Anggota_Lembaga_Adat) == 'Tidak' ? 'selected' : '' }}>Tidak</option>
+                                    <option value="Lainnya" {{ old('Anggota_Lembaga_Adat', $item->Anggota_Lembaga_Adat) == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <!-- Keterangan -->
-                        <div class="mb-3">
-                            <label for="keterangan" class="block text-sm font-medium text-gray-700">Keterangan</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control" rows="3">{{ $item->keterangan }}</textarea>
-                        </div>
-
-                        <!-- Status Permohonan -->
-                        <div class="mb-3">
-                            <label for="status_permohonan" class="block text-sm font-medium text-gray-700">Status Permohonan</label>
-                            <select name="status_permohonan" id="status_permohonan" class="form-control">
-                                <option value="Diajukan" {{ $item->status_permohonan == 'Diajukan' ? 'selected' : '' }}>Diajukan</option>
-                                <option value="Diproses" {{ $item->status_permohonan == 'Diproses' ? 'selected' : '' }}>Diproses</option>
-                                <option value="Selesai" {{ $item->status_permohonan == 'Selesai' ? 'selected' : '' }}>Selesai</option>
-                                <option value="Ditolak" {{ $item->status_permohonan == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
-                            </select>
-                        </div>
-
-                        <!-- Tanggal Permohonan -->
-                        <div class="mb-3">
-                            <label for="tanggal_permohonan" class="block text-sm font-medium text-gray-700">Tanggal Permohonan</label>
-                            <input type="date" name="tanggal_permohonan" id="tanggal_permohonan" class="form-control" value="{{ $item->tanggal_permohonan }}">
-                        </div>
-
-                        <!-- Petugas -->
-                        <div class="mb-3">
-                            <label for="petugas_id" class="block text-sm font-medium text-gray-700">Petugas</label>
-                            <select name="petugas_id" id="petugas_id" class="form-control">
-                                <option value="">-- Pilih Petugas --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}" {{ $item->petugas_id == $user->id ? 'selected' : '' }}>
-                                        {{ $user->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <!-- Upload Lampiran -->
-                        <div class="mb-3">
-                            <label for="lampiran" class="block text-sm font-medium text-gray-700">Lampiran (Opsional)</label>
-                            <input type="file" name="lampiran" id="lampiran" class="form-control" accept="application/pdf,image/*">
-                            @if($item->lampiran)
-                                <p class="text-sm text-gray-600 mt-1">File saat ini: {{ basename($item->lampiran) }}</p>
-                            @endif
-                        </div>
-
-                        <!-- Status Aktif -->
-                        <div class="mb-3">
-                            <label for="is_active" class="block text-sm font-medium text-gray-700">Status Aktif</label>
-                            <select name="is_active" id="is_active" class="form-control">
-                                <option value="1" {{ $item->is_active ? 'selected' : '' }}>Aktif</option>
-                                <option value="0" {{ !$item->is_active ? 'selected' : '' }}>Tidak Aktif</option>
-                            </select>
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-primary">Update</button>
-                            <a href="{{ route('layanan-masyarakat.index') }}" class="btn btn-secondary">Kembali</a>
+                        <!-- Tombol -->
+                        <div class="mt-6 flex gap-3">
+                            <button type="submit" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Update</button>
+                            <a href="{{ route('layanan-masyarakat.index') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-600">Kembali</a>
                         </div>
                     </form>
                 </div>
