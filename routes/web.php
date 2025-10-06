@@ -102,6 +102,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/konfliksosial/export/csv', [IbuHamilController::class, 'exportCsv'])->name('konfliksosial.export.csv');
     Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
     Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+    Route::get('/usaha-art/export/pdf', [UsahaArtController::class, 'exportPdf'])->name('usaha-art.export.pdf');
+    Route::get('/sosial-ekonomi/export/csv', [SosialEkonomiController::class, 'exportCsv'])->name('sosial-ekonomi.export.csv');
+    Route::get('/sosial-ekonomi/export/pdf', [SosialEkonomiController::class, 'exportPdf'])->name('sosial-ekonomi.export.pdf');
+    Route::get('/usaha-art/export/csv', [UsahaArtController::class, 'exportCsv'])->name('usaha-art.export.csv');
+    Route::get('/usaha-art/export/pdf', [UsahaArtController::class, 'exportPdf'])->name('usaha-art.export.pdf');
+    
+    
 });
 
 

@@ -38,7 +38,7 @@ return new class extends Migration
                 'Lainnya',
             ]);
             $table->string('nama_usaha');
-            $table->integer('jumlah_pekerja');
+            $table->integer('jumlah_pekerja')->unsigned()->default(0); // Ditambahkan unsigned dan default 0
             $table->enum('memiliki_tempat_usaha', ['Ada', 'Tidak ada']);
             $table->enum('omset_usaha_bulan', [
                 'Kurang dari/sama dengan Rp. 1 Juta',
@@ -46,6 +46,62 @@ return new class extends Migration
                 'Rp. 5 Juta s/d Rp. 10 Juta',
                 'Lebih dari/sama dengan Rp. 10 Juta',
             ]);
+            $table->enum('partisipasi_sekolah', [
+                'SD',
+                'SMP',
+                'SMA',
+                'Perguruan Tinggi',
+                'Tidak Sekolah lagi',
+                'Belum pernah Sekolah',
+            ])->default('Belum pernah Sekolah');
+            $table->enum('ijazah_terakhir', [
+                'Tidak memiliki',
+                'SD',
+                'SMP',
+                'SMA',
+                'D1',
+                'D2',
+                'D3',
+                'D3/S1',
+                'S2',
+                'S3',
+            ])->default('Tidak memiliki');
+            $table->enum('jenis_disabilitas', [
+                'Penglihatan',
+                'Pendengaran',
+                'Berjalan/naik tangga',
+                'Mengingat/Konsentrasi (pikun)',
+                'Mengurus Diri Sendiri',
+                'Komunikasi',
+                'Depresi/autis',
+                'Lumpuh',
+                'Sumbing',
+                'Gila',
+                'Stres',
+                'Tidak mengalami',
+            ])->default('Tidak mengalami');
+            $table->enum('tingkat_kesulitan_disabilitas', [
+                'Sedikit kesulitan',
+                'Banyak kesulitan',
+                'Tidak bisa sama sekali',
+                'Tidak mengalami kesulitan',
+            ])->default('Tidak mengalami kesulitan');
+            $table->enum('penyakit_kronis_menahun', [
+                'Tidak ada',
+                'Hipertensi',
+                'Rematik',
+                'Asma',
+                'Masalah jantung',
+                'Diabetes',
+                'TBC',
+                'Stroke',
+                'Kanker atau Tumor Ganas',
+                'Lepra/Kustan',
+                'Lever',
+                'Malaria',
+                'HIV/AIDS',
+                'Gagal ginjal',
+            ])->default('Tidak ada');
             $table->timestamps();
         });
     }
