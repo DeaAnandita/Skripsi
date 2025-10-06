@@ -1,7 +1,6 @@
 <x-app-layout>
     <div x-data="{ sidebarOpen: false }" class="py-6 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-        {{-- Header --}}
         {{-- Header Card --}}
             <div class="relative bg-gradient-to-br from-blue-200 to-blue-100 hover:from-blue-200 hover:to-blue-100 border border-blue-200 text-black-800 rounded-3xl p-8 overflow-hidden">
                 <div class="relative z-10 max-w-xl">
@@ -11,13 +10,12 @@
                         Lihat Menu Utama
                     </a>
                 </div>
-                {{-- SVG Ilustrasi (keluar dari div) --}}
+                {{-- SVG Ilustrasi (hanya tampil di layar ≥ sm) --}}
                 <img src="{{ asset('images/welcome.svg') }}"
-                     alt="Welcome Illustration"
-                     class="absolute -top-10 right-0 w-72 opacity-95 drop-shadow-lg pointer-events-none">
+                    alt="Welcome Illustration"
+                    class="absolute -top-10 right-0 w-72 opacity-95 drop-shadow-lg pointer-events-none hidden sm:block">
             </div>
-
-
+            
         {{-- Quick Access Menu --}}
         <div class="mt-10">
             <h3 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">📂 Akses Cepat</h3>
@@ -77,39 +75,66 @@
         <div class="mt-12 bg-white rounded-2xl shadow-md p-6">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-lg font-semibold text-gray-700">📈 Statistik Data Desa</h3>
-                <span class="text-sm text-gray-500">Data per Oktober 2025</span>
+                <span class="text-sm text-gray-500" id="updateTime"></span>
             </div>
             <canvas id="desaChart" height="120"></canvas>
         </div>
-    </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const ctx = document.getElementById('desaChart').getContext('2d');
+
+                let chart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Penduduk', 'Keluarga', 'Aset', 'Lahan'],
+                        datasets: [{
+                            label: 'Jumlah Data',
+                            data: [0, 0, 0, 0],
+                        backgroundColor: ['#60a5fa', '#34d399', '#fbbf24', '#f87171']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+
+            async function fetchData() {
+                try {
+                    const response = await axios.get('/api/statistik-desa');
+                    const data = response.data;
+
+                    chart.data.datasets[0].data = [
+                        data.penduduk,
+                        data.keluarga,
+                        data.aset,
+                        data.lahan
+                    ];
+                    chart.update();
+
+                    const now = new Date();
+                    document.getElementById('updateTime').textContent =
+                        `Terakhir diperbarui: ${now.toLocaleTimeString()}`;
+                } catch (error) {
+                    console.error('Gagal memuat data statistik:', error);
+                }
+            }
+
+            // Muat pertama kali
+            fetchData();
+
+            // Refresh otomatis setiap 10 detik
+            setInterval(fetchData, 10000);
+        });
+        </script>
+
 
     {{-- Alpine.js --}}
     <script src="//unpkg.com/alpinejs" defer></script>
-
-    {{-- Chart.js --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const ctx = document.getElementById('desaChart');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Aset Keluarga', 'Aset Lahan', 'Penduduk', 'Survei'],
-                datasets: [{
-                    label: 'Jumlah Data',
-                    data: [120, 80, 240, 60],
-                    backgroundColor: ['#93c5fd', '#86efac', '#fde68a', '#c4b5fd'],
-                    borderRadius: 8
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { display: false },
-                },
-                scales: {
-                    y: { beginAtZero: true }
-                }
-            }
-        });
-    </script>
 </x-app-layout>
