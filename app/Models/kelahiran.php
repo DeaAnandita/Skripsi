@@ -14,7 +14,7 @@ class Kelahiran extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id_keluarga',
+        'user_id',
         'nik',
         'nama_lengkap',
         'tempat_lahir',
@@ -26,8 +26,7 @@ class Kelahiran extends Model
     /**
      * Relasi ke tabel users
      */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'created_by', 'id');
-    }
+    public function user() {
+         return $this->belongsTo(User::class);
+        }
 }

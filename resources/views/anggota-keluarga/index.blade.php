@@ -1,9 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kelola Anggota Keluarga') }}
-        </h2>
-    </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -16,43 +11,59 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 space-y-6">
 
-            {{-- Header bar: search + export + add --}}
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                        <form action="{{ route('anggota-keluarga.index') }}" method="GET" class="flex gap-2 w-full md:w-1/2">
-                            <input type="text" name="search" value="{{ request('search') }}"
-                                placeholder="🔍 Cari berdasarkan nama/nik"
-                                class="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <button type="submit"
-                                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Cari</button>
+                {{-- Header bar: judul + search + tombol aksi --}}
+<div class="flex flex-wrap items-center justify-between gap-4 mb-4">
 
-                        <a href="{{ route('anggota-keluarga.create') }}"
-                           class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                            + Tambah Anggota
-                        </a>
-                    </form>
+    {{-- Judul --}}
+    <h2 class="text-xl font-semibold text-gray-800 whitespace-nowrap">
+        Kelola Data Anggota Keluarga
+    </h2>
 
-                        <div class="flex items-center gap-3">
-                            <div x-data="{ open:false }" class="relative">
-                                <button @click="open = !open"
-                                    class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                                    <span>Export</span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </button>
-                                <div x-show="open" @click.away="open=false" x-transition
-                                     class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow z-30">
-                                    <a href="{{ route('anggota-keluarga.export.csv') }}" class="block px-4 py-2 hover:bg-gray-50">📄 Export CSV</a>
-                                    <a href="{{ route('anggota-keluarga.export.pdf') }}" class="block px-4 py-2 hover:bg-gray-50">🖨 Export PDF</a>
-                                </div>
-                            </div>
+    {{-- Form search --}}
+    <form action="{{ route('anggota-keluarga.index') }}" method="GET"
+          class="flex gap-2 flex-1 max-w-md">
+        <input type="text" name="search" value="{{ request('search') }}"
+               placeholder="🔍 Cari berdasarkan NIK"
+               class="flex-1 px-4 py-2 rounded-lg border focus:ring-2 focus:ring-blue-500 focus:outline-none">
+        <button type="submit"
+                class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            Cari
+        </button>
+    </form>
 
-                            <a href="{{ route('anggota-keluarga.create') }}"
-                               class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
-                                + Tambah Anggota
-                            </a>
-                        </div>
-                    </div>
+        {{-- Tombol aksi kanan --}}
+        <div class="flex items-center gap-2 flex-shrink-0">
+
+        {{-- Reset filter --}}
+        <a href="{{ route('anggota-keluarga.index') }}"
+           class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm">
+            Reset Filter
+        </a>
+
+        {{-- Tambah data --}}
+        <a href="{{ route('anggota-keluarga.create') }}"
+           class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition whitespace-nowrap">
+            + Tambah Data
+        </a>
+
+        {{-- Export dropdown --}}
+        <div x-data="{ open:false }" class="relative">
+            <button @click="open = !open"
+                    class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                <span>Export</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div x-show="open" @click.away="open=false" x-transition
+                 class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow z-30">
+                <a href="{{ route('kelahiran.export.csv') }}" class="block px-4 py-2 hover:bg-gray-50">📄 Export CSV</a>
+                <a href="{{ route('kelahiran.export.pdf') }}" class="block px-4 py-2 hover:bg-gray-50">🖨 Export PDF</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
                     {{-- Table --}}

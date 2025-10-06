@@ -41,18 +41,18 @@
                         @csrf
                         @method('PUT')
 
-                        {{-- Pilih User --}}
-                        <div>
-                                <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                                <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option value="">-- Pilih Surveyor --</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ $item->user_id == $user->id ? 'selected' : '' }}>
-                                            {{ $user->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
+                        <!-- Surveyor -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Surveyor</label>
+                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <option value="">-- Pilih Surveyor --</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" {{ $item->user_id == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
                          {{-- NIK --}}
                         <div class="mb-4">

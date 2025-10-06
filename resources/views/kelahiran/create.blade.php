@@ -32,20 +32,11 @@
                                 @enderror
                             </div>
 
-                            <!-- Nama Bayi -->
+                            <!-- Nama Lengkap -->
                             <div>
-                                <label for="nama_bayi" class="block text-sm font-medium text-gray-700">Nama Bayi</label>
-                                <input type="text" name="nama_bayi" id="nama_bayi" value="{{ old('nama_bayi') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" maxlength="100">
-                                @error('nama_bayi')
-                                    <span class="text-red-600 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <!-- Tanggal Lahir -->
-                            <div>
-                                <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
-                                <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                @error('tanggal_lahir')
+                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                                <input type="text" name="nama_lengkap" id="nama_lengkap" value="{{ old('nama_lengkap') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" maxlength="100">
+                                @error('nama_lengkap')
                                     <span class="text-red-600 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -59,6 +50,29 @@
                                 @enderror
                             </div>
 
+                            <!-- Tanggal Lahir -->
+                            <div>
+                                <label for="tanggal_lahir" class="block text-sm font-medium text-gray-700">Tanggal Lahir</label>
+                                <input type="date" name="tanggal_lahir" id="tanggal_lahir" value="{{ old('tanggal_lahir') }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                @error('tanggal_lahir')
+                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <!-- Jenis Kelamin -->
+                            <div>
+                                <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
+                                <select name="jenis_kelamin" id="jenis_kelamin" 
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="">-- Pilih Jenis Kelamin --</option>
+                                <option value="laki-laki" {{ old('jenis_kelamin') == 'laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                <option value="perempuan" {{ old('jenis_kelamin') == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
+                            </select>
+                            @error('jenis_kelamin')
+                                <span class="text-red-600 text-sm">{{ $message }}</span>
+                            @enderror
+                            </div>
+
                             <!-- Akta Kelahiran -->
                             <div>
                                 <label for="akta_kelahiran" class="block text-sm font-medium text-gray-700">Akta Kelahiran</label>
@@ -69,18 +83,11 @@
                             </div>
 
                             <!-- Surveyor -->
-                            <div>
-                                <label for="created_by" class="block text-sm font-medium text-gray-700">Surveyor</label>
-                                <select name="created_by" id="created_by" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">-- Pilih Surveyor --</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ old('created_by') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('created_by')
-                                    <span class="text-red-600 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Surveyor</label>
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         </div>
 
                         <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-600">KIRIM</button>

@@ -94,7 +94,7 @@ class AnggotaKeluargaController extends Controller
         $item = AnggotaKeluarga::findOrFail($id);
         $data = $request->validate([
             'user_id' => 'required|exists:users,id',
-            // 'id_keluarga' => 'required|exists:master_keluarga,id_keluarga',
+            // 'No_KK' => 'required|exists:master_keluarga,No_KK',
             'nik' => 'required|string|max:16|unique:anggota_keluarga',
             'nama_lengkap' => 'required|string|max:100',
             'tanggal_lahir' => 'required|date',

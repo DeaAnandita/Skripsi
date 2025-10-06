@@ -14,9 +14,10 @@
                         <tr>
                             <th class="border p-2 text-left">No</th>
                             <th class="border p-2 text-left">NIK</th>
-                            <th class="border p-2 text-left">Nama Bayi</th>
-                            <th class="border p-2 text-left">Tanggal Lahir</th>
+                            <th class="border p-2 text-left">Nama Lengkap</th>
                             <th class="border p-2 text-left">Tempat Lahir</th>
+                            <th class="border p-2 text-left">Tanggal Lahir</th>
+                            <th class="border p-2 text-left">Jenis Kelamin</th>
                             <th class="border p-2 text-left">Akta Kelahiran</th>
                             <th class="border p-2 text-left">Surveyor</th>
                         </tr>
@@ -27,8 +28,9 @@
                                 <td class="border p-2">{{ $loop->iteration }}</td>
                                 <td class="border p-2">{{ $row->nik ?? '-' }}</td>
                                 <td class="border p-2">{{ $row->nama_bayi ?? '-' }}</td>
-                                <td class="border p-2">{{ $row->tanggal_lahir ? \Carbon\Carbon::parse($row->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
                                 <td class="border p-2">{{ $row->tempat_lahir ?? '-' }}</td>
+                                <td class="border p-2">{{ $row->tanggal_lahir ? \Carbon\Carbon::parse($row->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
+                                <td class="border p-2">{{ $row->jenis_kelamin ?? '-' }}</td>
                                 <td class="border p-2">{{ $row->akta_kelahiran ?? '-' }}</td>
                                 <td class="border p-2">{{ $row->user->name ?? '-' }}</td>
                             </tr>

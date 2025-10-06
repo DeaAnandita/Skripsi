@@ -16,24 +16,28 @@
                             <td class="border px-4 py-2">{{ $item->nik ?? '-' }}</td>
                         </tr>
                         <tr>
-                            <td class="border px-4 py-2 font-semibold">Nama Bayi</td>
-                            <td class="border px-4 py-2">{{ $item->nama_bayi ?? '-' }}</td>
-                        </tr>
-                        <tr>
-                            <td class="border px-4 py-2 font-semibold">Tanggal Lahir</td>
-                            <td class="border px-4 py-2">{{ $item->tanggal_lahir ? \Carbon\Carbon::parse($item->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
+                            <td class="border px-4 py-2 font-semibold">Nama Lengkap</td>
+                            <td class="border px-4 py-2">{{ $item->nama_lengkap ?? '-' }}</td>
                         </tr>
                         <tr>
                             <td class="border px-4 py-2 font-semibold">Tempat Lahir</td>
                             <td class="border px-4 py-2">{{ $item->tempat_lahir ?? '-' }}</td>
                         </tr>
                         <tr>
+                            <td class="border px-4 py-2 font-semibold">Tanggal Lahir</td>
+                            <td class="border px-4 py-2">{{ $item->tanggal_lahir ? \Carbon\Carbon::parse($item->tanggal_lahir)->format('d/m/Y') : '-' }}</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2 font-semibold">Jenis Kelamin</td>
+                            <td class="border px-4 py-2">{{ $item->jenis_kelamin ?? '-' }}</td>
+                        </tr>
+                        <tr>
                             <td class="border px-4 py-2 font-semibold">Akta Kelahiran</td>
                             <td class="border px-4 py-2">{{ $item->akta_kelahiran ?? '-' }}</td>
                         </tr>
                         <tr>
-                            <td class="border px-4 py-2 font-semibold">Surveyor</td>
-                            <td class="border px-4 py-2">{{ $item->user->name ?? '-' }}</td>
+                            <td class="p-3 font-semibold w-1/3 bg-gray-50">Surveyor</td>
+                            <td class="p-3">{{ $item->user->name ?? '-' }}</td>
                         </tr>
                     </tbody>
                 </table>

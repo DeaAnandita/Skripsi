@@ -26,18 +26,6 @@
                     <form method="POST" action="{{ route('anggota-keluarga.store') }}">
                         @csrf
 
-                        <div>
-                                <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                                <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                    <option value="">-- Pilih Surveyor --</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}">
-                                            {{ $user->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
                         {{-- NIK --}}
                         <div class="mb-4">
                             <label for="nik" class="block text-sm font-medium text-gray-700">Nomor Induk Kependudukan (NIK)</label>
@@ -93,16 +81,14 @@
                             </select>
                         </div>
 
-                        {{-- Surveyor / User
+                        <!-- Surveyor -->
                         <div class="mb-4">
                             <label class="block text-sm font-medium text-gray-700">Surveyor</label>
-                            <select name="created_by" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-                                <option value="">-- Pilih Surveyor --</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
+                            <input type="text" value="{{ auth()->user()->name }}" readonly
+                                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm bg-gray-100 text-gray-700">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                        </div>
+
 
                         <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-600">SIMPAN</button>
                     </form>

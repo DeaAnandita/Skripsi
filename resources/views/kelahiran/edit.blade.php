@@ -35,11 +35,20 @@
                                 @enderror
                             </div>
 
-                            <!-- Nama Bayi -->
+                            <!-- Nama Lengkap -->
                             <div>
-                                <label for="nama_bayi" class="block text-sm font-medium text-gray-700">Nama Bayi</label>
-                                <input type="text" name="nama_bayi" id="nama_bayi" value="{{ old('nama_bayi', $item->nama_bayi) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" maxlength="100">
-                                @error('nama_bayi')
+                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                                <input type="text" name="nama_lengkap" id="nama_lengkap" value="{{ old('nama_lengkap', $item->nama_lengkap) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" maxlength="100">
+                                @error('nama_lengkap')
+                                    <span class="text-red-600 text-sm">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                             <!-- Tempat Lahir -->
+                            <div>
+                                <label for="tempat_lahir" class="block text-sm font-medium text-gray-700">Tempat Lahir</label>
+                                <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir', $item->tempat_lahir) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" maxlength="100">
+                                @error('tempat_lahir')
                                     <span class="text-red-600 text-sm">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -53,13 +62,18 @@
                                 @enderror
                             </div>
 
-                            <!-- Tempat Lahir -->
-                            <div>
-                                <label for="tempat_lahir" class="block text-sm font-medium text-gray-700">Tempat Lahir</label>
-                                <input type="text" name="tempat_lahir" id="tempat_lahir" value="{{ old('tempat_lahir', $item->tempat_lahir) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" maxlength="100">
-                                @error('tempat_lahir')
-                                    <span class="text-red-600 text-sm">{{ $message }}</span>
-                                @enderror
+                            <!-- Jenis Kelamin -->
+                            <div class="mt-4">
+                                <label for="jenis_kelamin" class="block text-sm font-medium text-gray-700">Jenis Kelamin</label>
+                                <select name="jenis_kelamin" id="jenis_kelamin" 
+                                     class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                 <option value="">-- Pilih Jenis Kelamin --</option>
+                                 <option value="laki-laki" {{ old('jenis_kelamin', $item->jenis_kelamin) == 'laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                 <option value="perempuan" {{ old('jenis_kelamin', $item->jenis_kelamin) == 'perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                </select>
+                             @error('jenis_kelamin')
+                                 <span class="text-red-600 text-sm">{{ $message }}</span>
+                             @enderror
                             </div>
 
                             <!-- Akta Kelahiran -->
@@ -71,20 +85,19 @@
                                 @enderror
                             </div>
 
-                            <!-- Surveyor -->
-                            <div>
-                                <label for="created_by" class="block text-sm font-medium text-gray-700">Surveyor</label>
-                                <select name="created_by" id="created_by" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                    <option value="">-- Pilih Surveyor --</option>
-                                    @foreach($users as $user)
-                                        <option value="{{ $user->id }}" {{ old('created_by', $item->created_by) == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('created_by')
-                                    <span class="text-red-600 text-sm">{{ $message }}</span>
-                                @enderror
-                            </div>
+                         <!-- Surveyor -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Surveyor</label>
+                            <select name="user_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                                <option value="">-- Pilih Surveyor --</option>
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}" {{ $item->user_id == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+                    </div>
 
                         <div class="mt-6 flex space-x-4">
                             <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Update</button>
