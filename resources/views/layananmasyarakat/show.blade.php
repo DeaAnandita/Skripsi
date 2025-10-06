@@ -1,87 +1,71 @@
-<?php
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Detail Data Layanan Masyarakat') }}
+        </h2>
+    </x-slot>
 
-namespace App\Http\Controllers;
+    <div class="py-6">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow-sm sm:rounded-lg">
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold mb-4">DETAIL DATA Layanan Masyarakat</h2>
 
-use App\Models\LayananMasyarakat;
-use Illuminate\Http\Request;
+                    <table class="table-auto w-full border border-gray-300 rounded-lg">
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td class="p-3 font-semibold w-1/3 bg-gray-50">Surveyor</td>
+                                <td class="p-3">{{ $item->user->name ?? auth()->user()->name }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Pengurus RT</td>
+                                <td class="p-3">{{ $item->Pengurus_RT ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Anggota Pengurus RT</td>
+                                <td class="p-3">{{ $item->Anggota_Pengurus_RT ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Pengurus RW</td>
+                                <td class="p-3">{{ $item->Pengurus_RW ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Anggota Pengurus RW</td>
+                                <td class="p-3">{{ $item->Anggota_Pengurus_RW ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Pengurus LKMD/K/LPM</td>
+                                <td class="p-3">{{ $item->Pengurus_LKMD_K_LPM ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Anggota LKMD/K/LPM</td>
+                                <td class="p-3">{{ $item->Anggota_LKMD_K_LPM ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Pengurus PKK</td>
+                                <td class="p-3">{{ $item->Pengurus_PKK ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Anggota PKK</td>
+                                <td class="p-3">{{ $item->Anggota_PKK ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Pengurus Lembaga Adat</td>
+                                <td class="p-3">{{ $item->Pengurus_Lembaga_Adat ?? '-' }}</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-semibold bg-gray-50">Anggota Lembaga Adat</td>
+                                <td class="p-3">{{ $item->Anggota_Lembaga_Adat ?? '-' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-class LayananMasyarakatController extends Controller
-{
-    // ... method CRUD sebelumnya ...
-
-    /**
-     * Display report for layanan masyarakat.
-     */
-    public function report(Request $request)
-    {
-        $query = LayananMasyarakat::with('user');
-
-        // Apply filters
-        if ($request->filled('status_pengajuan')) {
-            $query->where('status_pengajuan', $request->status_pengajuan);
-        }
-
-        if ($request->filled('nama_pemohon')) {
-            $query->whereHas('user', function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->nama_pemohon . '%');
-            });
-        }
-
-        if ($request->filled('tanggal_pengajuan')) {
-            $query->whereDate('tanggal_pengajuan', $request->tanggal_pengajuan);
-        }
-
-        $data = $query->get();
-
-        // Ringkasan
-        $total = $data->count();
-
-        // Per status pengajuan
-        $perStatus = $data->groupBy('status_pengajuan')->map->count();
-
-        // Per kategori layanan (hitung berdasarkan layanan yang true)
-        $perKategori = collect();
-        $services = [
-            'layanan_ktp' => 'Administrasi Kependudukan',
-            'layanan_kk' => 'Administrasi Kependudukan',
-            'layanan_akta_kelahiran' => 'Administrasi Kependudukan',
-            'layanan_akta_kematian' => 'Administrasi Kependudukan',
-            'layanan_akta_perkawinan' => 'Administrasi Kependudukan',
-            'layanan_akta_cerai' => 'Administrasi Kependudukan',
-            'layanan_sim' => 'Administrasi Kendaraan',
-            'layanan_stnk' => 'Administrasi Kendaraan',
-            'layanan_pbb' => 'Administrasi Pajak',
-            'layanan_bpjs_kesehatan' => 'Bantuan Kesehatan',
-            'layanan_bpjs_ketenagakerjaan' => 'Bantuan Ketenagakerjaan',
-            'layanan_kartu_keluarga_sejahtera' => 'Bantuan Sosial',
-            'layanan_bantuan_langsung_tunai' => 'Bantuan Sosial',
-            'layanan_sertifikat_tanah' => 'Administrasi Tanah',
-            'layanan_izin_usaha' => 'Izin Usaha',
-            'layanan_bantuan_pendidikan' => 'Bantuan Pendidikan',
-            'layanan_bantuan_kesehatan' => 'Bantuan Kesehatan',
-            'layanan_pengaduan_masyarakat' => 'Pengaduan',
-            'layanan_informasi_publik' => 'Informasi Publik',
-            'layanan_pendaftaran_sekolah' => 'Pendidikan',
-            'layanan_vaksinasi' => 'Kesehatan Masyarakat',
-            'layanan_posyandu' => 'Kesehatan Masyarakat',
-            'layanan_program_keluarga_berencana' => 'Keluarga Berencana',
-            'layanan_rehabilitasi_narkoba' => 'Rehabilitasi',
-            'layanan_bantuan_hukum' => 'Bantuan Hukum',
-            'layanan_pemakaman' => 'Layanan Pemakaman',
-            'layanan_transportasi_sosial' => 'Transportasi Sosial',
-            'layanan_penerangan_jalan' => 'Infrastruktur',
-            'layanan_air_bersih' => 'Infrastruktur',
-        ];
-
-        foreach ($services as $field => $kategori) {
-            $count = $data->filter(function ($item) use ($field) {
-                return $item->$field;
-            })->count();
-            if ($count > 0) {
-                $perKategori[$kategori] = $count;
-            }
-        }
-
-        return view('layanan_masyarakat.report', compact('data', 'total', 'perStatus', 'perKategori'));
-    }
-}
+                    <div class="mt-6 flex gap-3">
+                        <a href="{{ route('layanan-masyarakat.index') }}" class="bg-gray-500 text-white font-bold py-2 px-4 rounded hover:bg-gray-600">Kembali</a>
+                        <a href="{{ route('layanan-masyarakat.edit', $item->id) }}" class="bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
