@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\BantuanSosial;
+<<<<<<< Updated upstream
 use App\Models\Keluarga;
 use App\Models\User;
+=======
+>>>>>>> Stashed changes
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +16,15 @@ class BantuanSosialController extends Controller
 {
     public function index(Request $request)
     {
+<<<<<<< Updated upstream
         $query = BantuanSosial::with(['user']);
+=======
+        $query = BantuanSosial::query();
+>>>>>>> Stashed changes
 
-        if ($request->has('search')) {
+        if ($request->has('search') && $request->search != '') {
             $search = $request->search;
+<<<<<<< Updated upstream
             $query->whereHas('user', function ($q) use ($search) {
                 $q->where('name', 'like', "%$search%");
             });
@@ -24,18 +32,36 @@ class BantuanSosialController extends Controller
 
         $bantuan = $query->orderBy('created_at', 'desc')->paginate(5);
         return view('bantuan-sosial.index', compact('bantuan'));
+=======
+            $query->where('nik_manual', 'like', "%$search%")
+                  ->orWhere('nama_lengkap', 'like', "%$search%");
+        }
+
+        $bantuans = $query->orderBy('created_at', 'desc')->paginate(5);
+        return view('bantuan-sosial.index', compact('bantuans'));
+>>>>>>> Stashed changes
     }
 
     public function create()
     {
+<<<<<<< Updated upstream
         // $keluargas = Keluarga::all();
         $users = User::all();
         return view('bantuan-sosial.create', compact('users'));
+=======
+        return view('bantuan-sosial.create');
+>>>>>>> Stashed changes
     }
 
     public function store(Request $request)
     {
+<<<<<<< Updated upstream
         $data = $request->validate([
+=======
+        $validated = $request->validate([
+            'nik_manual' => 'required|string|max:16',
+            'nama_lengkap' => 'required|string|max:255',
+>>>>>>> Stashed changes
             'kks_kps' => 'nullable|in:Ya,Tidak,Lainnya',
             'kks_kps_lainnya' => 'nullable|string|max:255',
             'pkh' => 'nullable|in:Ya,Tidak,Lainnya',
@@ -46,6 +72,7 @@ class BantuanSosialController extends Controller
             'kip_lainnya' => 'nullable|string|max:255',
             'kis' => 'nullable|in:Ya,Tidak,Lainnya',
             'kis_lainnya' => 'nullable|string|max:255',
+<<<<<<< Updated upstream
             'jamsostek_bpjs_ketenagakerjaan' => 'nullable|in:Ya,Tidak,Lainnya',
             'jamsostek_bpjs_ketenagakerjaan_lainnya' => 'nullable|string|max:255',
             'peserta_mandiri_asuransi_lain' => 'nullable|in:Ya,Tidak,Lainnya',
@@ -71,27 +98,62 @@ class BantuanSosialController extends Controller
 
         BantuanSosial::create($data);
         return redirect()->route('bantuan-sosial.index')->with('success', 'Data bantuan sosial ditambahkan.');
+=======
+            'bpjs_ketenagakerjaan' => 'nullable|in:Ya,Tidak,Lainnya',
+            'bpjs_ketenagakerjaan_lainnya' => 'nullable|string|max:255',
+            'asuransi_mandiri' => 'nullable|in:Ya,Tidak,Lainnya',
+            'asuransi_mandiri_lainnya' => 'nullable|string|max:255',
+            'kriteria' => 'nullable|array',
+            'tanggal_survey' => 'nullable|date',
+            'tanggal_penerimaan' => 'nullable|date',
+            'tanggal_distribusi' => 'nullable|date',
+            'bukti_lampiran' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+            'created_by' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('bukti_lampiran')) {
+            $validated['bukti_lampiran'] = $request->file('bukti_lampiran')->store('bukti', 'public');
+        }
+        $validated['kriteria'] = json_encode($validated['kriteria'] ?? []);
+
+        BantuanSosial::create($validated);
+        return redirect()->route('bantuan-sosial.index')->with('success', 'Data bantuan sosial berhasil ditambahkan.');
+>>>>>>> Stashed changes
     }
 
     public function show($id)
     {
+<<<<<<< Updated upstream
         $item = BantuanSosial::with(['keluarga', 'petugas'])->findOrFail($id);
+=======
+        $item = BantuanSosial::findOrFail($id);
+>>>>>>> Stashed changes
         return view('bantuan-sosial.show', compact('item'));
     }
 
     public function edit($id)
     {
         $item = BantuanSosial::findOrFail($id);
+<<<<<<< Updated upstream
         // $keluargas = Keluarga::all();
         $users = User::all();
         return view('bantuan-sosial.edit', compact('item', 'keluargas', 'users'));
+=======
+        return view('bantuan_sosial.edit', compact('item'));
+>>>>>>> Stashed changes
     }
 
     public function update(Request $request, $id)
     {
         $item = BantuanSosial::findOrFail($id);
 
+<<<<<<< Updated upstream
         $data = $request->validate([
+=======
+        $validated = $request->validate([
+            'nik_manual' => 'required|string|max:16',
+            'nama_lengkap' => 'required|string|max:255',
+>>>>>>> Stashed changes
             'kks_kps' => 'nullable|in:Ya,Tidak,Lainnya',
             'kks_kps_lainnya' => 'nullable|string|max:255',
             'pkh' => 'nullable|in:Ya,Tidak,Lainnya',
@@ -102,6 +164,7 @@ class BantuanSosialController extends Controller
             'kip_lainnya' => 'nullable|string|max:255',
             'kis' => 'nullable|in:Ya,Tidak,Lainnya',
             'kis_lainnya' => 'nullable|string|max:255',
+<<<<<<< Updated upstream
             'jamsostek_bpjs_ketenagakerjaan' => 'nullable|in:Ya,Tidak,Lainnya',
             'jamsostek_bpjs_ketenagakerjaan_lainnya' => 'nullable|string|max:255',
             'peserta_mandiri_asuransi_lain' => 'nullable|in:Ya,Tidak,Lainnya',
@@ -130,6 +193,27 @@ class BantuanSosialController extends Controller
 
         $item->update($data);
         return redirect()->route('bantuan-sosial.index')->with('success', 'Data bantuan sosial diupdate.');
+=======
+            'bpjs_ketenagakerjaan' => 'nullable|in:Ya,Tidak,Lainnya',
+            'bpjs_ketenagakerjaan_lainnya' => 'nullable|string|max:255',
+            'asuransi_mandiri' => 'nullable|in:Ya,Tidak,Lainnya',
+            'asuransi_mandiri_lainnya' => 'nullable|string|max:255',
+            'kriteria' => 'nullable|array',
+            'tanggal_survey' => 'nullable|date',
+            'tanggal_penerimaan' => 'nullable|date',
+            'tanggal_distribusi' => 'nullable|date',
+            'bukti_lampiran' => 'nullable|file|mimes:jpg,png,pdf|max:2048',
+            'created_by' => 'nullable|integer',
+        ]);
+
+        if ($request->hasFile('bukti_lampiran')) {
+            $validated['bukti_lampiran'] = $request->file('bukti_lampiran')->store('bukti', 'public');
+        }
+        $validated['kriteria'] = json_encode($validated['kriteria'] ?? []);
+
+        $item->update($validated);
+        return redirect()->route('bantuan-sosial.index')->with('success', 'Data bantuan sosial berhasil diperbarui.');
+>>>>>>> Stashed changes
     }
 
     public function destroy($id)
@@ -139,6 +223,7 @@ class BantuanSosialController extends Controller
             Storage::disk('public')->delete($item->bukti_distribusi);
         }
         $item->delete();
+<<<<<<< Updated upstream
         return redirect()->route('bantuan-sosial.index')->with('success', 'Data bantuan sosial dihapus.');
     }
 
@@ -178,10 +263,14 @@ class BantuanSosialController extends Controller
         $data = BantuanSosial::with(['keluarga', 'petugas'])->get();
         $pdf = Pdf::loadView('bantuan-sosial.report-pdf', compact('data'))->setPaper('a4', 'landscape');
         return $pdf->download('bantuan_sosial.pdf');
+=======
+        return redirect()->route('bantuan-sosial.index')->with('success', 'Data bantuan sosial berhasil dihapus.');
+>>>>>>> Stashed changes
     }
 
     public function exportCsv()
     {
+<<<<<<< Updated upstream
         $data = BantuanSosial::with(['keluarga', 'petugas'])->get();
         $filename = 'bantuan_sosial_' . date('Ymd_His') . '.csv';
         $headers = [
@@ -218,5 +307,30 @@ class BantuanSosialController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
+=======
+        $query = BantuanSosial::query();
+
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+            $query->where('nik_manual', 'like', "%$search%")
+                  ->orWhere('nama_lengkap', 'like', "%$search%");
+        }
+
+        if ($request->has('tanggal_survey') && $request->tanggal_survey != '') {
+            $query->whereDate('tanggal_survey', $request->tanggal_survey);
+        }
+
+        $data = $query->orderBy('created_at', 'desc')->paginate(10);
+        $total = $data->count();
+        $perProgram = $query->selectRaw('kks_kps as program, COUNT(*) as count')->groupBy('kks_kps')->get()->pluck('count', 'kks_kps')->toArray();
+
+        if ($request->has('export') && $request->export === 'pdf') {
+            $allData = $query->get();
+            $pdf = Pdf::loadView('bantuan_sosial.report', compact('allData', 'total', 'perProgram'))->setPaper('a4', 'landscape');
+            return $pdf->download('laporan_bantuan_sosial.pdf');
+        }
+
+        return view('bantuan_sosial.report', compact('data', 'total', 'perProgram'));
+>>>>>>> Stashed changes
     }
 }

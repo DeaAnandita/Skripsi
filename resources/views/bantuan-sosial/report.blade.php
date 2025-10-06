@@ -1,4 +1,5 @@
 <x-app-layout>
+<<<<<<< Updated upstream
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Laporan Bantuan Sosial') }}
@@ -40,10 +41,64 @@
                         <ul>
                             @foreach($perProgram as $prog => $jumlah)
                                 <li>{{ $prog }}: {{ $jumlah }}</li>
+=======
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white shadow-sm sm:rounded-lg">
+                <div class="p-6">
+                    <h2 class="text-2xl font-bold mb-4">Laporan Bantuan Sosial</h2>
+
+                    <!-- Filter -->
+                    <div class="mb-4 flex gap-2">
+                        <form action="{{ route('bantuan-sosial.report') }}" method="GET" class="flex gap-2 w-full md:w-1/2">
+                            <input type="text" name="search" value="{{ request('search') }}" placeholder="🔍 Cari berdasarkan NIK atau nama..." class="flex-1 px-4 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">Cari</button>
+                        </form>
+                        <div class="flex items-center gap-2">
+                            <a href="{{ route('bantuan-sosial.report') }}"
+                               class="px-3 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm">
+                                Reset Filter
+                            </a>
+                            <a href="{{ route('bantuan-sosial.report', ['export' => 'pdf'] + request()->all()) }}"
+                               class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                                Export PDF
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Filter Tanggal Survey -->
+                    <div class="mb-4" x-data="{ showSurveyDate: false }">
+                        <div class="relative inline-block">
+                            <button @click="showSurveyDate = !showSurveyDate" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg flex items-center">
+                                <span>Filter Tanggal Survey</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="showSurveyDate" @click.away="showSurveyDate = false" class="absolute z-10 mt-2 w-64 bg-white border rounded-md shadow-lg p-2">
+                                <form method="GET" action="{{ route('bantuan-sosial.report') }}" class="space-y-2">
+                                    <input type="hidden" name="search" value="{{ request('search') }}">
+                                    <label class="block text-sm text-gray-700">Tanggal Survey</label>
+                                    <input type="date" name="tanggal_survey" value="{{ request('tanggal_survey') }}" class="w-full px-2 py-1 border rounded-md">
+                                    <button type="submit" class="w-full mt-2 bg-blue-600 text-white py-1 rounded-md hover:bg-blue-700">Terapkan</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary -->
+                    <div class="mb-6">
+                        <p class="text-lg font-semibold">Total Data: {{ $total }}</p>
+                        <p class="text-md">Per Program:</p>
+                        <ul class="list-disc pl-5">
+                            @foreach (['Ya', 'Tidak', 'Lainnya'] as $status)
+                                <li>{{ $status }}: {{ $perProgram[$status] ?? 0 }}</li>
+>>>>>>> Stashed changes
                             @endforeach
                         </ul>
                     </div>
 
+<<<<<<< Updated upstream
                     <div>
                         <h4 class="font-semibold">Per Status Verifikasi</h4>
                         <ul>
@@ -101,8 +156,56 @@
                             @endforelse
                         </tbody>
                     </table>
+=======
+                    <!-- Table -->
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full text-sm border-collapse">
+                            <thead class="bg-gray-100 text-gray-700">
+                                <tr>
+                                    <th class="px-3 py-2 border text-center w-10">#</th>
+                                    <th class="px-3 py-2 border">Tanggal Survey</th>
+                                    <th class="px-3 py-2 border">NIK Manual</th>
+                                    <th class="px-3 py-2 border">Nama Lengkap</th>
+                                    <th class="px-3 py-2 border">KKS/KPS</th>
+                                    <th class="px-3 py-2 border">PKH</th>
+                                    <th class="px-3 py-2 border">KIP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($data as $index => $item)
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-3 py-2 border text-center">{{ $index + 1 }}</td>
+                                        <td class="px-3 py-2 border">{{ $item->tanggal_survey ?? '-' }}</td>
+                                        <td class="px-3 py-2 border">{{ $item->nik_manual ?? '-' }}</td>
+                                        <td class="px-3 py-2 border">{{ $item->nama_lengkap ?? '-' }}</td>
+                                        <td class="px-3 py-2 border">{{ $item->kks_kps ?? '-' }} {{ $item->kks_kps_lainnya ? '(' . $item->kks_kps_lainnya . ')' : '' }}</td>
+                                        <td class="px-3 py-2 border">{{ $item->pkh ?? '-' }} {{ $item->pkh_lainnya ? '(' . $item->pkh_lainnya . ')' : '' }}</td>
+                                        <td class="px-3 py-2 border">{{ $item->kip ?? '-' }} {{ $item->kip_lainnya ? '(' . $item->kip_lainnya . ')' : '' }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="7" class="px-4 py-6 text-center text-gray-500">
+                                            Belum ada data bantuan sosial.
+                                        </td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="p-4">
+                        {{ $data->appends(request()->all())->links() }}
+                    </div>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
 </x-app-layout>
+=======
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+</xaiArtifact>
+>>>>>>> Stashed changes

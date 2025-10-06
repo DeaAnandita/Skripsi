@@ -17,6 +17,39 @@ use App\Models\AsetLahan;
 use App\Models\KesejahteraanKeluarga;
 use App\Models\Sarpraskerja;
 use Illuminate\Support\Facades\Route;
+<<<<<<< Updated upstream
+=======
+use App\Http\Controllers\{
+    ProfileController,
+    KeluargaController,
+    DasarKeluargaController,
+    AsetKeluargaController,
+    AsetLahanController,
+    AsetTernakController,
+    UsahaArtController,
+    SosialEkonomiController,
+    BantuanSosialController,
+    AnggotaKeluargaController,
+    PenyewaanLahanController,
+    IbuHamilController,
+    BayiController,
+    SuratController,
+    JenisSuratController,
+    SarpraskerjaController,
+    BangunKeluargaController,
+    UmkmController,
+    LayananMasyarakatController,
+    KesejahteraanKeluargaController,
+    AdmpembangunanController,
+    KelahiranController,
+    KonflikSosialController,
+    ReportController,
+    NamaHewanController,
+    JenisHewanController,
+    DashboardController,
+    LembagaDesaController
+};
+>>>>>>> Stashed changes
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +65,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+<<<<<<< Updated upstream
 Route::middleware(['auth'])->group(function () {
     Route::get('/aset-keluarga', [AsetKeluargaController::class, 'index'])->name('aset-keluarga.index');
     Route::get('/aset-keluarga/create', [AsetKeluargaController::class, 'create'])->name('aset-keluarga.create');
@@ -39,11 +73,43 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/aset-keluarga/{id}', [AsetKeluargaController::class, 'show'])->name('aset-keluarga.show');
     Route::get('/aset-keluarga/{id}/edit', [AsetKeluargaController::class, 'edit'])->name('aset-keluarga.edit');
     Route::put('/aset-keluarga/{id}', [AsetKeluargaController::class, 'update'])->name('aset-keluarga.update');
+=======
+    // Semua CRUD pakai resource
+    Route::resources([
+        'keluarga' => KeluargaController::class,
+        'dasar-keluarga' => DasarKeluargaController::class,
+        'aset-keluarga' => AsetKeluargaController::class,
+        'aset-lahan' => AsetLahanController::class,
+        'aset-ternak' => AsetTernakController::class,
+        'usaha-art' => UsahaArtController::class,
+        'sosial-ekonomi' => SosialEkonomiController::class,
+        'bantuan-sosial' => BantuanSosialController::class,
+        'anggota-keluarga' => AnggotaKeluargaController::class,
+        'penyewaan-lahan' => PenyewaanLahanController::class,
+        'ibu-hamil' => IbuHamilController::class,
+        'bayi' => BayiController::class,
+        'surat-online' => SuratController::class,
+        'jenis-surat' => JenisSuratController::class,
+        'sarpras-kerja' => SarpraskerjaController::class,
+        'bangun-keluarga' => BangunKeluargaController::class,
+        'umkm' => UmkmController::class,
+        'layanan-masyarakat' => LayananMasyarakatController::class,
+        'kesejahteraan-keluarga' => KesejahteraanKeluargaController::class,
+        'admpembangunan' => AdmpembangunanController::class,
+        'kelahiran' => KelahiranController::class,
+        'konflik-sosial' => KonflikSosialController::class,
+        'nama-hewan' => NamaHewanController::class,
+        'jenis-hewan' => JenisHewanController::class,
+        'lembaga-desa' => LembagaDesaController::class,
+        'reports' => ReportController::class,
+    ]);
+>>>>>>> Stashed changes
 
     // Untuk hapus data juga sekalian
     Route::delete('/aset-keluarga/{id}', [AsetKeluargaController::class, 'destroy'])->name('aset-keluarga.destroy');
 });
 
+<<<<<<< Updated upstream
 Route::middleware(['auth'])->group(function () {
     Route::get('/aset-lahan', [AsetlahanController::class, 'index'])->name('aset-lahan.index');
     Route::get('/aset-lahan/create', [AsetlahanController::class, 'create'])->name('aset-lahan.create');
@@ -54,6 +120,35 @@ Route::middleware(['auth'])->group(function () {
 
     // Untuk hapus data juga sekalian
     Route::delete('/aset-lahan/{id}', [AsetLahanController::class, 'destroy'])->name('aset-lahan.destroy');
+=======
+    // Export PDF/CSV tambahan
+    Route::get('/aset-keluarga/export/csv', [AsetKeluargaController::class, 'exportCsv'])->name('aset-keluarga.export.csv');
+    Route::get('/aset-keluarga/export/pdf', [AsetKeluargaController::class, 'exportPdf'])->name('aset-keluarga.export.pdf');
+    Route::get('/aset-lahan/export/csv', [AsetLahanController::class, 'exportCsv'])->name('aset-lahan.export.csv');
+    Route::get('/aset-lahan/export/pdf', [AsetLahanController::class, 'exportPdf'])->name('aset-lahan.export.pdf');
+    Route::get('/kesejahteraan_keluarga/export/csv', [KesejahteraanKeluargaController::class, 'exportCsv'])->name('kesejahteraan_keluarga.export.csv');
+    Route::get('/kesejahteraan_keluarga/export/pdf', [KesejahteraanKeluargaController::class, 'exportPdf'])->name('kesejahteraan_keluarga.export.pdf');
+    Route::get('/sarpraskerja/export/csv', [SarpraskerjaController::class, 'exportCsv'])->name('sarpraskerja.export.csv');
+    Route::get('/sarpraskerja/export/pdf', [SarpraskerjaController::class, 'exportPdf'])->name('sarpraskerja.export.pdf');
+    Route::get('/umkm/export/csv', [UmkmController::class, 'exportCsv'])->name('umkm.export.csv');
+    Route::get('/umkm/export/pdf', [UmkmController::class, 'exportPdf'])->name('umkm.export.pdf');
+    Route::get('/bantuan-sosial/export/csv', [BantuanSosialController::class, 'exportCsv'])->name('bantuan-sosial.export.csv');
+    Route::get('/bantuan-sosial/export/pdf', [BantuanSosialController::class, 'exportPdf'])->name('bantuan-sosial.export.pdf');
+    Route::get('/anggota-keluarga/export/csv', [AnggotaKeluargaController::class, 'exportCsv'])->name('anggota-keluarga.export.csv');
+    Route::get('/anggota-keluarga/export/pdf', [AnggotaKeluargaController::class, 'exportPdf'])->name('anggota-keluarga.export.pdf');
+    Route::get('/ibu-hamil/export/csv', [IbuHamilController::class, 'exportCsv'])->name('ibu-hamil.export.csv');
+    Route::get('/ibu-hamil/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('ibu-hamil.export.pdf');
+    Route::get('/bayi/export/csv', [IbuHamilController::class, 'exportCsv'])->name('bayi.export.csv');
+    Route::get('/bayi/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('bayi.export.pdf');
+    Route::get('/bangunkeluarga/export/csv', [BangunKeluargaController::class, 'exportCsv'])->name('bangunkeluarga.export.csv');
+    Route::get('/bangunkeluarga/export/pdf', [BangunKeluargaController::class, 'exportPdf'])->name('bangunkeluarga.export.Pdf');
+    Route::get('/konfliksosial/export/pdf', [IbuHamilController::class, 'exportPdf'])->name('konfliksosial.export.pdf');
+    Route::get('/konfliksosial/export/csv', [IbuHamilController::class, 'exportCsv'])->name('konfliksosial.export.csv');
+    Route::get('/reports/export/{format}', [ReportController::class, 'export'])->name('reports.export');
+    Route::get('/reports/export', [ReportController::class, 'export'])->name('reports.export');
+     Route::get('/lembaga-desa/export/csv', [LembagaDesaController::class, 'exportCsv'])->name('lembaga-desa.export.csv');
+    Route::get('/lembaga-desa/export/pdf', [LembagaDesaController::class, 'exportPdf'])->name('lembaga-desa.export.pdf');
+>>>>>>> Stashed changes
 });
 
 

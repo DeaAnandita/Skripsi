@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+<<<<<<< Updated upstream
             {{ __('Tambah Data Bantuan Sosial') }}
         </h2>
     </x-slot>
@@ -117,30 +118,114 @@
                                 <label for="kip" class="block text-sm font-medium text-gray-700">Menerima KIP:</label>
                                 <select name="kip" id="kip" class="input-field">
                                     <option value="">Silahkan Pilih</option>
+=======
+            {{ __('Tambah Bantuan Sosial') }}
+        </h2>
+    </x-slot>
+
+    @if ($errors->any())
+        <div class="mb-4 p-4 rounded-md bg-red-100 text-red-800">
+            <ul class="list-disc pl-5">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <div class="py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <h2 class="text-2xl font-bold mb-4">PENDATAAN BANTUAN SOSIAL</h2>
+
+                    <form method="POST" action="{{ route('bantuan-sosial.store') }}" enctype="multipart/form-data">
+                        @csrf
+
+                        <!-- Petugas (Manual) -->
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700">Petugas (ID)</label>
+                            <input type="number" name="created_by" id="created_by" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="Masukkan ID Petugas">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <!-- NIK Manual -->
+                            <div>
+                                <label for="nik_manual" class="block text-sm font-medium text-gray-700">NIK Manual</label>
+                                <input type="text" name="nik_manual" id="nik_manual" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Nama Lengkap -->
+                            <div>
+                                <label for="nama_lengkap" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                                <input type="text" name="nama_lengkap" id="nama_lengkap" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Tanggal Survey -->
+                            <div>
+                                <label for="tanggal_survey" class="block text-sm font-medium text-gray-700">Tanggal Survey</label>
+                                <input type="date" name="tanggal_survey" id="tanggal_survey" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- KKS/KPS -->
+                            <div>
+                                <label for="kks_kps" class="block text-sm font-medium text-gray-700">KKS/KPS</label>
+                                <select name="kks_kps" id="kks_kps" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+>>>>>>> Stashed changes
                                     <option value="Ya">Ya</option>
                                     <option value="Tidak">Tidak</option>
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
+<<<<<<< Updated upstream
                                 <input type="text" name="kip_lainnya" id="kip_lainnya" class="input-field mt-2" placeholder="Keterangan jika Lainnya">
                             </div>
                             <div>
                                 <label for="kis" class="block text-sm font-medium text-gray-700">Menerima KIS:</label>
                                 <select name="kis" id="kis" class="input-field">
                                     <option value="">Silahkan Pilih</option>
+=======
+                            </div>
+                            <div id="kks_kps_lainnya_div" class="hidden">
+                                <label for="kks_kps_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="kks_kps_lainnya" id="kks_kps_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- PKH -->
+                            <div>
+                                <label for="pkh" class="block text-sm font-medium text-gray-700">PKH</label>
+                                <select name="pkh" id="pkh" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+>>>>>>> Stashed changes
                                     <option value="Ya">Ya</option>
                                     <option value="Tidak">Tidak</option>
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
+<<<<<<< Updated upstream
                                 <input type="text" name="kis_lainnya" id="kis_lainnya" class="input-field mt-2" placeholder="Keterangan jika Lainnya">
                             </div>
                             <div>
                                 <label for="jamsostek_bpjs_ketenagakerjaan" class="block text-sm font-medium text-gray-700">Menerima Jamsostek/BPJS Ketenagakerjaan:</label>
                                 <select name="jamsostek_bpjs_ketenagakerjaan" id="jamsostek_bpjs_ketenagakerjaan" class="input-field">
                                     <option value="">Silahkan Pilih</option>
+=======
+                            </div>
+                            <div id="pkh_lainnya_div" class="hidden">
+                                <label for="pkh_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="pkh_lainnya" id="pkh_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Raskin/BPNT -->
+                            <div>
+                                <label for="raskin_bpnt" class="block text-sm font-medium text-gray-700">Raskin/BPNT</label>
+                                <select name="raskin_bpnt" id="raskin_bpnt" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+>>>>>>> Stashed changes
                                     <option value="Ya">Ya</option>
                                     <option value="Tidak">Tidak</option>
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
+<<<<<<< Updated upstream
                                 <input type="text" name="jamsostek_bpjs_ketenagakerjaan_lainnya" id="jamsostek_bpjs_ketenagakerjaan_lainnya" class="input-field mt-2" placeholder="Keterangan jika Lainnya">
                             </div>
 
@@ -149,10 +234,24 @@
                                 <label for="peserta_mandiri_asuransi_lain" class="block text-sm font-medium text-gray-700">Peserta Mandiri Asuransi Lain:</label>
                                 <select name="peserta_mandiri_asuransi_lain" id="peserta_mandiri_asuransi_lain" class="input-field">
                                     <option value="">Silahkan Pilih</option>
+=======
+                            </div>
+                            <div id="raskin_bpnt_lainnya_div" class="hidden">
+                                <label for="raskin_bpnt_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="raskin_bpnt_lainnya" id="raskin_bpnt_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- KIP -->
+                            <div>
+                                <label for="kip" class="block text-sm font-medium text-gray-700">KIP</label>
+                                <select name="kip" id="kip" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+>>>>>>> Stashed changes
                                     <option value="Ya">Ya</option>
                                     <option value="Tidak">Tidak</option>
                                     <option value="Lainnya">Lainnya</option>
                                 </select>
+<<<<<<< Updated upstream
                                 <input type="text" name="peserta_mandiri_asuransi_lain_lainnya" id="peserta_mandiri_asuransi_lain_lainnya" class="input-field mt-2" placeholder="Keterangan jika Lainnya">
                             </div>
                             <div>
@@ -228,10 +327,133 @@
                         <!-- Submit Button -->
                         <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-green-600">
                             KIRIM
+=======
+                            </div>
+                            <div id="kip_lainnya_div" class="hidden">
+                                <label for="kip_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="kip_lainnya" id="kip_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- KIS -->
+                            <div>
+                                <label for="kis" class="block text-sm font-medium text-gray-700">KIS</label>
+                                <select name="kis" id="kis" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            <div id="kis_lainnya_div" class="hidden">
+                                <label for="kis_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="kis_lainnya" id="kis_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- BPJS Ketenagakerjaan -->
+                            <div>
+                                <label for="bpjs_ketenagakerjaan" class="block text-sm font-medium text-gray-700">BPJS Ketenagakerjaan</label>
+                                <select name="bpjs_ketenagakerjaan" id="bpjs_ketenagakerjaan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            <div id="bpjs_ketenagakerjaan_lainnya_div" class="hidden">
+                                <label for="bpjs_ketenagakerjaan_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="bpjs_ketenagakerjaan_lainnya" id="bpjs_ketenagakerjaan_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Asuransi Mandiri -->
+                            <div>
+                                <label for="asuransi_mandiri" class="block text-sm font-medium text-gray-700">Asuransi Mandiri</label>
+                                <select name="asuransi_mandiri" id="asuransi_mandiri" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                    <option value="">-- Silahkan Pilih --</option>
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            <div id="asuransi_mandiri_lainnya_div" class="hidden">
+                                <label for="asuransi_mandiri_lainnya" class="block text-sm font-medium text-gray-700">Lainnya</label>
+                                <input type="text" name="asuransi_mandiri_lainnya" id="asuransi_mandiri_lainnya" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Kriteria (Checkbox) -->
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700">Kriteria</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="kriteria[]" value="Usia >18" class="mr-2">
+                                        <label>Usia >18</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="kriteria[]" value="Pendapatan <5jt" class="mr-2">
+                                        <label>Pendapatan <5jt</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="kriteria[]" value="Lansia" class="mr-2">
+                                        <label>Lansia</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="kriteria[]" value="Disabilitas" class="mr-2">
+                                        <label>Disabilitas</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" name="kriteria[]" value="Ibu Hamil" class="mr-2">
+                                        <label>Ibu Hamil</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tanggal Penerimaan -->
+                            <div>
+                                <label for="tanggal_penerimaan" class="block text-sm font-medium text-gray-700">Tanggal Penerimaan</label>
+                                <input type="date" name="tanggal_penerimaan" id="tanggal_penerimaan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Tanggal Distribusi -->
+                            <div>
+                                <label for="tanggal_distribusi" class="block text-sm font-medium text-gray-700">Tanggal Distribusi</label>
+                                <input type="date" name="tanggal_distribusi" id="tanggal_distribusi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            </div>
+
+                            <!-- Bukti Lampiran -->
+                            <div class="md:col-span-2">
+                                <label for="bukti_lampiran" class="block text-sm font-medium text-gray-700">Bukti Lampiran</label>
+                                <input type="file" name="bukti_lampiran" id="bukti_lampiran" class="mt-1 block w-full">
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="mt-6 w-full bg-blue-600 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">
+                            Simpan
+>>>>>>> Stashed changes
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
+=======
+
+    <!-- Script untuk show/hide 'lainnya' -->
+    <script>
+        const selects = ['kks_kps', 'pkh', 'raskin_bpnt', 'kip', 'kis', 'bpjs_ketenagakerjaan', 'asuransi_mandiri'];
+        selects.forEach(selectId => {
+            const select = document.getElementById(selectId);
+            const lainnyaDiv = document.getElementById(selectId + '_lainnya_div');
+            if (select) {
+                select.addEventListener('change', function () {
+                    if (this.value === 'Lainnya') {
+                        lainnyaDiv.classList.remove('hidden');
+                    } else {
+                        lainnyaDiv.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+>>>>>>> Stashed changes
 </x-app-layout>

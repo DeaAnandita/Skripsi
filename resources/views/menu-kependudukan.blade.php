@@ -1,9 +1,46 @@
 <x-app-layout>
+<<<<<<< Updated upstream
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Menu Kependudukan') }}
         </h2>
     </x-slot>
+=======
+    <div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6">
+            @php
+                $categories = [
+                    'Data Keluarga' => [
+                        ['title' => 'Data Dasar Keluarga', 'color' => 'blue', 'desc' => 'Kelola data dasar keluarga', 'route' => 'dasar-keluarga.index'],
+                        ['title' => 'Anggota Keluarga', 'color' => 'green', 'desc' => 'Kelola data anggota keluarga', 'route' => 'anggota-keluarga.index'],
+                        ['title' => 'Bangun Keluarga', 'color' => 'blue', 'desc' => 'Kelola data bangun keluarga', 'route' => 'bangun-keluarga.index'],
+                        ['title' => 'Kesejahteraan Keluarga', 'color' => 'green', 'desc' => 'Kelola data kesejahteraan keluarga', 'route' => 'kesejahteraan-keluarga.index'],
+                    ],
+                    'Aset & Ekonomi' => [
+                        ['title' => 'Aset Keluarga', 'color' => 'blue', 'desc' => 'Kelola data aset keluarga', 'route' => 'aset-keluarga.index'],
+                        ['title' => 'Aset Lahan & Tanah', 'color' => 'green', 'desc' => 'Kelola data aset lahan dan tanah', 'route' => 'aset-lahan.index'],
+                        ['title' => 'Aset Ternak & Perikanan', 'color' => 'blue', 'desc' => 'Kelola data aset ternak & perikanan', 'route' => 'aset-ternak.index'],
+                        ['title' => 'Penyewaan Lahan', 'color' => 'green', 'desc' => 'Kelola data penyewaan lahan ternak & perikanan', 'route' => 'penyewaan-lahan.index'],
+                        ['title' => 'UMKM', 'color' => 'blue', 'desc' => 'Kelola data UMKM', 'route' => 'umkm.index'],
+                        ['title' => 'Layanan Ekonomi', 'color' => 'green', 'desc' => 'Kelola data layanan ekonomi', 'route' => 'umkm.index'],
+                        ['title' => 'Sarana & Prasarana Kerja', 'color' => 'blue', 'desc' => 'Kelola data sarpras kerja', 'route' => 'sarpras-kerja.index'],
+                        ['title' => 'Usaha ART', 'color' => 'green', 'desc' => 'Kelola data usaha anggota rumah tangga', 'route' => 'usaha-art.index'],
+                    ],
+                    'Pelayanan & Sosial' => [
+                        ['title' => 'Layanan Masyarakat', 'color' => 'blue', 'desc' => 'Kelola data layanan masyarakat', 'route' => 'layanan-masyarakat.index'],
+                        ['title' => 'Lembaga Desa', 'color' => 'blue', 'desc' => 'Kelola data lembaga desa', 'route' => 'lembaga-desa.index'],
+                        ['title' => 'Bantuan Sosial', 'color' => 'green', 'desc' => 'Kelola data bantuan sosial', 'route' => 'bantuan-sosial.index'],
+                        ['title' => 'Konflik Sosial', 'color' => 'blue', 'desc' => 'Kelola data konflik sosial', 'route' => 'konflik-sosial.index'],
+                        ['title' => 'Sosial Ekonomi', 'color' => 'green', 'desc' => 'Kelola data sosial ekonomi', 'route' => 'sosial-ekonomi.index'],
+                    ],
+                    'Kesehatan' => [
+                        ['title' => 'Kualitas Ibu Hamil', 'color' => 'blue', 'desc' => 'Kelola data ibu hamil', 'route' => 'ibu-hamil.index'],
+                        ['title' => 'Kualitas Bayi', 'color' => 'green', 'desc' => 'Kelola data bayi', 'route' => 'bayi.index'],
+                        ['title' => 'Kelahiran', 'color' => 'blue', 'desc' => 'Kelola data kelahiran', 'route' => 'kelahiran.index'],
+                    ],
+                ];
+            @endphp
+>>>>>>> Stashed changes
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-4 lg:px-8">

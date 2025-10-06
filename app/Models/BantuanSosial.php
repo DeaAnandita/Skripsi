@@ -9,9 +9,10 @@ class BantuanSosial extends Model
 {
     use HasFactory;
 
-    protected $table = 'bantuan_sosials';
+    protected $table = 'bantuan_sosial';
 
     protected $fillable = [
+<<<<<<< Updated upstream
         'kks_kps',
         'kks_kps_lainnya',
         'pkh',
@@ -60,4 +61,16 @@ class BantuanSosial extends Model
     public function user() {
          return $this->belongsTo(User::class);
         }
+=======
+        'nik_manual', 'nama_lengkap', 'kks_kps', 'kks_kps_lainnya', 'pkh', 'pkh_lainnya',
+        'raskin_bpnt', 'raskin_bpnt_lainnya', 'kip', 'kip_lainnya', 'kis', 'kis_lainnya',
+        'bpjs_ketenagakerjaan', 'bpjs_ketenagakerjaan_lainnya', 'asuransi_mandiri',
+        'asuransi_mandiri_lainnya', 'kriteria', 'tanggal_survey', 'tanggal_penerimaan',
+        'tanggal_distribusi', 'bukti_lampiran', 'created_by',
+    ];
+
+    // Menghapus relasi sementara
+    // public function dasarKeluarga() { ... }
+    // public function createdBy() { ... }
+>>>>>>> Stashed changes
 }

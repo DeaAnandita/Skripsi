@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('bantuan_sosials', function (Blueprint $table) {
-            // Primary key
             $table->id();
+<<<<<<< Updated upstream
 
             // // Relasi ke keluargas
             // $table->foreignId('keluarga_id')
@@ -76,8 +76,31 @@ return new class extends Migration {
             $table->boolean('is_active')->default(true);
 
             // Timestamp & soft delete
+=======
+            $table->string('nik_manual', 16)->nullable();
+            $table->string('nama_lengkap', 255)->nullable();
+            $table->enum('kks_kps', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('kks_kps_lainnya', 255)->nullable();
+            $table->enum('pkh', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('pkh_lainnya', 255)->nullable();
+            $table->enum('raskin_bpnt', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('raskin_bpnt_lainnya', 255)->nullable();
+            $table->enum('kip', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('kip_lainnya', 255)->nullable();
+            $table->enum('kis', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('kis_lainnya', 255)->nullable();
+            $table->enum('bpjs_ketenagakerjaan', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('bpjs_ketenagakerjaan_lainnya', 255)->nullable();
+            $table->enum('asuransi_mandiri', ['Ya', 'Tidak', 'Lainnya'])->nullable();
+            $table->string('asuransi_mandiri_lainnya', 255)->nullable();
+            $table->json('kriteria')->nullable();
+            $table->date('tanggal_survey')->nullable();
+            $table->date('tanggal_penerimaan')->nullable();
+            $table->date('tanggal_distribusi')->nullable();
+            $table->string('bukti_lampiran')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable(); // Menjadikan created_by sebagai kolom biasa tanpa foreign key
+>>>>>>> Stashed changes
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
